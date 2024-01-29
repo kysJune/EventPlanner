@@ -14,7 +14,7 @@ app.get('/hello/cleveland', (req: Request, res: Response) =>{
     res.send('Hello Cleveland!')
 })
 
-app.get("/test", (req, res) => {
+app.get("/test", (req: Request, res: Response) => {
     interface test {
         name: string,
         age: number
