@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import {listOfUsers} from "../pretendDb.js";
+import User from "./components/User.jsx";
 import './App.css'
 
 function App() {
@@ -30,10 +31,7 @@ function App() {
       {
         users.map( user => {
           return (
-            <div>
-               <p>{user.name}</p> 
-               <p>{user.age}</p> 
-            </div>
+            <User name={user.name} age={user.age}/>
             ); 
         })
       }
