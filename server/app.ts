@@ -1,7 +1,9 @@
 import express, {Express, Request, Response} from "express";
 import dotenv from "dotenv";
+let {connectMongo} = require( "./config/dbConnection");
 
 dotenv.config();
+connectMongo();
 
 const app: Express = express();
 const port = process.env.PORT || 3000;
