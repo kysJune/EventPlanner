@@ -1,37 +1,22 @@
 import express, {Express, Request, Response} from "express";
 import dotenv from "dotenv";
-let {connectMongo} = require( "./config/dbConnection");
-
+import {connectMongo} from "./config/dbConnection";
+import userRouter from "./routes/userRouter";
 dotenv.config();
 connectMongo();
 
 const app: Express = express();
 const port = process.env.PORT || 3000;
 
+//middleware
+app.use("/user", userRouter);
+
 app.get('/', (req: Request, res: Response) => {
-  res.send('Hello World!')
-})
-
-app.get('/hello/cleveland', (req: Request, res: Response) =>{
-    res.send('Hello Cleveland!')
-})
-
-app.get("/test", (req: Request, res: Response) => {
-    interface test {
-        name: string,
-        age: number
-    }
-
-    const person: test = {
-        name: "test",
-        age: 22
-    };
-
-    console.log(person);
-    res.send("tet again");
+  res.send('Hello World!');
 });
 
+
 app.listen(port, () => {
-  console.log(`server listening on port ${port}`)
+  console.log(`server listening on port ${port}`);
 });
 
