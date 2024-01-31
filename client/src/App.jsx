@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import {listOfUsers} from "../pretendDb.js";
 import User from "./components/User.jsx";
 import './App.css'
+import Weather from "./components/weather/Weather.jsx";
 
 function App() {
   let [count, setCount] = useState(0);
@@ -23,21 +24,11 @@ function App() {
     <div className="App">
      <header>
         <h1>Event Planner</h1>
-        {
-         links.map((link, index) => <a  key = {index} href="#">{link}</a>)
-        }
+       <nav className="nav-links">
+          
+        </nav>
      </header>
-     <div className="users-container">
-      {
-        users.map( user => {
-          return (
-            <User name={user.name} age={user.age}/>
-            ); 
-        })
-      }
-     </div>
-     <button onClick={handleClick}>increment counter</button>
-     <p id="counter">{count}</p>
+      <Weather />
     </div>
   )
 }
