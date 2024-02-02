@@ -1,19 +1,18 @@
 a {
-  margin-right: 10px;
-  height: fit-content;
-  width: fit-content;
+	margin-right: 10px;
+	height: fit-content;
+	width: fit-content;
 }
 
-header{
-  height: 10%;
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
+header {
+	height: 10%;
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
 }
 
-p
-{
-  color: white;
+p {
+	color: white;
 }
