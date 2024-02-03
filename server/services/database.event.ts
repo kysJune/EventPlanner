@@ -33,7 +33,7 @@ class DatabaseEvent {
 	}
 
 	/**
-	 *
+	 * Lists all events by the userid, day, month and year
 	 */
 	async listEvents(
 		userid: ObjectId,
@@ -67,9 +67,9 @@ class DatabaseEvent {
 	}
 
 	/**
-	 * Delete a user
+	 * Delete an Event
 	 */
-	async delete(id: ObjectId) {
+	async delete(id: ObjectId): Promise<void> {
 		await EventModel.deleteOne({ _id: id });
 	}
 }
