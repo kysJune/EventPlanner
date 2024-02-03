@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import {listOfUsers} from "../pretendDb.js";
-import User from "./components/User.jsx";
+import { Login } from './components/login/Login.jsx';
 import './App.css'
 
 function App() {
@@ -15,10 +15,10 @@ function App() {
 
   useEffect( () => {
     // fetch data from server   getAllUsers
-
     setUsers(listOfUsers);
   }, [])
 
+  
   return (
     <div className="App">
      <header>
@@ -27,15 +27,7 @@ function App() {
          links.map((link, index) => <a  key = {index} href="#">{link}</a>)
         }
      </header>
-     <div className="users-container">
-      {
-        users.map( user => {
-          return (
-            <User name={user.name} age={user.age}/>
-            ); 
-        })
-      }
-     </div>
+     <Login/>
      <button onClick={handleClick}>increment counter</button>
      <p id="counter">{count}</p>
     </div>
