@@ -1,37 +1,20 @@
-import { useState, useEffect } from 'react'
-import {listOfUsers} from "../pretendDb.js";
-import { Login } from './components/login/Login.jsx';
-import './App.css'
+import "./App.css";
+import Login from "./components/login/login.jsx";
+import Register from "./components/register/Register.jsx";
+import Weather from "./components/weather/Weather.jsx";
 
 function App() {
-  let [count, setCount] = useState(0);
-  const [users, setUsers] = useState([]); 
-  const links =  ["link1", "link2", "link3"];
-
-  const handleClick = () =>{
-    setCount(count + 1);
-
-  }
-
-  useEffect( () => {
-    // fetch data from server   getAllUsers
-    setUsers(listOfUsers);
-  }, [])
-
-  
-  return (
-    <div className="App">
-     <header>
-        <h1>Event Planner</h1>
-        {
-         links.map((link, index) => <a  key = {index} href="#">{link}</a>)
-        }
-     </header>
-     <Login/>
-     <button onClick={handleClick}>increment counter</button>
-     <p id="counter">{count}</p>
-    </div>
-  )
+	return (
+		<div className="App">
+			<header>
+				<h1>Event Planner</h1>
+				<nav className="nav-links"></nav>
+			</header>
+			<Weather />
+			<Login />
+			<Register />
+		</div>
+	);
 }
 
-export default App
+export default App;
