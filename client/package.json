@@ -12,6 +12,21 @@
 		"preview": "vite preview",
 		"test": "jest"
 	},
+	"jest": {
+		"moduleFileExtensions": [
+			"js",
+			"jsx"
+		],
+		"transform": {
+			"^.+\\.(js|jsx)$": "babel-jest"
+		}
+	},
+	"babel": {
+		"presets": [
+			"@babel/preset-env",
+			"@babel/preset-react"
+		]
+	},
 	"moduleDirectories": [
 		"node_modules",
 		"src"
@@ -22,13 +37,18 @@
 		"react-dom": "^18.2.0"
 	},
 	"devDependencies": {
+		"@babel/core": "^7.23.9",
 		"@babel/plugin-syntax-jsx": "^7.23.3",
+		"@babel/preset-env": "^7.23.9",
+		"@babel/preset-react": "^7.23.3",
+		"@babel/preset-typescript": "^7.23.3",
 		"@testing-library/jest-dom": "^6.4.1",
 		"@testing-library/react": "^14.2.1",
 		"@types/jest": "^29.5.12",
 		"@types/react": "^18.2.43",
 		"@types/react-dom": "^18.2.17",
 		"@vitejs/plugin-react": "^4.2.1",
+		"babel-jest": "^29.7.0",
 		"eslint": "^8.56.0",
 		"eslint-config-google": "^0.14.0",
 		"eslint-config-prettier": "^9.1.0",
