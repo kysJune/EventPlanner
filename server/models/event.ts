@@ -1,23 +1,15 @@
 import mongoose, { Document, Schema } from "mongoose";
+import { EventRequest } from "../types/requests/eventRequest";
 
-export interface Event {
-	name: string;
-	userid: number;
-	day: number;
-	month: number;
-	year: number;
-	start: number;
-	end: number;
-}
-
-const eventSchema = new Schema<Event & Document>({
+const eventSchema = new Schema<EventRequest & Document>({
 	name: {
 		type: String,
 		required: true,
 	},
 	userid: {
-		type: Number,
+		type: Schema.Types.ObjectId,
 		required: true,
+		ref: "User",
 	},
 	day: {
 		type: Number,
@@ -41,6 +33,9 @@ const eventSchema = new Schema<Event & Document>({
 	},
 });
 
-const EventModel = mongoose.model<Event & Document>("Event", eventSchema);
+const EventModel = mongoose.model<EventRequest & Document>(
+	"Event",
+	eventSchema,
+);
 
 export default EventModel;
