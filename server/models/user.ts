@@ -1,12 +1,7 @@
 import mongoose, { Document, Schema } from "mongoose";
+import { UserRequest } from "../types/requests/userRequest";
 
-interface User {
-	username: string;
-	password: string;
-	location?: string;
-}
-
-const userSchema = new Schema<User & Document>({
+const userSchema = new Schema<UserRequest & Document>({
 	username: {
 		type: String,
 		required: true,
@@ -21,5 +16,5 @@ const userSchema = new Schema<User & Document>({
 	},
 });
 
-const UserModel = mongoose.model<User & Document>("User", userSchema);
+const UserModel = mongoose.model<UserRequest & Document>("User", userSchema);
 export default UserModel;

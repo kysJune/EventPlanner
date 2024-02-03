@@ -3,7 +3,7 @@ import { ObjectId } from "mongoose";
 import { EventRequest } from "../types/requests/eventRequest";
 import EventModel from "../models/event";
 
-class DatabaseEvent {
+export class DatabaseEvent {
 	/**
 	 * Create an event
 	 */
