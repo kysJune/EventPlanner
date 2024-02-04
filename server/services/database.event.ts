@@ -17,7 +17,7 @@ export class DatabaseEvent {
 	 */
 	async read(
 		userid: ObjectId,
-		name: string,
+		name: string
 	): Promise<EventResponse | undefined> {
 		const event: EventResponse | null = await EventModel.findOne({
 			userid,
@@ -39,7 +39,7 @@ export class DatabaseEvent {
 		userid: ObjectId,
 		day: number,
 		month: number,
-		year: number,
+		year: number
 	): Promise<EventResponse[] | undefined> {
 		const events: EventResponse[] = await EventModel.find({
 			userid,
@@ -59,10 +59,7 @@ export class DatabaseEvent {
 	/**
 	 * Update an event
 	 */
-	async update(
-		id: ObjectId,
-		eventUpdate: Partial<EventRequest>,
-	): Promise<void> {
+	async update(id: ObjectId, eventUpdate: Partial<EventRequest>): Promise<void> {
 		await EventModel.updateOne({ _id: id }, eventUpdate);
 	}
 
