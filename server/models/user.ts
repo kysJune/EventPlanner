@@ -4,16 +4,16 @@ import { UserRequest } from "../types/requests/userRequest";
 const userSchema = new Schema<UserRequest & Document>({
 	username: {
 		type: String,
-		required: true,
+		required: true
 	},
 	password: {
 		type: String,
-		required: true,
+		required: true
 	},
 	location: {
 		type: String,
-		required: false,
-	},
+		required: false
+	}
 });
 
 const UserModel = mongoose.model<UserRequest & Document>("User", userSchema);

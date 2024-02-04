@@ -21,7 +21,7 @@ export class DatabaseEvent {
 	): Promise<EventResponse | undefined> {
 		const event: EventResponse | null = await EventModel.findOne({
 			userid,
-			name,
+			name
 		});
 		if (event) {
 			console.info("Event found");
@@ -45,7 +45,7 @@ export class DatabaseEvent {
 			userid,
 			day,
 			month,
-			year,
+			year
 		});
 
 		if (events.length > 0) {

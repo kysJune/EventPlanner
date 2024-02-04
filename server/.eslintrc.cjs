@@ -4,7 +4,7 @@ module.exports = {
 		"eslint:recommended",
 		"plugin:@typescript-eslint/recommended",
 		"standard",
-		"prettier",
+		"prettier"
 	],
 	parser: "@typescript-eslint/parser",
 	plugins: ["@typescript-eslint"],
@@ -17,8 +17,8 @@ module.exports = {
 				quotes: ["error", "double"],
 				"no-console": ["warn"],
 				indent: ["error", "tab"],
-				"comma-dangle": ["error", "always-multiline"],
-			},
-		},
-	],
+				"comma-dangle": "off"
+			}
+		}
+	]
 };
