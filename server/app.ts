@@ -15,7 +15,7 @@ const port = process.env.PORT || 3000;
 
 // Enable CORS for all routes
 // composition JSON sent between client and server are on the order of  n X 100KB
-app.use(bodyParser.json({ limit: "1mb" })); 
+app.use(bodyParser.json({ limit: "1mb" }));
 app.use(cors({ origin: true, credentials: true }));
 // for express session }));
 
