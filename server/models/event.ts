@@ -35,7 +35,7 @@ const eventSchema = new Schema<EventRequest & Document>({
 
 const EventModel = mongoose.model<EventRequest & Document>(
 	"Event",
-	eventSchema,
+	eventSchema
 );
 
 export default EventModel;
