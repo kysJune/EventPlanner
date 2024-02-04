@@ -2,10 +2,9 @@ import express, { Express, Request, Response } from "express";
 import dotenv from "dotenv";
 import { connectMongo } from "./config/dbConnection";
 import userRouter from "./routes/userRouter";
-import mongoose from "mongoose";
 
 import session from "express-session";
-const MongoStore = require("connect-mongo")(session); // eslint-disable-line @typescript-eslint/no-var-requires
+import MongoStore from "connect-mongo"; // eslint-disable-line @typescript-eslint/no-var-requires
 
 dotenv.config();
 connectMongo();
@@ -19,7 +18,10 @@ app.use(
 		secret: "your-secret-key",
 		resave: false,
 		saveUninitialized: false,
-		store: new MongoStore({ mongooseConnection: mongoose.connection }),
+		store: MongoStore.create({
+			mongoUrl: process.env.MONGO_DB_URL,
+			collectionName: "session"
+		}),
 		cookie: { maxAge: 60 * 60 * 1000 } // 1 hour
 	})
 );
