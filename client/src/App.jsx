@@ -3,16 +3,7 @@ import { Login } from "./components/login/Login";
 import Home from "./components/home/Home";
 // import { Register } from "./components/register/Register";
 import { Route, Routes, BrowserRouter } from "react-router-dom";
-import Weather from "./components/weather/Weather";
-import { Login } from "./components/login/Login";
-import Home from "./components/home/Home";
-// import { Register } from "./components/register/Register";
-import { Route, Routes, BrowserRouter } from "react-router-dom";
 import "./App.css";
-import Register from "./components/register/Register.jsx";
-import { Login } from './components/login/Login.jsx';
-import './App.css'
-
 
 function App() {
 	return (
