@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import axios from "axios";
 
@@ -22,7 +21,7 @@ export const Login = ({}) => {
 		<div className="Login">
 			<input type="text" id="username" onChange={handleNameChange} value={username} />
 			<input type="password" id="password" onChange={handlePasswordChange} value={password} />
-            <button onClick={handleLogin}>Login</button>
+			<button onClick={handleLogin}>Login</button>
 		</div>
 	);
 };
