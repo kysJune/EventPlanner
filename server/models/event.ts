@@ -4,33 +4,33 @@ import { EventRequest } from "../types/requests/eventRequest";
 const eventSchema = new Schema<EventRequest & Document>({
 	name: {
 		type: String,
-		required: true,
+		required: true
 	},
 	userid: {
 		type: Schema.Types.ObjectId,
 		required: true,
-		ref: "User",
+		ref: "User"
 	},
 	day: {
 		type: Number,
-		required: true,
+		required: true
 	},
 	month: {
 		type: Number,
-		required: true,
+		required: true
 	},
 	year: {
 		type: Number,
-		required: true,
+		required: true
 	},
 	start: {
 		type: Number,
-		required: true,
+		required: true
 	},
 	end: {
 		type: Number,
-		required: true,
-	},
+		required: true
+	}
 });
 
 const EventModel = mongoose.model<EventRequest & Document>(
