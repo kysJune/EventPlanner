@@ -19,28 +19,48 @@ export const Register = ({}) => {
 	};
 
 	const handleRegister = async () => {
-		try{
+		try {
 			if (confirmPassword !== password) {
 				//TODO display password mismatch
 				alert("kys");
 				return;
 			}
-			const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/user/register`, { username, password });
+			const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/user/register`, {
+				username,
+				password
+			});
 			if (response.status !== 200) {
 				console.error("register failed");
 				alert(response.data.message);
 			}
-		}
-		catch(error) {
+		} catch (error) {
 			console.error(error);
 		}
 	};
 
 	return (
 		<form className="Register">
-			<input placeholder="Username" type="text" id="username" onChange={handleNameChange} value={username} />
-			<input placeholder="Password" type="password" id="password" onChange={handlePasswordChange} value={password} />
-			<input placeholder="Confirm Password" type="password" id="confirm-password" onChange={handleConfirmPasswordChange} value={confirmPassword}/>
+			<input
+				placeholder="Username"
+				type="text"
+				id="username"
+				onChange={handleNameChange}
+				value={username}
+			/>
+			<input
+				placeholder="Password"
+				type="password"
+				id="password"
+				onChange={handlePasswordChange}
+				value={password}
+			/>
+			<input
+				placeholder="Confirm Password"
+				type="password"
+				id="confirm-password"
+				onChange={handleConfirmPasswordChange}
+				value={confirmPassword}
+			/>
 			<button onClick={handleRegister}>Register</button>
 		</form>
 	);

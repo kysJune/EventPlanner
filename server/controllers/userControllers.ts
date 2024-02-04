@@ -4,8 +4,8 @@ import { UserRequest } from "../types/requests/userRequest";
 // import { Session } from "express-session";
 declare module "express-session" {
 	interface SessionData {
-	  isLoggedIn?: boolean;
-	  // Add any other custom properties you need
+		isLoggedIn?: boolean;
+		// Add any other custom properties you need
 	}
 }
 
