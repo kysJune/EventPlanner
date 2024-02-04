@@ -2,15 +2,22 @@ import express, { Express, Request, Response } from "express";
 import dotenv from "dotenv";
 import { connectMongo } from "./config/dbConnection";
 import userRouter from "./routes/userRouter";
-
 import session from "express-session";
-import MongoStore from "connect-mongo"; // eslint-disable-line @typescript-eslint/no-var-requires
+import MongoStore from "connect-mongo";
+import cors from "cors";
+import bodyParser from "body-parser";
 
 dotenv.config();
 connectMongo();
 
 const app: Express = express();
 const port = process.env.PORT || 3000;
+
+// Enable CORS for all routes
+// composition JSON sent between client and server are on the order of  n X 100KB
+app.use(bodyParser.json({ limit: "1mb" })); 
+app.use(cors({ origin: true, credentials: true }));
+// for express session }));
 
 // middleware
 app.use(
