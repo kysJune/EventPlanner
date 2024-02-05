@@ -1,5 +1,5 @@
 export interface UserRequest {
 	username: string;
-	password: string;
+	password: string | undefined;
 	location?: string;
 }
