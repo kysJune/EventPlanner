@@ -14,9 +14,10 @@ export const Login = ({}) => {
 	};
 
 	const handleLogin = async () => {
-		const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/user/login`,
-		{ username, password },
-		{withCredentials: true}
+		const response = await axios.post(
+			`${import.meta.env.VITE_BACKEND_URL}/user/login`,
+			{ username, password },
+			{ withCredentials: true }
 		);
 	};
 
