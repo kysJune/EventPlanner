@@ -9,12 +9,12 @@ declare module "express-session" {
 	interface SessionData {
 		isLoggedIn?: boolean;
 		userid?: ObjectId;
-		// Add any other custom properties you need
 	}
 }
 
 export const login = async (req: Request, res: Response) => {
 	const { username, password } = req.body;
+
 	// check if username exists and retrieve the hashed password
 	const user = await DatabaseUser.readByUsername(username);
 	if (user === undefined) {
@@ -31,7 +31,6 @@ export const login = async (req: Request, res: Response) => {
 		res
 			.status(StatusCodes.INTERNAL_SERVER_ERROR)
 			.send("error comparing passwords");
-		
 	} else {
 		if (!isAuthenticated) {
 			res
@@ -39,9 +38,8 @@ export const login = async (req: Request, res: Response) => {
 				.send("username password combo is incorrect");
 			return;
 		}
-		// log the user in
+
 		req.session.isLoggedIn = true;
-		// set the user id in the session
 		req.session.userid = user.id;
 		res.status(StatusCodes.OK).send("successfully logged in");
 	}
@@ -49,25 +47,29 @@ export const login = async (req: Request, res: Response) => {
 
 export const register = async (req: Request, res: Response) => {
 	const { username, password } = req.body;
-	// const location = req.body?.location
-	// check if the username already exists
-	const isDuplicate = (await DatabaseUser.readByUsername(username)) !== undefined;
-	if (isDuplicate) {
+	// TODO : future asking for the user's location in the future as part of registration
+
+	// Check if a user already exists with that username
+	const user = await DatabaseUser.readByUsername(username);
+	if (user) {
 		res.status(StatusCodes.CONFLICT).send("username already exists");
 		return;
 	}
-	// hash the password
+
+	// Create the new user
 	const hashedPassword = await hashPassword(password);
 	if (hashedPassword === undefined) {
 		res.status(StatusCodes.INTERNAL_SERVER_ERROR).send("error hashing password");
 		return;
 	}
+
 	const newuser: UserRequest = { username, password: hashedPassword };
 	try {
 		const userId = await DatabaseUser.create(newuser);
+
 		req.session.isLoggedIn = true;
-		// set the user id in the session
 		req.session.userid = userId;
+
 		res.status(StatusCodes.OK).send("successfully registered user");
 	} catch (error) {
 		console.error("something went wrong in register controller");
