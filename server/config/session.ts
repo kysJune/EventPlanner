@@ -1,13 +1,14 @@
 import session from "express-session";
+import { Express } from "express";
 import MongoStore from "connect-mongo";
+import dotenv from "dotenv";
+dotenv.config();
 
-require("dotenv").config();
-
-const mongoSession = (app: any) => {
+const mongoSession = (app: Express) => {
 	app.use(
 		session({
 			name: "sessionid",
-			secret: "secret",
+			secret: "secretfkadshkfhasdjfhakfsad",
 			store: MongoStore.create({
 				mongoUrl: process.env.MONGO_DB_URL
 			}),

@@ -9,9 +9,8 @@ export async function connectMongo() {
 		await mongoose.connect(mongoUri!, {
 			family: 4
 		});
-		console.log("connected to the mongo database");
+		console.info("connected to the mongo database");
 	} catch (error) {
-		console.log(error);
+		console.error(error);
 	}
 }
-

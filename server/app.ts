@@ -4,7 +4,7 @@ import { connectMongo } from "./config/dbConnection";
 import userRouter from "./routes/userRouter";
 import cors from "cors";
 import bodyParser from "body-parser";
-import mongoSession from "../server/config/session";	
+import mongoSession from "../server/config/session";
 
 const startServer = async () => {
 	dotenv.config();
@@ -14,7 +14,7 @@ const startServer = async () => {
 
 	await connectMongo();
 
-	//allow sending up to 1mb of data from client to server
+	// allow sending up to 1mb of data from client to server
 	app.use(bodyParser.json({ limit: "1mb" }));
 	// Enable CORS for all routes
 	app.use(cors({ origin: true, credentials: true }));
@@ -30,7 +30,7 @@ const startServer = async () => {
 	});
 
 	app.listen(port, () => {
-		console.log(`server listening on port ${port}`);
+		console.info(`server listening on port ${port}`);
 	});
 };
 
