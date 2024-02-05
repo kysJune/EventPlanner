@@ -15,7 +15,7 @@ module.exports = {
 			rules: {
 				semi: [1, "always"],
 				quotes: ["error", "double"],
-				"no-console": ["warn"],
+				"no-console": ["warn", { allow: ["info", "error"] }],
 				indent: ["error", "tab"],
 				"comma-dangle": "off"
 			}
