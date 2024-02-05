@@ -7,9 +7,10 @@ export class DatabaseUser {
 	/**
 	 * Create a user
 	 */
-	static async create(user: UserRequest) {
+	static async create(user: UserRequest): Promise<ObjectId> {
 		const result = new UserModel(user);
 		await result.save();
+		return result._id;
 	}
 
 	/**
@@ -17,6 +18,19 @@ export class DatabaseUser {
 	 */
 	static async read(userid: ObjectId): Promise<UserResponse | undefined> {
 		const result: UserResponse | null = await UserModel.findById(userid);
+		if (result) {
+			return result;
+		} else {
+			return undefined;
+		}
+	}
+
+	static async readByUsername(
+		username: string
+	): Promise<UserResponse | undefined> {
+		const result: UserResponse | null = await UserModel.findOne({
+			username
+		});
 		if (result) {
 			return result;
 		} else {
