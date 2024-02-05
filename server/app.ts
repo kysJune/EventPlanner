@@ -2,43 +2,36 @@ import express, { Express, Request, Response } from "express";
 import dotenv from "dotenv";
 import { connectMongo } from "./config/dbConnection";
 import userRouter from "./routes/userRouter";
-import session from "express-session";
-import MongoStore from "connect-mongo";
 import cors from "cors";
 import bodyParser from "body-parser";
+import mongoSession from "../server/config/session";	
 
-dotenv.config();
-connectMongo();
+const startServer = async () => {
+	dotenv.config();
 
-const app: Express = express();
-const port = process.env.PORT || 3000;
+	const app: Express = express();
+	const port = process.env.PORT || 3000;
 
-// Enable CORS for all routes
-// composition JSON sent between client and server are on the order of  n X 100KB
-app.use(bodyParser.json({ limit: "1mb" }));
-app.use(cors({ origin: true, credentials: true }));
-// for express session }));
+	await connectMongo();
 
-// middleware
-app.use(
-	session({
-		secret: "your-secret-key",
-		resave: false,
-		saveUninitialized: false,
-		store: MongoStore.create({
-			mongoUrl: process.env.MONGO_DB_URL,
-			collectionName: "session"
-		}),
-		cookie: { maxAge: 60 * 60 * 1000 } // 1 hour
-	})
-);
+	//allow sending up to 1mb of data from client to server
+	app.use(bodyParser.json({ limit: "1mb" }));
+	// Enable CORS for all routes
+	app.use(cors({ origin: true, credentials: true }));
+	// for express session }));
 
-app.use("/user", userRouter);
+	// middleware
+	mongoSession(app);
 
-app.get("/", (req: Request, res: Response) => {
-	res.send("Hello World!");
-});
+	app.use("/user", userRouter);
 
-app.listen(port, () => {
-	console.log(`server listening on port ${port}`);
-});
+	app.get("/", (req: Request, res: Response) => {
+		res.send("Hello World!");
+	});
+
+	app.listen(port, () => {
+		console.log(`server listening on port ${port}`);
+	});
+};
+
+startServer();

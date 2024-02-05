@@ -19,6 +19,9 @@ export const Register = ({}) => {
 	};
 
 	const handleRegister = async () => {
+		console.log(
+			`username: ${username}, password: ${password}, confirmPassword: ${confirmPassword}`
+		)
 		try {
 			if (confirmPassword !== password) {
 				//TODO display password mismatch
@@ -28,7 +31,7 @@ export const Register = ({}) => {
 			const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/user/register`, {
 				username,
 				password
-			});
+			}, {withCredentials: true});
 			if (response.status !== 200) {
 				console.error("register failed");
 				alert(response.data.message);
@@ -39,7 +42,7 @@ export const Register = ({}) => {
 	};
 
 	return (
-		<form className="Register">
+		<div className="Register">
 			<input
 				placeholder="Username"
 				type="text"
@@ -62,7 +65,7 @@ export const Register = ({}) => {
 				value={confirmPassword}
 			/>
 			<button onClick={handleRegister}>Register</button>
-		</form>
+		</div>
 	);
 };
 export default Register;

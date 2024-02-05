@@ -11,7 +11,6 @@ declare module "express-session" {
 
 export const login = async (req: Request, res: Response) => {
 	// TODO: implement login
-	console.log("inside login", req.body);
 	res.send("inside login");
 };
 
@@ -19,7 +18,6 @@ export const register = async (req: Request, res: Response) => {
 	const username = req.body.username;
 	const password = req.body.password;
 	// const location = req.body?.location;
-
 	// TODO check user table so that user dne
 	const newuser: UserRequest = { username, password };
 	try {

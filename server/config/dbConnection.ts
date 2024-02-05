@@ -14,3 +14,4 @@ export async function connectMongo() {
 		console.log(error);
 	}
 }
+
