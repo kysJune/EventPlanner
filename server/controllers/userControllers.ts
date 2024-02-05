@@ -50,6 +50,7 @@ export const login = async (req: Request, res: Response) => {
 export const register = async (req: Request, res: Response) => {
 	const { username, password } = req.body;
 	// const location = req.body?.location
+	// check if the username already exists
 	const isDuplicate = (await DatabaseUser.readByUsername(username)) !== undefined;
 	if (isDuplicate) {
 		res.status(StatusCodes.CONFLICT).send("username already exists");
