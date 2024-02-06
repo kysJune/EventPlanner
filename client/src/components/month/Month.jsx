@@ -21,9 +21,11 @@ const Month = ({ month, year }) => {
 					<div className="week" key = {ind}>
 						{week.map((day, index) => {
 							let monthProp = month;
+							// if the day is from the previous month set the month to the previous month
 							if(day.monthStatus === "prev"){
 								monthProp = (month - 1) < 0 ? 11 : month - 1;
 							}
+							// if the day is from the next month set the month to the next month
 							else if (day.monthStatus === "next"){
 								monthProp = (month + 1) > 11 ? 0 : month + 1;
 							}
