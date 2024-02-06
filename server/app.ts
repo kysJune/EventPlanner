@@ -15,7 +15,7 @@ const startServer = async () => {
 	await connectMongo();
 
 	// allow sending up to 1mb of data from client to server
-	app.use(bodyParser.json({ limit: "1mb" }));
+	app.use(bodyParser.json({ limit: "1mb" }));      
 	// Enable CORS for all routes
 	app.use(cors({ origin: true, credentials: true }));
 	// for express session }));
@@ -23,7 +23,7 @@ const startServer = async () => {
 	// middleware
 	mongoSession(app);
 
-	app.use("/user", userRouter);
+	app.use("/user", userRouter);   
 
 	app.get("/", (req: Request, res: Response) => {
 		res.send("Hello World!");
