@@ -1,0 +1,36 @@
+.Month {
+	height: 99%;
+	width: 100%;
+	box-sizing: border-box;
+	margin: auto;
+}
+
+.week {
+	display: flex;
+	height: 16.66%;
+	width: 100%;
+}
+
+.MiniDay {
+	border: 1px solid white;
+	height: 100%;
+	width: 14%;
+}
+
+.mini-button {
+	margin-left: 4px;
+	margin-top: 4px;
+	background-color: transparent;
+}
+
+.MiniEvent {
+	width: 90%;
+	background: lightblue;
+	border-radius: 10px;
+	margin-left: 4px;
+}
+
+.MiniEvent p {
+	color: black;
+	margin-left: 4px;
+}
