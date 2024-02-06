@@ -1,6 +1,5 @@
 import { Request, Response } from "express";
 import { DatabaseUser } from "../services/database.user";
-import { UserRequest } from "../types/requests/userRequest";
 import { hashPassword, isPassword } from "../utils/hashing";
 import { ObjectId } from "mongoose";
 import { StatusCodes } from "http-status-codes";
@@ -20,7 +19,7 @@ export const login = async (req: Request, res: Response) => {
 	if (user === undefined) {
 		res
 			.status(StatusCodes.FORBIDDEN)
-			.send("username password combo is incorrect");
+			.send({ message: "username password combo is incorrect" });
 		return;
 	}
 	const isAuthenticated: boolean | undefined = await isPassword(
@@ -30,18 +29,22 @@ export const login = async (req: Request, res: Response) => {
 	if (typeof isAuthenticated === "undefined") {
 		res
 			.status(StatusCodes.INTERNAL_SERVER_ERROR)
-			.send("error comparing passwords");
+			.send({ message: "error comparing passwords" });
 	} else {
 		if (!isAuthenticated) {
 			res
 				.status(StatusCodes.FORBIDDEN)
-				.send("username password combo is incorrect");
+				.send({ message: "username password combo is incorrect" });
 			return;
 		}
 
 		req.session.isLoggedIn = true;
 		req.session.userid = user.id;
-		res.status(StatusCodes.OK).send("successfully logged in");
+
+		res.status(StatusCodes.OK).send({
+			user,
+			message: "Successful login"
+		});
 	}
 };
 
@@ -59,18 +62,22 @@ export const register = async (req: Request, res: Response) => {
 	// Create the new user
 	const hashedPassword = await hashPassword(password);
 	if (hashedPassword === undefined) {
-		res.status(StatusCodes.INTERNAL_SERVER_ERROR).send("error hashing password");
+		res
+			.status(StatusCodes.INTERNAL_SERVER_ERROR)
+			.send({ message: "error hashing password" });
 		return;
 	}
 
-	const newuser: UserRequest = { username, password: hashedPassword };
 	try {
-		const userId = await DatabaseUser.create(newuser);
+		const userId = await DatabaseUser.create({
+			username,
+			password: hashedPassword
+		});
 
 		req.session.isLoggedIn = true;
 		req.session.userid = userId;
 
-		res.status(StatusCodes.OK).send("successfully registered user");
+		res.status(StatusCodes.OK).send({ message: "successfully registered user" });
 	} catch (error) {
 		console.error("something went wrong in register controller");
 		throw error;
