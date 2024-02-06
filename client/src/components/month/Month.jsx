@@ -8,9 +8,9 @@ import populateMonth from "./algorithms";
 const Month = ({ month, year }) => {
 	// query all events for the loggedin user for the given month and year
 
-	// first day of the week for that month
+	//weeks array contains all day objects to display for the given month 
 	const weeks = populateMonth(month, year);
-	//import Month enum from backend
+
 	return (
 		<div className="Month">
 			<header>
@@ -29,13 +29,23 @@ const Month = ({ month, year }) => {
 							else if (day.monthStatus === "next"){
 								monthProp = (month + 1) > 11 ? 0 : month + 1;
 							}
+
+							let yearProp = year;
+							// if the previous month is December (11) then set the year to the previous year
+							if(monthProp === 11 && day.monthStatus === "prev"){
+								yearProp = year - 1;
+							}
+							// if the next month is January (0) then set the year to the next year
+							else if(monthProp === 0 && day.monthStatus === "next"){
+								yearProp = year + 1;
+							}
 							return (
 								<MiniDay
 									key={index}
 									events={day.events}
 									day={day.day}
 									month={monthProp}
-									year={year}
+									year={yearProp}
 									weekDay={day.weekDay}
 									monthStatus={day.monthStatus}
 								/>
