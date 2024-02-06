@@ -9,7 +9,7 @@ const MiniEvent = ({ event }) => {
 	);
 };
 
-const MiniDay = ({ events, day, month, year }) => {
+const MiniDay = ({ events, day, month, year, weekDay, monthStatus }) => {
 	const navigate = useNavigate();
 
 	const handleClick = () => {
@@ -17,10 +17,14 @@ const MiniDay = ({ events, day, month, year }) => {
 	};
 
 	return (
-		<div className="MiniDay">
-			<button className="mini-button" onClick={handleClick}>
-				{day}
-			</button>
+		<div className={`MiniDay ${monthStatus}`}>
+			<div className="mini-day-header">
+				<button className="mini-button" onClick={handleClick}>
+					{day}
+				</button>
+				{weekDay.length > 0 && <p>{weekDay}</p>}
+			</div>
+
 			<div className="mini-event-container">
 				{events.map((e, index) => {
 					return <MiniEvent event={e} key={index} />;
