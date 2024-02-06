@@ -17,9 +17,24 @@
 	width: 14%;
 }
 
+.MiniDay.prev {
+	background-color: grey;
+}
+
+.mini-day-header {
+	width: fit-content;
+	padding-right: 4px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+.mini-day-header p {
+	font-size: 15px;
+}
+
 .mini-button {
-	margin-left: 4px;
-	margin-top: 4px;
+	/* margin-left: 4px;
+	margin-top: 4px; */
 	background-color: transparent;
 }
 
