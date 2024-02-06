@@ -1,9 +1,12 @@
 import { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export const Login = ({}) => {
 	const [username, setName] = useState("");
 	const [password, setPassword] = useState("");
+
+	const navigate = useNavigate();
 
 	const handleNameChange = (event) => {
 		setName(event.target.value);
@@ -19,6 +22,10 @@ export const Login = ({}) => {
 			{ username, password },
 			{ withCredentials: true }
 		);
+
+		if (response.status === 200) {
+			navigate("/Month");
+		}
 	};
 
 	return (
