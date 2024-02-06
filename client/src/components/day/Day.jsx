@@ -24,7 +24,7 @@ const Day = () => {
 
 	return (
 		<div className="day">
-			<h1>{`${Number(month)+1}/${day}/${year}`}</h1>
+			<h1>{`${Number(month) + 1}/${day}/${year}`}</h1>
 
 			{
 				//put all the hours on the page

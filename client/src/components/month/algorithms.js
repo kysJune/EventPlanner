@@ -1,8 +1,4 @@
-import {
-	WeekDay,
-	getDay,
-	numDaysInMonth
-} from "../../../../server/utils/CalculateWeekDay";
+import { WeekDay, getDay, numDaysInMonth } from "../../../../server/utils/CalculateWeekDay";
 
 const populateMonth = (month, year) => {
 	const firstWeekDay = getDay(1, month, year);
@@ -26,7 +22,7 @@ const populateMonth = (month, year) => {
 			],
 			day: i,
 			weekDay: WeekDay[i - numDaysPrev + firstWeekDay - 1],
-            monthStatus: "prev"
+			monthStatus: "prev"
 		});
 	}
 	//complete the first week with days of the current month
@@ -41,7 +37,7 @@ const populateMonth = (month, year) => {
 			],
 			day: i,
 			weekDay: WeekDay[firstWeekDay + i - 1],
-            monthStatus: "curr"
+			monthStatus: "curr"
 		});
 	}
 	weeks.push(daysOfLastMonth);
@@ -58,7 +54,7 @@ const populateMonth = (month, year) => {
 				],
 				day: week * 7 + i + 1 - firstWeekDay,
 				weekDay: "",
-                monthStatus: "curr"
+				monthStatus: "curr"
 			});
 		}
 
