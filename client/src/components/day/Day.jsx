@@ -2,8 +2,13 @@ import "./Day.css";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Event from "../event/Event";
-const Day = ({ day, month, year }) => {
+import { useLocation } from "react-router-dom";
+const Day = () => {
 	const [events, setEvents] = useState([]);
+	const location = useLocation();
+	const { day, month, year } = location.state;
+
+	console.log(day, month, year);
 
 	useEffect(() => {
 		const fetchEvents = async () => {
@@ -26,7 +31,7 @@ const Day = ({ day, month, year }) => {
 				Array.from({ length: 24 }, (v, i) => {
 					return (
 						<div key={i} className="hour">
-							<p>{i > 11 ? `${i - 12 == 0 ? 12 : i - 12}:00 PM` : `${i == 0 ? 12 : i}:00 AM`}</p>
+							<p>{i > 11 ? `${i - 12 === 0 ? 12 : i - 12}:00 PM` : `${i === 0 ? 12 : i}:00 AM`}</p>
 						</div>
 					);
 				})
