@@ -20,12 +20,19 @@ const Month = ({ month, year }) => {
 				return (
 					<div className="week" key = {ind}>
 						{week.map((day, index) => {
+							let monthProp = month;
+							if(day.monthStatus === "prev"){
+								monthProp = (month - 1) < 0 ? 11 : month - 1;
+							}
+							else if (day.monthStatus === "next"){
+								monthProp = (month + 1) > 11 ? 0 : month + 1;
+							}
 							return (
 								<MiniDay
 									key={index}
 									events={day.events}
 									day={day.day}
-									month={month}
+									month={monthProp}
 									year={year}
 									weekDay={day.weekDay}
 									monthStatus={day.monthStatus}
