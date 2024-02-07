@@ -3,7 +3,7 @@ import { Request, Response } from "express";
 import { DatabaseUserEvent } from "../services/database.user.event";
 
 import UnauthorizedError from "../errors/UnauthorizedError";
-import mongoose, { ObjectId } from "mongoose";
+import { ObjectId } from "mongoose";
 import BadRequestError from "../errors/BadRequest";
 import { UserEventResponse } from "../types/responses/userEventResponse";
 import {
@@ -13,11 +13,15 @@ import {
 import { includeIfDefined } from "../utils/includeIfDefined";
 
 export const create = async (req: Request, res: Response) => {
-	if (!req.session.userid) {
+	const id: ObjectId | undefined = req.session.userid;
+	if (!id) {
 		throw new UnauthorizedError();
 	}
 
-	const data: unknown = req.body;
+	const data: unknown = {
+		id,
+		...req.body
+	};
 	if (!isValidUserEventRequest(data)) {
 		throw new BadRequestError("Invalid UserEvent Request data");
 	}
@@ -102,7 +106,7 @@ export const listEvents = async (req: Request, res: Response) => {
 
 	if (!events) {
 		userEvents = [];
-		statusCode = StatusCodes.NOT_FOUND;
+		statusCode = StatusCodes.NO_CONTENT;
 		message = "No events found";
 	} else {
 		userEvents = events;
@@ -127,12 +131,6 @@ export const update = async (req: Request, res: Response) => {
 		throw new BadRequestError("Invalid UserEvent request data");
 	}
 
-	// TODO : I would ideally use a path param for event id, but
-	//  I can not seem to figure out why I cant use the function to convert str to objectid
-	if (!mongoose.Types.ObjectId.isValid(req.body.id)) {
-		throw new BadRequestError("Invalid event id");
-	}
-
 	const id: ObjectId = req.body.id;
 	await DatabaseUserEvent.update(id, data);
 
@@ -141,16 +139,10 @@ export const update = async (req: Request, res: Response) => {
 	});
 };
 
-export const remove = async (req: Request, res: Response) => {
+export const deleteEvent = async (req: Request, res: Response) => {
 	const userid: undefined | ObjectId = req.session.userid;
 	if (!userid) {
 		throw new UnauthorizedError();
-	}
-
-	// TODO : I would ideally use a path param for event id, but
-	//  I can not seem to figure out why I cant use the function to convert str to objectid
-	if (!mongoose.Types.ObjectId.isValid(req.body.id)) {
-		throw new BadRequestError("Invalid event id");
 	}
 
 	const id: ObjectId = req.body.id;

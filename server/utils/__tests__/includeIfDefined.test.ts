@@ -1,7 +1,7 @@
 import { includeIfDefined } from "../includeIfDefined";
 
 describe("includeIfDefined", () => {
-	it("should include the property if defined", () => {
+	it("includes the key-value pair if the value is defined", () => {
 		const property = "name";
 		const value = "George Washington";
 
@@ -10,7 +10,7 @@ describe("includeIfDefined", () => {
 		expect(result).toEqual({ name: "George Washington" });
 	});
 
-	it("should not include the property if value is undefined", () => {
+	it("returns an empty object if the value is undefined", () => {
 		const property = "name";
 		const value = undefined;
 

@@ -3,7 +3,7 @@ import {
 	create,
 	listEvents,
 	read,
-	remove,
+	deleteEvent,
 	update
 } from "../controllers/userEventController";
 
@@ -15,6 +15,6 @@ userEventRouter.get("/list", listEvents);
 
 // TODO : convert these two to use path param id if possible
 userEventRouter.put("/update", update);
-userEventRouter.delete("/delete", remove);
+userEventRouter.delete("/delete", deleteEvent);
 
 export default userEventRouter;
