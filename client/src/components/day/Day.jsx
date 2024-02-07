@@ -27,8 +27,22 @@ const Day = () => {
 	}, []);
 
 	const handleCreateEvent = async () => {
+		if(newEventName.length === 0 || newEventStartTime === "" || newEventEndTime === "") {
+			alert("Please fill out all fields");
+			return;
+		}
+		if(
+			newEventStartTime < 0 
+			|| newEventStartTime > 24 
+			|| newEventEndTime < 0 
+			|| newEventEndTime > 24
+			|| newEventStartTime > newEventEndTime) 
+			{
+				alert("Invalid time range");
+				return;
+			}
 		try {
-			//TODO: validate the inputs and make the post request match backend
+			//TODO: make the post request match backend
 			const response = await axios.post(`/events/${day}/${month}/${year}`, {
 				name: newEventName,
 				startTime: newEventStartTime,
