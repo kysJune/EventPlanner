@@ -3,12 +3,16 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import Event from "../event/Event";
 import { useLocation } from "react-router-dom";
+import Modal from "react-modal";
 const Day = () => {
 	const [events, setEvents] = useState([]);
 	const location = useLocation();
-	const { day, month, year } = location.state;
-
-	console.log(day, month, year);
+	const { day, month, year } =
+		location.state == null ? { day: 1, month: 1, year: 2024 } : location.state;
+	const [modalIsOpen, setModalIsOpen] = useState(false);
+	const [newEventName, setNewEventName] = useState("");
+	const [newEventStartTime, setNewEventStartTime] = useState("");
+	const [newEventEndTime, setNewEventEndTime] = useState("");
 
 	useEffect(() => {
 		const fetchEvents = async () => {
@@ -22,10 +26,24 @@ const Day = () => {
 		fetchEvents();
 	}, []);
 
+	const handleCreateEvent = async () => {
+		try {
+			//TODO: validate the inputs and make the post request match backend
+			const response = await axios.post(`/events/${day}/${month}/${year}`, {
+				name: newEventName,
+				startTime: newEventStartTime,
+				endTime: newEventEndTime
+			});
+			setEvents([...events, response.data]);
+		} catch (error) {
+			console.error(error);
+		}
+	};
+
 	return (
 		<div className="day">
 			<h1>{`${Number(month) + 1}/${day}/${year}`}</h1>
-
+			<button onClick={() => setModalIsOpen(true)}>Create Event</button>
 			{
 				//put all the hours on the page
 				Array.from({ length: 24 }, (v, i) => {
@@ -42,6 +60,47 @@ const Day = () => {
 					return <Event key={index} event={event} />;
 				})
 			}
+
+			{/* ----------------------------------------MODAL---------------------------------------- */}
+			<Modal isOpen={modalIsOpen} contentLabel="Create an Event Modal">
+				<header>
+					<h1>Creating an event...</h1>
+					<button
+						className="modal-button"
+						onClick={() => {
+							setModalIsOpen(false);
+						}}
+					>
+						X
+					</button>
+				</header>
+				<div className="modal-controls">
+					<div className="modal-control">
+						<label htmlFor="new-event-name">Event Name</label>
+						<input
+							type="text"
+							id="new-event-name"
+							onChange={(e) => {
+								setNewEventName(e.target.value);
+							}}
+							value={newEventName}
+						/>
+					</div>
+					<div className="modal-control">
+						<label htmlFor="new-event-start-time">{`Start Time (in 24 hour time)`}</label>
+						<input id="new-event-start-time" type="number" min={0} max={24} />
+					</div>
+					<div className="modal-control">
+						<label htmlFor="new-event-end-time">{`End Time (in 24 hour time)`}</label>
+						<input id="new-event-end-time" type="number" min={0} max={24} />
+					</div>
+
+					<button className="modal-button create-event-button" onClick={handleCreateEvent}>
+						Create
+					</button>
+				</div>
+			</Modal>
+			{/* ----------------------------------------MODAL---------------------------------------- */}
 		</div>
 	);
 };
