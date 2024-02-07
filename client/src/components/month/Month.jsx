@@ -1,18 +1,48 @@
 import "./Month.css";
 import MiniDay from "./MiniDay.jsx";
 import { Month as MonthEnum } from "../../../../server/utils/CalculateWeekDay";
-import populateMonth from "./algorithms";
+import populateMonth, { getCurrentMonth, getCurrentYear } from "./algorithms";
+import { useLocation, useNavigate } from "react-router-dom";
 
-const Month = ({ month, year }) => {
+const Month = () => {
+	const navigate = useNavigate();
+	const location = useLocation();
+	const month = location?.state?.month || 0; //bug when I try to set the month to getCurrentMonth() or any number other than 0
+	//when on February the handlePrevMonthClick function does not work
+	const year = location?.state?.year || getCurrentYear();
 	// query all events for the loggedin user for the given month and year
 
 	//weeks array contains all day objects to display for the given month
 	const weeks = populateMonth(month, year);
 
+	const handlePrevMonthClick = () => {
+		navigate("/Month", {
+			state: {
+				year: Number(month) - 1 < 0 ? Number(year) - 1 : year,
+				month: Number(month) - 1 < 0 ? 11 : Number(month) - 1
+			}
+		});
+	};
+
+	const handleNextMonthClick = () => {
+		navigate("/Month", {
+			state: {
+				year: Number(month) + 1 > 11 ? Number(year) + 1 : year,
+				month: Number(month) + 1 > 11 ? 0 : Number(month) + 1
+			}
+		});
+	};
+
 	return (
 		<div className="Month">
 			<header>
+				<button className="month-control-button" onClick={handlePrevMonthClick}>
+					{"<"}
+				</button>
 				<h1>{`${MonthEnum[month]}, ${year}`}</h1>
+				<button className="month-control-button" onClick={handleNextMonthClick}>
+					{">"}
+				</button>
 			</header>
 			{weeks.map((week, ind) => {
 				return (
