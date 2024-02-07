@@ -22,7 +22,6 @@ const Home = () => {
 				</nav>
 			</header>
 			<h1>Welcome to the Weather App</h1>
-			<Day day={1} month={1} year={2022} />
 		</div>
 	);
 };

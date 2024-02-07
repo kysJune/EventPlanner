@@ -1,10 +1,13 @@
 import { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export const Register = ({}) => {
 	const [username, setName] = useState("");
 	const [password, setPassword] = useState("");
 	const [confirmPassword, setConfirmPassword] = useState("");
+
+	const navigate = useNavigate();
 
 	const handleNameChange = (event) => {
 		setName(event.target.value);
@@ -37,6 +40,8 @@ export const Register = ({}) => {
 			if (response.status !== 200) {
 				console.error("register failed");
 				alert(response.data.message);
+			} else {
+				navigate("/");
 			}
 		} catch (error) {
 			console.error(error);

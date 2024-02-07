@@ -1,0 +1,56 @@
+.Month {
+	height: 99%;
+	width: 100%;
+	box-sizing: border-box;
+	margin: auto;
+}
+
+.week {
+	display: flex;
+	height: 16.66%;
+	width: 100%;
+}
+
+.MiniDay {
+	border: 1px solid white;
+	height: 100%;
+	width: 14%;
+}
+
+.MiniDay.prev{
+	background-color: grey;
+}
+
+.MiniDay.next{
+	background-color: grey;
+	opacity: .5;
+}
+
+.mini-day-header {
+	width: fit-content;
+	padding-right: 4px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+.mini-day-header p {
+	font-size: 15px;
+}
+
+.mini-button {
+	/* margin-left: 4px;
+	margin-top: 4px; */
+	background-color: transparent;
+}
+
+.MiniEvent {
+	width: 90%;
+	background: lightblue;
+	border-radius: 10px;
+	margin-left: 4px;
+}
+
+.MiniEvent p {
+	color: black;
+	margin-left: 4px;
+}
