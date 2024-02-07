@@ -31,11 +31,11 @@ const Month = ({ month, year }) => {
 							let yearProp = year;
 							// if the previous month is December (11) then set the year to the previous year
 							if (monthProp === 11 && day.monthStatus === "prev") {
-								yearProp = year - 1;
+								yearProp = Number(year) - 1;
 							}
 							// if the next month is January (0) then set the year to the next year
 							else if (monthProp === 0 && day.monthStatus === "next") {
-								yearProp = year + 1;
+								yearProp = Number(year) + 1;
 							}
 							return (
 								<MiniDay

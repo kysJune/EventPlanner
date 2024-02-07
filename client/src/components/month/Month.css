@@ -17,8 +17,13 @@
 	width: 14%;
 }
 
-.MiniDay.prev {
+.MiniDay.prev{
 	background-color: grey;
+}
+
+.MiniDay.next{
+	background-color: grey;
+	opacity: .5;
 }
 
 .mini-day-header {
