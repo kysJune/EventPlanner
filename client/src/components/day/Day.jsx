@@ -4,6 +4,7 @@ import axios from "axios";
 import Event from "../event/Event";
 import { useLocation } from "react-router-dom";
 import Modal from "react-modal";
+import isValidEvent from "./algorithms";
 const Day = () => {
 	const [events, setEvents] = useState([]);
 	const location = useLocation();
@@ -27,27 +28,17 @@ const Day = () => {
 	}, []);
 
 	const handleCreateEvent = async () => {
-		if(newEventName.length === 0 || newEventStartTime === "" || newEventEndTime === "") {
-			alert("Please fill out all fields");
-			return;
-		}
-		if(
-			newEventStartTime < 0 
-			|| newEventStartTime > 24 
-			|| newEventEndTime < 0 
-			|| newEventEndTime > 24
-			|| newEventStartTime > newEventEndTime) 
-			{
-				alert("Invalid time range");
-				return;
-			}
+		if (!isValidEvent(newEventName, newEventStartTime, newEventEndTime)) return;
 		try {
 			//TODO: make the post request match backend
-			const response = await axios.post(`/events/${day}/${month}/${year}`, {
+			const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/events/create`, {
 				name: newEventName,
 				startTime: newEventStartTime,
-				endTime: newEventEndTime
-			});
+				endTime: newEventEndTime, 
+				day: day,
+				month: month,
+				year: year
+			}, {withCredentials: true});
 			setEvents([...events, response.data]);
 		} catch (error) {
 			console.error(error);
