@@ -5,6 +5,19 @@
 	margin: auto;
 }
 
+.month-control-button{
+	background-color: transparent;
+	border: none;
+	color: white;
+	font-size: 30px;
+
+}
+
+.month-control-button:hover{
+	cursor: pointer;
+	color: grey;
+}
+
 .week {
 	display: flex;
 	height: 16.66%;
@@ -17,13 +30,17 @@
 	width: 14%;
 }
 
-.MiniDay.prev{
+.MiniDay.prev {
 	background-color: grey;
 }
 
-.MiniDay.next{
+.MiniDay.next {
 	background-color: grey;
-	opacity: .5;
+	opacity: 0.5;
+}
+
+.MiniDay.today {
+	background-color: navy;
 }
 
 .mini-day-header {
