@@ -11,7 +11,7 @@ const userEventRouter = express.Router();
 
 userEventRouter.post("/create", create);
 userEventRouter.get("/:id/read", read);
-userEventRouter.get("/list", listEvents);
+userEventRouter.post("/list", listEvents);
 userEventRouter.put("/update", update);
 userEventRouter.delete("/delete", deleteEvent);
 
