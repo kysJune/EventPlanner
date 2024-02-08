@@ -3,8 +3,6 @@ import UserModel from "../models/user";
 import { UserRequest } from "../types/requests/userRequest";
 import { UserResponse } from "../types/responses/userResponse";
 
-
-
 export class DatabaseUser {
 	/**
 	 * Create a user
