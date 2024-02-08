@@ -1,6 +1,6 @@
-import { ObjectId } from "mongoose";
+import mongoose from "mongoose";
 import { EventResponse } from "./eventResponse";
 
 export interface UserEventResponse extends EventResponse {
-	userid: ObjectId;
+	userid: mongoose.Types.ObjectId;
 }

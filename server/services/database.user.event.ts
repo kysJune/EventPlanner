@@ -1,4 +1,4 @@
-import { ObjectId } from "mongoose";
+import mongoose from "mongoose";
 import UserEventModel from "../models/userEvent";
 import { UserEventRequest } from "../types/requests/userEventRequest";
 import { UserEventResponse } from "../types/responses/userEventResponse";
@@ -13,15 +13,13 @@ export class DatabaseUserEvent {
 	}
 
 	/**
-	 * Get a single event by userid and name
+	 * Get a single event by its id
 	 */
 	static async read(
-		userid: ObjectId,
-		name: string
+		id: mongoose.Types.ObjectId
 	): Promise<UserEventResponse | undefined> {
-		const event: UserEventResponse | null = await UserEventModel.findOne({
-			userid,
-			name
+		const event: UserEventResponse | null = await UserEventModel.findById({
+			_id: id
 		});
 		if (event) {
 			console.info("Event found");
@@ -33,20 +31,12 @@ export class DatabaseUserEvent {
 	}
 
 	/**
-	 * Lists all events by the userid, day, month and year
+	 * Lists all events by the given filter
 	 */
 	static async listEvents(
-		userid: ObjectId,
-		day: number,
-		month: number,
-		year: number
+		filterData: Partial<UserEventRequest>
 	): Promise<UserEventResponse[] | undefined> {
-		const events: UserEventResponse[] = await UserEventModel.find({
-			userid,
-			day,
-			month,
-			year
-		});
+		const events: UserEventResponse[] = await UserEventModel.find(filterData);
 
 		if (events.length > 0) {
 			console.info("Events found");
@@ -60,7 +50,7 @@ export class DatabaseUserEvent {
 	 * Update an event
 	 */
 	static async update(
-		id: ObjectId,
+		id: mongoose.Types.ObjectId,
 		eventUpdateData: Partial<UserEventRequest>
 	): Promise<void> {
 		await UserEventModel.updateOne({ _id: id }, eventUpdateData);
@@ -69,7 +59,7 @@ export class DatabaseUserEvent {
 	/**
 	 * Delete an Event
 	 */
-	static async delete(id: ObjectId): Promise<void> {
+	static async delete(id: mongoose.Types.ObjectId): Promise<void> {
 		await UserEventModel.deleteOne({ _id: id });
 	}
 }

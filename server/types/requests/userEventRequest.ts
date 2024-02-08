@@ -1,6 +1,6 @@
-import { ObjectId } from "mongoose";
 import { EventRequest } from "./eventRequest";
+import mongoose from "mongoose";
 
 export interface UserEventRequest extends EventRequest {
-	userid: ObjectId;
+	userid: mongoose.Types.ObjectId;
 }
