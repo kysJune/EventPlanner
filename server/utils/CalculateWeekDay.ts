@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 export enum Month {
 	January = 0,
 	February,
@@ -14,13 +15,13 @@ export enum Month {
 }
 
 export enum WeekDay {
-Sun = 0,
-Mon,
-Tue,
-Wed,
-Thu,
-Fri,
-Sat
+	Sun = 0,
+	Mon,
+	Tue,
+	Wed,
+	Thu,
+	Fri,
+	Sat
 }
 
 // TODO : Consider better error handling and constraint checking
@@ -33,8 +34,8 @@ export const getDay = (day: number, month: Month, year: number) => {
 	return date.getDay();
 };
 /**
- * 
- * @param year 
+ *
+ * @param year
  * @param month zero indexed
  * @returns the number of days in that month
  */
