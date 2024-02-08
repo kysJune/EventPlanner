@@ -3,6 +3,7 @@
 	width: 100%;
 	box-sizing: border-box;
 	margin: auto;
+	overflow: auto;
 }
 
 .month-control-button {

@@ -3,7 +3,12 @@ import { Login } from "./components/login/Login";
 import Home from "./components/home/Home";
 import { Register } from "./components/register/Register";
 import { Route, Routes, BrowserRouter } from "react-router-dom";
+import Header from "./components/header/Header";
 import "./App.css";
+import Cookies from "universal-cookie";
+
+// Create a new instance of the Cookies class
+export const cookies = new Cookies();
 import Day from "./components/day/Day.jsx";
 import Month from "./components/month/Month.jsx";
 

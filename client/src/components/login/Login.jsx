@@ -1,11 +1,11 @@
 import { useState } from "react";
 import axios from "axios";
+import { cookies } from "../../App.jsx";
 import { useNavigate } from "react-router-dom";
 
 export const Login = ({}) => {
 	const [username, setName] = useState("");
 	const [password, setPassword] = useState("");
-
 	const navigate = useNavigate();
 
 	const handleNameChange = (event) => {
@@ -22,9 +22,10 @@ export const Login = ({}) => {
 			{ username, password },
 			{ withCredentials: true }
 		);
-
 		if (response.status === 200) {
-			navigate("/Month");
+			cookies.set("isLoggedIn", "true");
+			cookies.set("username", username);
+			navigate("/");
 		}
 	};
 

@@ -1,4 +1,4 @@
-a {
+App {
 	margin-right: 10px;
 	height: fit-content;
 	width: fit-content;
@@ -11,6 +11,8 @@ header {
 	flex-direction: row;
 	justify-content: space-between;
 	align-items: center;
+	color: black;
+	/* margin-bottom:20px ; */
 }
 
 p {

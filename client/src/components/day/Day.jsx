@@ -5,6 +5,7 @@ import Event from "../event/Event";
 import { useLocation } from "react-router-dom";
 import Modal from "react-modal";
 import isValidEvent from "./algorithms";
+
 const Day = () => {
 	const [events, setEvents] = useState([]);
 	const location = useLocation();
@@ -43,6 +44,7 @@ const Day = () => {
 				{ withCredentials: true }
 			);
 			setEvents([...events, response.data]);
+			setModalIsOpen(false);
 		} catch (error) {
 			console.error(error);
 		}

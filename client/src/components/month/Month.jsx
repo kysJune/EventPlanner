@@ -4,6 +4,7 @@ import MiniDay from "./MiniDay.jsx";
 import { Month as MonthEnum } from "../../../../server/utils/CalculateWeekDay";
 import populateMonth, { getCurrentMonth, getCurrentYear } from "./algorithms";
 import { useLocation } from "react-router-dom";
+import Header from "../header/Header.jsx";
 
 const Month = () => {
 	const location = useLocation();
@@ -27,6 +28,7 @@ const Month = () => {
 
 	return (
 		<div className="Month">
+			<Header />
 			<header>
 				<button className="month-control-button" onClick={handlePrevMonthClick}>
 					{"<"}

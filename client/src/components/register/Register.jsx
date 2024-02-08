@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { cookies } from "../../App.jsx";
 
 export const Register = ({}) => {
 	const [username, setName] = useState("");
@@ -40,6 +41,8 @@ export const Register = ({}) => {
 				console.error("register failed");
 				alert(response.data.message);
 			} else {
+				cookies.set("isLoggedIn", "true");
+				cookies.set("username", username);
 				navigate("/");
 			}
 		} catch (error) {
