@@ -1,6 +1,7 @@
 import "./Home.css";
 import { useNavigate } from "react-router-dom";
 import Day from "../day/Day";
+import Header from "../header/Header.jsx"
 
 const Home = () => {
 	// const navigate = useNavigate();
@@ -15,6 +16,7 @@ const Home = () => {
 
 	return (
 		<div className="home">
+			<Header />
 			<header>
 				<nav>
 					{/* <button onClick={handleLogin}>login</button>

@@ -1,4 +1,5 @@
 import "./Event.css";
+import Header from "../header/Header";
 
 const Event = ({ event }) => {
 	//TODO: figure out how to display the event in the Day component based on its start and end time

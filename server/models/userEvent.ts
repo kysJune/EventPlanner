@@ -1,7 +1,7 @@
 import mongoose, { Document, Schema } from "mongoose";
-import { EventRequest } from "../types/requests/eventRequest";
+import { UserEventRequest } from "../types/requests/userEventRequest";
 
-const eventSchema = new Schema<EventRequest & Document>({
+const eventSchema = new Schema<UserEventRequest & Document>({
 	name: {
 		type: String,
 		required: true
@@ -33,9 +33,9 @@ const eventSchema = new Schema<EventRequest & Document>({
 	}
 });
 
-const EventModel = mongoose.model<EventRequest & Document>(
-	"Event",
+const UserEventModel = mongoose.model<UserEventRequest & Document>(
+	"UserEvent",
 	eventSchema
 );
 
-export default EventModel;
+export default UserEventModel;

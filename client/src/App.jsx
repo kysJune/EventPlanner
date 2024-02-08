@@ -9,16 +9,19 @@ import Cookies from "universal-cookie";
 
 // Create a new instance of the Cookies class
 export const cookies = new Cookies();
+import Day from "./components/day/Day.jsx";
+import Month from "./components/month/Month.jsx";
 
 function App() {
 	return (
 		<div className="App">
 			<BrowserRouter>
-				<Header />
 				<Routes>
 					<Route path="/Login" element={<Login />} />
 					<Route path="/register" element={<Register />} />
 					<Route path="/Weather" element={<Weather />} />
+					<Route path="/Month" element={<Month />} />
+					<Route path="/Day" element={<Day />} />
 					<Route path="/" element={<Home />} />
 				</Routes>
 			</BrowserRouter>

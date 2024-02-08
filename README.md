@@ -8,9 +8,18 @@ Cleveland Plonsey
 
 
 ### How to Run the Server
-cd into ./server
-npm run dev
+- cd into ./server
+- npm i
+- npm run dev
 
 ### How to Run the Frontend
-cd into client
-npm start
+- cd into client
+- npm i
+- npm run dev
+
+#### Before a push...
+##### In BOTH client and server 
+- npm run lint
+- //fix the reported errors. 
+- npm run format
+- git commit -m"format and lint changed files"

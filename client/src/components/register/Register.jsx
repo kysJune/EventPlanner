@@ -1,11 +1,14 @@
 import { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import { cookies } from "../../App.jsx";
 
 export const Register = ({}) => {
 	const [username, setName] = useState("");
 	const [password, setPassword] = useState("");
 	const [confirmPassword, setConfirmPassword] = useState("");
+
+	const navigate = useNavigate();
 
 	const handleNameChange = (event) => {
 		setName(event.target.value);
@@ -20,11 +23,10 @@ export const Register = ({}) => {
 	};
 
 	const handleRegister = async () => {
-		console.log(`username: ${username}, password: ${password}, confirmPassword: ${confirmPassword}`);
 		try {
 			if (confirmPassword !== password) {
 				//TODO display password mismatch
-				alert("kys");
+				alert("Passwords do not match");
 				return;
 			}
 			const response = await axios.post(
@@ -41,6 +43,7 @@ export const Register = ({}) => {
 			} else {
 				cookies.set("isLoggedIn", "true");
 				cookies.set("username", username);
+				navigate("/");
 			}
 		} catch (error) {
 			console.error(error);

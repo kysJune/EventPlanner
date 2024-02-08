@@ -5,6 +5,7 @@ import userRouter from "./routes/userRouter";
 import cors from "cors";
 import bodyParser from "body-parser";
 import mongoSession from "../server/config/session";
+import userEventRouter from "./routes/userEventRouter";
 
 const startServer = async () => {
 	dotenv.config();
@@ -24,6 +25,8 @@ const startServer = async () => {
 	mongoSession(app);
 
 	app.use("/user", userRouter);
+
+	app.use("/event", userEventRouter);
 
 	app.get("/", (req: Request, res: Response) => {
 		res.send("Hello World!");

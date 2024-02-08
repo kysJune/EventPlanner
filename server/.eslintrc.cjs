@@ -4,7 +4,8 @@ module.exports = {
 		"eslint:recommended",
 		"plugin:@typescript-eslint/recommended",
 		"standard",
-		"prettier"
+		"prettier",
+		"plugin:jest/recommended"
 	],
 	parser: "@typescript-eslint/parser",
 	plugins: ["@typescript-eslint"],

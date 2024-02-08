@@ -1,7 +1,7 @@
-import { ObjectId } from "mongoose";
+import mongoose from "mongoose";
 
 export interface UserResponse {
-	id: ObjectId;
+	id: mongoose.Types.ObjectId;
 	username: string;
 	password: string;
 	location?: string;
