@@ -1,9 +1,8 @@
-import { ObjectId } from "mongoose";
+import mongoose from "mongoose";
 
 export interface EventResponse {
-	_id: ObjectId;
+	_id: mongoose.Types.ObjectId;
 	name: string;
-	userid: ObjectId;
 	day: number;
 	month: number;
 	year: number;

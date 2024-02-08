@@ -1,13 +1,12 @@
 import { Request, Response } from "express";
 import { DatabaseUser } from "../services/database.user";
 import { hashPassword, isPassword } from "../utils/hashing";
-import { ObjectId } from "mongoose";
 import { StatusCodes } from "http-status-codes";
 
 declare module "express-session" {
 	interface SessionData {
 		isLoggedIn?: boolean;
-		userid?: ObjectId;
+		userid?: string;
 	}
 }
 
@@ -39,7 +38,7 @@ export const login = async (req: Request, res: Response) => {
 		}
 
 		req.session.isLoggedIn = true;
-		req.session.userid = user.id;
+		req.session.userid = user.id.toString();
 
 		res.status(StatusCodes.OK).send({
 			user,
@@ -75,7 +74,7 @@ export const register = async (req: Request, res: Response) => {
 		});
 
 		req.session.isLoggedIn = true;
-		req.session.userid = userId;
+		req.session.userid = userId.toString();
 
 		res.status(StatusCodes.OK).send({ message: "successfully registered user" });
 	} catch (error) {
