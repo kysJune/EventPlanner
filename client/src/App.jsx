@@ -15,7 +15,7 @@ function App() {
 					<Route path="/Login" element={<Login />} />
 					<Route path="/register" element={<Register />} />
 					<Route path="/Weather" element={<Weather />} />
-					<Route path="/Month" element={<Month month="11" year="2024" />} />
+					<Route path="/Month" element={<Month />} />
 					<Route path="/Day" element={<Day />} />
 					<Route path="/" element={<Home />} />
 				</Routes>
