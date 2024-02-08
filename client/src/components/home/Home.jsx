@@ -1,7 +1,7 @@
 import "./Home.css";
 import { useNavigate } from "react-router-dom";
 import Day from "../day/Day";
-import Header from "../header/Header.jsx"
+import Header from "../header/Header.jsx";
 
 const Home = () => {
 	// const navigate = useNavigate();

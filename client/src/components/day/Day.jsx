@@ -5,7 +5,6 @@ import Event from "../event/Event";
 import { useLocation } from "react-router-dom";
 import Modal from "react-modal";
 import isValidEvent from "./algorithms";
-import Header from "../header/Header";
 
 const Day = () => {
 	const [events, setEvents] = useState([]);
@@ -45,6 +44,7 @@ const Day = () => {
 				{ withCredentials: true }
 			);
 			setEvents([...events, response.data]);
+			setModalIsOpen(false);
 		} catch (error) {
 			console.error(error);
 		}
@@ -52,7 +52,6 @@ const Day = () => {
 
 	return (
 		<div className="day">
-			<Header />
 			<h1>{`${Number(month) + 1}/${day}/${year}`}</h1>
 			<button onClick={() => setModalIsOpen(true)}>Create Event</button>
 			{

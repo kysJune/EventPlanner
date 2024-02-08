@@ -27,9 +27,11 @@
 	padding: 5px;
 	padding-right: 5%;
 	height: fit-content;
-	width: fit-content;
+	width: 30%;
+	justify-content: space-between;
 }
 
 .username {
 	color: black;
+	position: relative;
 }

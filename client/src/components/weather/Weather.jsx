@@ -40,7 +40,7 @@ const Weather = () => {
 
 	return (
 		<div className="weather">
-			<Header />
+			{/* <Header /> */}
 			<div className="city-input">
 				<label htmlFor="city">City</label>
 				<input type="text" name="city" id="city" value={city} onChange={handleCityChange} />
