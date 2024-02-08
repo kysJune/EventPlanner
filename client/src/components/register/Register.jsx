@@ -22,11 +22,10 @@ export const Register = ({}) => {
 	};
 
 	const handleRegister = async () => {
-		console.log(`username: ${username}, password: ${password}, confirmPassword: ${confirmPassword}`);
 		try {
 			if (confirmPassword !== password) {
 				//TODO display password mismatch
-				alert("kys");
+				alert("Passwords do not match");
 				return;
 			}
 			const response = await axios.post(

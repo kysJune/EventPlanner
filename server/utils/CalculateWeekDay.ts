@@ -39,6 +39,6 @@ export const getDay = (day: number, month: Month, year: number) => {
  * @param month zero indexed
  * @returns the number of days in that month
  */
-export const numDaysInMonth = (y:number, m:number): number => {
- return new Date(y, m+1, 0).getDate();
-}
+export const numDaysInMonth = (y: number, m: number): number => {
+	return new Date(y, m + 1, 0).getDate();
+};

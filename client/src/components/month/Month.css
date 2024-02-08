@@ -5,15 +5,14 @@
 	margin: auto;
 }
 
-.month-control-button{
+.month-control-button {
 	background-color: transparent;
 	border: none;
 	color: white;
 	font-size: 30px;
-
 }
 
-.month-control-button:hover{
+.month-control-button:hover {
 	cursor: pointer;
 	color: grey;
 }

@@ -8,7 +8,7 @@ const populateMonth = (month, year) => {
 	const firstWeekDay = getDay(1, month, year);
 
 	const numDaysCurr = numDaysInMonth(year, month);
-	
+
 	const numDaysPrev = numDaysInMonth(
 		month - 1 < 0 ? 11 : month - 1,
 		month - 1 < 0 ? year - 1 : year
