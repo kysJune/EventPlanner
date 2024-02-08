@@ -1,4 +1,4 @@
-const isValidEvent = (name, startTime, endTime) => {
+const isValidEvent = (newEventName, newEventStartTime, newEventEndTime) => {
 	if (newEventName.length === 0 || newEventStartTime === "" || newEventEndTime === "") {
 		alert("Please fill out all fields");
 		return false;

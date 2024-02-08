@@ -30,15 +30,18 @@ const Day = () => {
 	const handleCreateEvent = async () => {
 		if (!isValidEvent(newEventName, newEventStartTime, newEventEndTime)) return;
 		try {
-			//TODO: make the post request match backend
-			const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/events/create`, {
-				name: newEventName,
-				startTime: newEventStartTime,
-				endTime: newEventEndTime, 
-				day: day,
-				month: month,
-				year: year
-			}, {withCredentials: true});
+			const response = await axios.post(
+				`${import.meta.env.VITE_BACKEND_URL}/event/create`,
+				{
+					name: newEventName,
+					start: newEventStartTime,
+					end: newEventEndTime,
+					day: Number(day),
+					month: Number(month),
+					year: Number(year)
+				},
+				{ withCredentials: true }
+			);
 			setEvents([...events, response.data]);
 		} catch (error) {
 			console.error(error);
@@ -93,11 +96,27 @@ const Day = () => {
 					</div>
 					<div className="modal-control">
 						<label htmlFor="new-event-start-time">{`Start Time (in 24 hour time)`}</label>
-						<input id="new-event-start-time" type="number" min={0} max={24} />
+						<input
+							id="new-event-start-time"
+							type="number"
+							min={0}
+							max={24}
+							onChange={(e) => {
+								setNewEventStartTime(Number(e.target.value));
+							}}
+						/>
 					</div>
 					<div className="modal-control">
 						<label htmlFor="new-event-end-time">{`End Time (in 24 hour time)`}</label>
-						<input id="new-event-end-time" type="number" min={0} max={24} />
+						<input
+							id="new-event-end-time"
+							type="number"
+							min={0}
+							max={24}
+							onChange={(e) => {
+								setNewEventEndTime(Number(e.target.value));
+							}}
+						/>
 					</div>
 
 					<button className="modal-button create-event-button" onClick={handleCreateEvent}>
