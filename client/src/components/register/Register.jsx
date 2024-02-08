@@ -1,5 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
+import { cookies } from "../../App.jsx";
 
 export const Register = ({}) => {
 	const [username, setName] = useState("");
@@ -37,6 +38,9 @@ export const Register = ({}) => {
 			if (response.status !== 200) {
 				console.error("register failed");
 				alert(response.data.message);
+			} else {
+				cookies.set("isLoggedIn", "true");
+				cookies.set("username", username);
 			}
 		} catch (error) {
 			console.error(error);
