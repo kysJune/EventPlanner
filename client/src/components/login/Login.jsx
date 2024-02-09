@@ -2,8 +2,9 @@ import { useState } from "react";
 import axios from "axios";
 import { cookies } from "../../App.jsx";
 import { useNavigate } from "react-router-dom";
+import logger from "../logger/logger.jsx";
 
-export const Login = ({}) => {
+export const Login = ({ }) => {
 	const [username, setName] = useState("");
 	const [password, setPassword] = useState("");
 	const navigate = useNavigate();
@@ -25,6 +26,7 @@ export const Login = ({}) => {
 		if (response.status === 200) {
 			cookies.set("isLoggedIn", "true");
 			cookies.set("username", username);
+			logger("User logged in");
 			navigate("/");
 		}
 	};
