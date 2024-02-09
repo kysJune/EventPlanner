@@ -39,4 +39,10 @@ export const convert24HourToString = (time) => {
 	return `${hours}:${minutes} ${ampm}`;
 };
 
+export const isTodaysDate = (day, month, year) => {
+	console.log(day, month, year);
+	const today = new Date();
+	return day === today.getDate() && month === today.getMonth() && year === today.getFullYear();
+};
+
 export default isValidEvent;
