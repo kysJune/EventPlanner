@@ -23,20 +23,18 @@ export const create = async (req: Request, res: Response) => {
 		throw new BadRequestError("Invalid UserEvent Request data");
 	}
 	try {
-	const event: UserEventResponse = await DatabaseUserEvent.create(data);
-	res.status(StatusCodes.CREATED).send({
-		event,
-		message: "Event created"
-	});
+		const event: UserEventResponse = await DatabaseUserEvent.create(data);
+		res.status(StatusCodes.CREATED).send({
+			event,
+			message: "Event created"
+		});
 	} catch (error) {
 		console.error("error creating event", error);
 		res.status(StatusCodes.INTERNAL_SERVER_ERROR).send({ message: error });
-		return;
 	}
 };
 
 export const read = async (req: Request, res: Response) => {
-
 	const id: string | undefined = req.params.id;
 	if (!id || !mongoose.Types.ObjectId.isValid(id)) {
 		throw new BadRequestError();
@@ -99,7 +97,6 @@ export const listEvents = async (req: Request, res: Response) => {
 };
 
 export const update = async (req: Request, res: Response) => {
-
 	const data: unknown = req.body;
 	if (!isValidPartialUserEventRequest(data)) {
 		throw new BadRequestError("Invalid UserEvent request data");
@@ -109,7 +106,7 @@ export const update = async (req: Request, res: Response) => {
 	if (!id || !mongoose.Types.ObjectId.isValid(id)) {
 		throw new BadRequestError();
 	}
-	try{
+	try {
 		await DatabaseUserEvent.update(new mongoose.Types.ObjectId(id), data);
 	} catch (error) {
 		console.error("error updating event", error);
@@ -122,7 +119,6 @@ export const update = async (req: Request, res: Response) => {
 };
 
 export const deleteEvent = async (req: Request, res: Response) => {
-
 	const id: string | undefined = req.body.id;
 	if (!id || !mongoose.Types.ObjectId.isValid(id)) {
 		throw new BadRequestError();
