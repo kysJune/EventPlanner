@@ -27,7 +27,7 @@ const Day = () => {
 						year: Number(year)
 					},
 					{ withCredentials: true }
-				); //TODO: send the userid as well maybe from a context
+				); 
 
 				setEvents([...response.data.userEvents]);
 			} catch (error) {
@@ -73,12 +73,12 @@ const Day = () => {
 							{
 								//put the events on the page
 								events.map((event, index) => {
-									const start = new Date(event.start);
-									const end = new Date(event.end);
+									const start = event.start;
+									const end = event.end;
 									const startHour = start;
 									const endHour = end;
-									const startMinute = start;
-									const endMinute = end;
+									const startMinute = 0;
+									const endMinute = 0;
 									if (startHour === i) {
 										return (
 											<div key={index} className="event">
