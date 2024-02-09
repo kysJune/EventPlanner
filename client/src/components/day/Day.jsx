@@ -3,18 +3,15 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
 import Modal from "react-modal";
-import isValidEvent, {convert24HourToString, get24HourTime} from "./algorithms";
+import isValidEvent, { convert24HourToString, get24HourTime } from "./algorithms";
 import { getCurrentMonth, getCurrentYear, getCurrentDay } from "../month/algorithms";
-import {getDay, WeekDay} from "../../../../server/utils/CalculateWeekDay";
+import { getDay, WeekDay } from "../../../../server/utils/CalculateWeekDay";
 
 const Day = () => {
 	const [events, setEvents] = useState([]);
 	const location = useLocation();
-	// const { day, month, year } =
-	// 	location.state == null ? { day: 1, month: 1, year: 2024 } : location.state;
-	const [day, setDay] = useState(location?.state?.day || getCurrentDay());
-	const [month, setMonth] = useState(location?.state?.month || getCurrentMonth());
-	const [year, setYear] = useState(location?.state?.year || getCurrentYear());
+	const { day, month, year } =
+		location.state == null ? { day: 1, month: 1, year: 2024 } : location.state;
 	const [modalIsOpen, setModalIsOpen] = useState(false);
 	const [newEventName, setNewEventName] = useState("");
 	const [newEventStartTime, setNewEventStartTime] = useState("");
@@ -57,12 +54,11 @@ const Day = () => {
 				},
 				{ withCredentials: true }
 			);
-			if(response.status === 201){
+			if (response.status === 201) {
 				setEvents([...events, response.data]);
 				setModalIsOpen(false);
 				setRefreshEvents(!refreshEvents);
 			}
-
 		} catch (error) {
 			console.error(error);
 		}
@@ -75,10 +71,11 @@ const Day = () => {
 				<h1 className="day-weekday">{WeekDay[getDay(Number(day), Number(month), Number(year))]}</h1>
 				<h1>{`${Number(month) + 1}/${day}/${year}`}</h1>
 			</div>
+
 			<button onClick={() => setModalIsOpen(true)}>Create Event</button>
 			{
 				//put all the hours on the page
-				Array.from({length: 24}, (v, i) => {
+				Array.from({ length: 24 }, (v, i) => {
 					return (
 						<div key={i} className="hour">
 							<p>{i > 11 ? `${i - 12 === 0 ? 12 : i - 12}:00 PM` : `${i === 0 ? 12 : i}:00 AM`}</p>
@@ -89,7 +86,6 @@ const Day = () => {
 									const end = event.end; //2130
 									const startHour = Math.floor(start / 100) * 100;
 									if (startHour === i * 100) {
-
 										return (
 											<div key={index} className="event">
 												<h3>{event.name}</h3>
@@ -99,7 +95,7 @@ const Day = () => {
 									}
 								})
 							}
-							<hr/>
+							<hr />
 						</div>
 					);
 				})

@@ -30,14 +30,13 @@
 	width: 60%;
 }
 
-.day-weekday{
+.day-weekday {
 	text-align: center;
 }
 
-.day-header{
+.day-header {
 	display: flex;
 	justify-content: space-between;
 	width: 25%;
 	align-items: center;
 }
-

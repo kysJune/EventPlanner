@@ -24,7 +24,13 @@ export enum WeekDay {
 	Sat
 }
 
-// TODO : Consider better error handling and constraint checking
+/**
+ * 
+ * @param day 
+ * @param month 
+ * @param year 
+ * @returns a number representing the day of the week (0-6)
+ */
 export const getDay = (day: number, month: Month, year: number) => {
 	if (day < 1 || day > 31) {
 		return -1;
