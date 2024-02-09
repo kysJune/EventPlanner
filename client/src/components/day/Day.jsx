@@ -9,12 +9,12 @@ import isValidEvent from "./algorithms";
 const Day = () => {
 	const [events, setEvents] = useState([]);
 	const location = useLocation();
-	const { day, month, year } = location.state == null ? { day: 1, month: 1, year: 2024 } : location.state;
+	const { day, month, year } =
+		location.state == null ? { day: 1, month: 1, year: 2024 } : location.state;
 	const [modalIsOpen, setModalIsOpen] = useState(false);
 	const [newEventName, setNewEventName] = useState("");
 	const [newEventStartTime, setNewEventStartTime] = useState("");
 	const [newEventEndTime, setNewEventEndTime] = useState("");
-
 
 	useEffect(() => {
 		const fetchEvents = async () => {
@@ -27,7 +27,7 @@ const Day = () => {
 						year: Number(year)
 					},
 					{ withCredentials: true }
-				); 
+				);
 
 				setEvents([...response.data.userEvents]);
 			} catch (error) {
