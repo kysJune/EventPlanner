@@ -1,7 +1,13 @@
 import { Request, Response, NextFunction } from "express";
+import mongoose from "mongoose";
 
 const authMiddleware = (req: Request, res: Response, next: NextFunction) => {
-	if (req.session.isLoggedIn && req.session.userid) {
+	const userid: string | undefined = req.session.userid;
+	if (
+		req.session.isLoggedIn &&
+		userid &&
+		mongoose.Types.ObjectId.isValid(userid)
+	) {
 		next();
 	} else {
 		res

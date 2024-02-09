@@ -1,7 +1,9 @@
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 import { DatabaseUser } from "../services/database.user";
 import { hashPassword, isPassword } from "../utils/hashing";
 import { StatusCodes } from "http-status-codes";
+import Forbidden from "../errors/Forbidden";
+import Conflict from "../errors/Conflict";
 
 declare module "express-session" {
 	interface SessionData {
@@ -10,31 +12,29 @@ declare module "express-session" {
 	}
 }
 
-export const login = async (req: Request, res: Response) => {
+export const login = async (
+	req: Request,
+	res: Response,
+	next: NextFunction
+) => {
 	const { username, password } = req.body;
 
 	// check if username exists and retrieve the hashed password
 	const user = await DatabaseUser.readByUsername(username);
-	if (user === undefined) {
-		res
-			.status(StatusCodes.FORBIDDEN)
-			.send({ message: "username password combo is incorrect" });
-		return;
+	if (!user) {
+		return next(new Forbidden("Username or Password is incorrect"));
 	}
+
 	const isAuthenticated: boolean | undefined = await isPassword(
 		password,
 		user.password
 	);
+
 	if (typeof isAuthenticated === "undefined") {
-		res
-			.status(StatusCodes.INTERNAL_SERVER_ERROR)
-			.send({ message: "error comparing passwords" });
+		return next(new Error("Error comparing passwords"));
 	} else {
 		if (!isAuthenticated) {
-			res
-				.status(StatusCodes.FORBIDDEN)
-				.send({ message: "username password combo is incorrect" });
-			return;
+			return next(new Forbidden("Username or Password is incorrect"));
 		}
 
 		req.session.isLoggedIn = true;
@@ -47,24 +47,24 @@ export const login = async (req: Request, res: Response) => {
 	}
 };
 
-export const register = async (req: Request, res: Response) => {
+export const register = async (
+	req: Request,
+	res: Response,
+	next: NextFunction
+) => {
 	const { username, password } = req.body;
 	// TODO : future asking for the user's location in the future as part of registration
 
 	// Check if a user already exists with that username
 	const user = await DatabaseUser.readByUsername(username);
 	if (user) {
-		res.status(StatusCodes.CONFLICT).send("username already exists");
-		return;
+		return next(new Conflict("Username already exists"));
 	}
 
 	// Create the new user
 	const hashedPassword = await hashPassword(password);
 	if (hashedPassword === undefined) {
-		res
-			.status(StatusCodes.INTERNAL_SERVER_ERROR)
-			.send({ message: "error hashing password" });
-		return;
+		return next(new Error("Error hashing password"));
 	}
 
 	try {
@@ -76,9 +76,9 @@ export const register = async (req: Request, res: Response) => {
 		req.session.isLoggedIn = true;
 		req.session.userid = userId.toString();
 
-		res.status(StatusCodes.OK).send({ message: "successfully registered user" });
+		res.status(StatusCodes.OK).send({ message: "Successfully registered user" });
 	} catch (error) {
-		console.error("something went wrong in register controller");
-		throw error;
+		console.error("Something went wrong in register controller");
+		return next(error);
 	}
 };
