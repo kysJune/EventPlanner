@@ -1,6 +1,7 @@
 .day {
 	height: 100%;
 	overflow: auto;
+	margin-left: 10px;
 }
 .modal-button {
 	background-color: lightblue;
@@ -28,3 +29,15 @@
 	margin: 10px;
 	width: 60%;
 }
+
+.day-weekday{
+	text-align: center;
+}
+
+.day-header{
+	display: flex;
+	justify-content: space-between;
+	width: 25%;
+	align-items: center;
+}
+
