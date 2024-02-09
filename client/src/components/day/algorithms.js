@@ -21,7 +21,6 @@ export const get24HourTime = (timeString) => {
 export const convert24HourToString = (time) => {
 	let hours = Math.floor(time / 100) * 100;
 	let minutes = time % 100;
-	let result = "";
 	let ampm = hours > 1100 ? "PM" : "AM";
 	if (hours > 1100) {
 		hours -= 1200;
@@ -40,7 +39,6 @@ export const convert24HourToString = (time) => {
 };
 
 export const isTodaysDate = (day, month, year) => {
-	console.log(day, month, year);
 	const today = new Date();
 	return day === today.getDate() && month === today.getMonth() && year === today.getFullYear();
 };
