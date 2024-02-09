@@ -23,7 +23,7 @@ const Day = () => {
 
 	useEffect(() => {
 		//check if the day is today
-		setIsToday(isTodaysDate(Number(day), Number(month), Number(year)));
+
 		const fetchEvents = async () => {
 			try {
 				const response = await axios.post(
@@ -35,12 +35,13 @@ const Day = () => {
 					},
 					{ withCredentials: true }
 				);
-				if(response.data.userEvents === undefined || response.status === 204) return;
+				if (response.data.userEvents === undefined || response.status === 204) return;
 				setEvents([...response.data.userEvents]);
 			} catch (error) {
 				console.error(error);
 			}
 		};
+		setIsToday(isTodaysDate(Number(day), Number(month), Number(year)));
 		fetchEvents();
 	}, [refreshEvents]);
 
@@ -87,19 +88,20 @@ const Day = () => {
 							<p>{i > 11 ? `${i - 12 === 0 ? 12 : i - 12}:00 PM` : `${i === 0 ? 12 : i}:00 AM`}</p>
 							{
 								//put the events on the page
-								events && events.map((event, index) => {
-									const start = event.start; //2030
-									const end = event.end; //2130
-									const startHour = Math.floor(start / 100) * 100;
-									if (startHour === i * 100) {
-										return (
-											<div key={index} className="event">
-												<h3>{event.name}</h3>
-												<p>{`from ${convert24HourToString(start)} to ${convert24HourToString(end)}`}</p>
-											</div>
-										);
-									}
-								})
+								events &&
+									events.map((event, index) => {
+										const start = event.start; //2030
+										const end = event.end; //2130
+										const startHour = Math.floor(start / 100) * 100;
+										if (startHour === i * 100) {
+											return (
+												<div key={index} className="event">
+													<h3 className="event-name">{event.name}</h3>
+													<p className="event-duration">{`from ${convert24HourToString(start)} to ${convert24HourToString(end)}`}</p>
+												</div>
+											);
+										}
+									})
 							}
 							<hr />
 						</div>
