@@ -2,7 +2,6 @@ import { StatusCodes } from "http-status-codes";
 import { Request, Response } from "express";
 import { DatabaseUserEvent } from "../services/database.user.event";
 
-import UnauthorizedError from "../errors/UnauthorizedError";
 import BadRequestError from "../errors/BadRequest";
 import { UserEventResponse } from "../types/responses/userEventResponse";
 import {
@@ -14,9 +13,6 @@ import mongoose from "mongoose";
 
 export const create = async (req: Request, res: Response) => {
 	const userid: string | undefined = req.session.userid;
-	if (!userid) {
-		throw new UnauthorizedError();
-	}
 
 	const data: unknown = {
 		...req.body,
@@ -26,20 +22,20 @@ export const create = async (req: Request, res: Response) => {
 	if (!isValidUserEventRequest(data)) {
 		throw new BadRequestError("Invalid UserEvent Request data");
 	}
-
+	try {
 	const event: UserEventResponse = await DatabaseUserEvent.create(data);
-
 	res.status(StatusCodes.CREATED).send({
 		event,
 		message: "Event created"
 	});
+	} catch (error) {
+		console.error("error creating event", error);
+		res.status(StatusCodes.INTERNAL_SERVER_ERROR).send({ message: error });
+		return;
+	}
 };
 
 export const read = async (req: Request, res: Response) => {
-	const userid: undefined | string = req.session.userid;
-	if (!userid) {
-		throw new UnauthorizedError();
-	}
 
 	const id: string | undefined = req.params.id;
 	if (!id || !mongoose.Types.ObjectId.isValid(id)) {
@@ -69,12 +65,6 @@ export const read = async (req: Request, res: Response) => {
 
 export const listEvents = async (req: Request, res: Response) => {
 	const userid: undefined | string = req.session.userid;
-	console.debug("userid", userid, req.body);
-	if (!userid) {
-		// throw new UnauthorizedError();
-		res.send("No user id");
-		return;
-	}
 
 	const filterData: unknown = {
 		...req.body,
@@ -109,10 +99,6 @@ export const listEvents = async (req: Request, res: Response) => {
 };
 
 export const update = async (req: Request, res: Response) => {
-	const userid: undefined | string = req.session.userid;
-	if (!userid) {
-		throw new UnauthorizedError();
-	}
 
 	const data: unknown = req.body;
 	if (!isValidPartialUserEventRequest(data)) {
@@ -123,28 +109,32 @@ export const update = async (req: Request, res: Response) => {
 	if (!id || !mongoose.Types.ObjectId.isValid(id)) {
 		throw new BadRequestError();
 	}
-
-	await DatabaseUserEvent.update(new mongoose.Types.ObjectId(id), data);
-
+	try{
+		await DatabaseUserEvent.update(new mongoose.Types.ObjectId(id), data);
+	} catch (error) {
+		console.error("error updating event", error);
+		res.status(StatusCodes.INTERNAL_SERVER_ERROR).send({ message: error });
+		return;
+	}
 	res.status(StatusCodes.OK).send({
 		message: "Event was successfully updated"
 	});
 };
 
 export const deleteEvent = async (req: Request, res: Response) => {
-	const userid: undefined | string = req.session.userid;
-	if (!userid) {
-		throw new UnauthorizedError();
-	}
 
 	const id: string | undefined = req.body.id;
 	if (!id || !mongoose.Types.ObjectId.isValid(id)) {
 		throw new BadRequestError();
 	}
-
-	await DatabaseUserEvent.delete(new mongoose.Types.ObjectId(id));
-
+	try {
+		await DatabaseUserEvent.delete(new mongoose.Types.ObjectId(id));
+	} catch (error) {
+		console.error("error deleting event", error);
+		res.status(StatusCodes.INTERNAL_SERVER_ERROR).send({ message: error });
+		return;
+	}
 	res.status(StatusCodes.NO_CONTENT).send({
-		message: "Event Delete"
+		message: "Event Deleted"
 	});
 };
