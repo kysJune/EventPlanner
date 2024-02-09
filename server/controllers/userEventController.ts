@@ -69,8 +69,11 @@ export const read = async (req: Request, res: Response) => {
 
 export const listEvents = async (req: Request, res: Response) => {
 	const userid: undefined | string = req.session.userid;
+	console.debug("userid", userid, req.body);
 	if (!userid) {
-		throw new UnauthorizedError();
+		// throw new UnauthorizedError();
+		res.send("No user id");
+		return;
 	}
 
 	const filterData: unknown = {

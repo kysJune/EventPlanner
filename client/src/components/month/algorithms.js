@@ -47,7 +47,7 @@ const populateMonth = (month, year) => {
 	}
 	weeks.push(daysOfLastMonth);
 	//fill the rest of the month
-	//fill the rest of the month
+
 	loop1: for (let week = 1; week < numWeeks; week++) {
 		const days = [];
 		for (let i = 0; i < 7; i++) {
@@ -67,6 +67,7 @@ const populateMonth = (month, year) => {
 				weeks.push(days);
 				break loop1;
 			}
+
 			if (week * 7 + i + 1 - firstWeekDay === numDaysCurr) {
 				weeks.push(days);
 				break loop1;
@@ -93,6 +94,7 @@ const populateMonth = (month, year) => {
 			});
 		}
 	}
+
 	//if the month is the current month, mark the current day
 	if (month === todayMonth && year === todayYear) {
 		todayDay += firstWeekDay; //offset the todayDay index by the number of days from previous month
