@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "./Weather.css";
 import axios from "axios";
-
+import Header from "../header/Header";
 import { convertKelvinToFahrenheit, getIcon } from "./Logic";
 
 const Weather = () => {
@@ -40,6 +40,7 @@ const Weather = () => {
 
 	return (
 		<div className="weather">
+			{/* <Header /> */}
 			<div className="city-input">
 				<label htmlFor="city">City</label>
 				<input type="text" name="city" id="city" value={city} onChange={handleCityChange} />

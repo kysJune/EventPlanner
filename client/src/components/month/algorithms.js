@@ -1,9 +1,14 @@
 import { WeekDay, getDay, numDaysInMonth } from "../../../../server/utils/CalculateWeekDay";
 
 const populateMonth = (month, year) => {
+	const todayMonth = getCurrentMonth();
+	const todayYear = getCurrentYear();
+	let todayDay = getCurrentDay();
+
 	const firstWeekDay = getDay(1, month, year);
 
-	const numDaysCurr = numDaysInMonth(month, year);
+	const numDaysCurr = numDaysInMonth(year, month);
+
 	const numDaysPrev = numDaysInMonth(
 		month - 1 < 0 ? 11 : month - 1,
 		month - 1 < 0 ? year - 1 : year
@@ -42,6 +47,7 @@ const populateMonth = (month, year) => {
 	}
 	weeks.push(daysOfLastMonth);
 	//fill the rest of the month
+
 	loop1: for (let week = 1; week < numWeeks; week++) {
 		const days = [];
 		for (let i = 0; i < 7; i++) {
@@ -57,6 +63,11 @@ const populateMonth = (month, year) => {
 				weekDay: "",
 				monthStatus: "curr"
 			});
+			if (week * 7 + i + 1 - firstWeekDay === numDaysCurr) {
+				weeks.push(days);
+				break loop1;
+			}
+
 			if (week * 7 + i + 1 - firstWeekDay === numDaysCurr) {
 				weeks.push(days);
 				break loop1;
@@ -83,7 +94,28 @@ const populateMonth = (month, year) => {
 			});
 		}
 	}
+
+	//if the month is the current month, mark the current day
+	if (month === todayMonth && year === todayYear) {
+		todayDay += firstWeekDay; //offset the todayDay index by the number of days from previous month
+		weeks[Math.floor((todayDay - 1) / 7)][(todayDay - 1) % 7].monthStatus = "today";
+	}
 	return weeks;
+};
+
+export const getCurrentMonth = () => {
+	const date = new Date();
+	return date.getMonth();
+};
+
+export const getCurrentYear = () => {
+	const date = new Date();
+	return date.getFullYear();
+};
+
+export const getCurrentDay = () => {
+	const date = new Date();
+	return date.getDate();
 };
 
 export default populateMonth;
