@@ -7,13 +7,29 @@ import {
 	update
 } from "../controllers/userEventController";
 import authMiddleware from "../middleware/authMiddleware";
+import { errorHandlerMiddleware } from "../middleware/errorHandler";
 
 const userEventRouter = express.Router();
 
-userEventRouter.post("/create", authMiddleware, create);
-userEventRouter.get("/:id/read", authMiddleware, read);
-userEventRouter.post("/list", authMiddleware, listEvents);
-userEventRouter.put("/update", authMiddleware, update);
-userEventRouter.delete("/delete", authMiddleware, deleteEvent);
+userEventRouter.post("/create", authMiddleware, create, errorHandlerMiddleware);
+userEventRouter.get("/:id/read", authMiddleware, read, errorHandlerMiddleware);
+userEventRouter.post(
+	"/list",
+	authMiddleware,
+	listEvents,
+	errorHandlerMiddleware
+);
+userEventRouter.put(
+	"/:id/update",
+	authMiddleware,
+	update,
+	errorHandlerMiddleware
+);
+userEventRouter.delete(
+	"/:id/delete",
+	authMiddleware,
+	deleteEvent,
+	errorHandlerMiddleware
+);
 
 export default userEventRouter;
