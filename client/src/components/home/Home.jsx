@@ -24,7 +24,6 @@ const Home = () => {
 				</nav>
 			</header>
 			<h1 className="weather">Welcome to the Weather App</h1>
-			<Day day={1} month={1} year={2024} />
 		</div>
 	);
 };
