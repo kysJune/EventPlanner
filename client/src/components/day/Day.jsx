@@ -3,22 +3,27 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
 import Modal from "react-modal";
-import isValidEvent, { convert24HourToString, get24HourTime } from "./algorithms";
-import { getCurrentMonth, getCurrentYear, getCurrentDay } from "../month/algorithms";
+import isValidEvent, { convert24HourToString, get24HourTime, isTodaysDate } from "./algorithms";
 import { getDay, WeekDay } from "../../../../server/utils/CalculateWeekDay";
+import Weather from "../weather/Weather";
+import Header from "../header/Header.jsx";
 
 const Day = () => {
-	const [events, setEvents] = useState([]);
 	const location = useLocation();
-	const { day, month, year } =
-		location.state == null ? { day: 1, month: 1, year: 2024 } : location.state;
+	const [events, setEvents] = useState([]);
+	const [day, setDay] = useState(location?.state?.day || 1);
+	const [month, setMonth] = useState(location?.state?.month || 0);
+	const [year, setYear] = useState(location?.state?.year || 2024);
 	const [modalIsOpen, setModalIsOpen] = useState(false);
 	const [newEventName, setNewEventName] = useState("");
 	const [newEventStartTime, setNewEventStartTime] = useState("");
 	const [newEventEndTime, setNewEventEndTime] = useState("");
 	const [refreshEvents, setRefreshEvents] = useState(false);
+	const [isToday, setIsToday] = useState(false);
 
 	useEffect(() => {
+		//check if the day is today
+		setIsToday(isTodaysDate(Number(day), Number(month), Number(year)));
 		const fetchEvents = async () => {
 			try {
 				const response = await axios.post(
@@ -30,7 +35,7 @@ const Day = () => {
 					},
 					{ withCredentials: true }
 				);
-
+				if(response.data.userEvents === undefined || response.status === 204) return;
 				setEvents([...response.data.userEvents]);
 			} catch (error) {
 				console.error(error);
@@ -71,7 +76,8 @@ const Day = () => {
 				<h1 className="day-weekday">{WeekDay[getDay(Number(day), Number(month), Number(year))]}</h1>
 				<h1>{`${Number(month) + 1}/${day}/${year}`}</h1>
 			</div>
-
+			{/* if it's the current day, show the current weather */}
+			{isToday && <Weather />}
 			<button onClick={() => setModalIsOpen(true)}>Create Event</button>
 			{
 				//put all the hours on the page
@@ -81,7 +87,7 @@ const Day = () => {
 							<p>{i > 11 ? `${i - 12 === 0 ? 12 : i - 12}:00 PM` : `${i === 0 ? 12 : i}:00 AM`}</p>
 							{
 								//put the events on the page
-								events.map((event, index) => {
+								events && events.map((event, index) => {
 									const start = event.start; //2030
 									const end = event.end; //2130
 									const startHour = Math.floor(start / 100) * 100;
