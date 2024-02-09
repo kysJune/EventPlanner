@@ -32,18 +32,24 @@ const Header = ({ isLoggedIn }) => {
 	return (
 		<header className="header">
 			<a className="titleContainer" href="/">
-				<Clock className="clock"/>
+				<Clock className="clock" />
 				<h1 className="title">Event Planner </h1>
 			</a>
 
 			{cookies.get("isLoggedIn") ? (
 				<div className="loggedInUser">
-					<SearchBar/> 
+					<SearchBar />
 					<p className="username"> {cookies.get("username")} </p>
 					{/*TODO change the button to instead show the current weather icon based on the users cookie's location value  */}
-					<button className="button" onClick={navWeather}>Weather</button>
-					<button className="button" onClick={navAbout}>About</button>
-					<button className="button" onClick={handleLogout}>Logout</button>
+					<button className="button" onClick={navWeather}>
+						Weather
+					</button>
+					<button className="button" onClick={navAbout}>
+						About
+					</button>
+					<button className="button" onClick={handleLogout}>
+						Logout
+					</button>
 				</div>
 			) : (
 				<nav className="loggedOutUser">

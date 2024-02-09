@@ -10,7 +10,7 @@
 	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.titleContainer{
+.titleContainer {
 	position: top;
 	display: flex;
 	flex-direction: row;
@@ -56,18 +56,18 @@
 	position: relative;
 }
 
-.clockTime{
+.clockTime {
 	color: black;
-	align-items: top; 
+	align-items: top;
 }
 
-.button{
+.button {
 	font-size: small;
 	height: 50%;
 	margin-top: 1%;
 }
 
-.searchbar{
+.searchbar {
 	color: aqua;
 	margin-top: 1%;
 }
