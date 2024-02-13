@@ -24,13 +24,13 @@ const Header = ({ isLoggedIn }) => {
 	};
 	const navYear = () => {
 		navigate("/year");
-	}
+	};
 	const navDay = () => {
 		navigate("/Day");
-	}
+	};
 	const navMonth = () => {
 		navigate("/month");
-	}
+	};
 	const handleLogout = () => {
 		//TODO send http request to logoutController
 		//cookies.remove({...cookies.getAll()});
