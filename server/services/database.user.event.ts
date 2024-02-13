@@ -36,7 +36,9 @@ export class DatabaseUserEvent {
 	static async listEvents(
 		filterData: Partial<UserEventRequest>
 	): Promise<UserEventResponse[] | undefined> {
-		const events: UserEventResponse[] = await UserEventModel.find(filterData);
+		const events: UserEventResponse[] = await UserEventModel.find(
+			filterData
+		).sort({ start: 1, end: 1 });
 
 		if (events.length > 0) {
 			console.info("Events found");
