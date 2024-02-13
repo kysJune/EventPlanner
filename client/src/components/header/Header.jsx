@@ -22,6 +22,15 @@ const Header = ({ isLoggedIn }) => {
 	const navAbout = () => {
 		navigate("/about");
 	};
+	const navYear = () => {
+		navigate("/year");
+	}
+	const navDay = () => {
+		navigate("/Day");
+	}
+	const navMonth = () => {
+		navigate("/month");
+	}
 	const handleLogout = () => {
 		//TODO send http request to logoutController
 		//cookies.remove({...cookies.getAll()});
@@ -43,6 +52,15 @@ const Header = ({ isLoggedIn }) => {
 					{/*TODO change the button to instead show the current weather icon based on the users cookie's location value  */}
 					<button className="button" onClick={navWeather}>
 						Weather
+					</button>
+					<button className="button" onClick={navYear}>
+						Year
+					</button>
+					<button className="button" onClick={navMonth}>
+						Month
+					</button>
+					<button className="button" onClick={navDay}>
+						Day
 					</button>
 					<button className="button" onClick={navAbout}>
 						About

@@ -5,12 +5,16 @@ import Event from "../event/Event";
 import { useLocation } from "react-router-dom";
 import Modal from "react-modal";
 import isValidEvent from "./algorithms";
-
+import Header from "../header/Header";
+import { getCurrentMonth, getCurrentYear, getCurrentDay } from "../month/algorithms";
 const Day = () => {
 	const [events, setEvents] = useState([]);
 	const location = useLocation();
-	const { day, month, year } =
-		location.state == null ? { day: 1, month: 1, year: 2024 } : location.state;
+	// const { day, month, year } =
+	// 	location.state == null ? { day: 1, month: 1, year: 2024 } : location.state;
+	const [day, setDay] = useState(location?.state?.day || getCurrentDay());
+	const [month, setMonth] = useState(location?.state?.month || getCurrentMonth());
+	const [year, setYear] = useState(location?.state?.year || getCurrentYear());
 	const [modalIsOpen, setModalIsOpen] = useState(false);
 	const [newEventName, setNewEventName] = useState("");
 	const [newEventStartTime, setNewEventStartTime] = useState("");
@@ -61,6 +65,7 @@ const Day = () => {
 
 	return (
 		<div className="day">
+			<Header />
 			<h1>{`${Number(month) + 1}/${day}/${year}`}</h1>
 			<p className="day-weekday">{}</p>
 			<button onClick={() => setModalIsOpen(true)}>Create Event</button>
