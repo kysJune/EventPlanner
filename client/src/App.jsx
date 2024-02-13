@@ -4,6 +4,7 @@ import Home from "./components/home/Home";
 import { Register } from "./components/register/Register";
 import { Route, Routes, BrowserRouter } from "react-router-dom";
 import Header from "./components/header/Header";
+// import Year from "./components/year/Year";
 import "./App.css";
 import Cookies from "universal-cookie";
 
@@ -21,6 +22,7 @@ function App() {
 					<Route path="/register" element={<Register />} />
 					<Route path="/Weather" element={<Weather />} />
 					<Route path="/Month" element={<Month />} />
+					{/* <Route path="/Year" element={<Year />} /> */}
 					<Route path="/Day" element={<Day />} />
 					<Route path="/" element={<Home />} />
 				</Routes>
