@@ -1,4 +1,4 @@
-import { cookies } from "../../App.jsx";
+import { cookies } from "../../../App.jsx";
 
 export const removeCookies = () => {
 	// Get all cookies

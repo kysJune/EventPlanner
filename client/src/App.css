@@ -5,12 +5,12 @@ App {
 }
 
 header {
-	height: 10%;
+	height: fit-content;
 	width: 100%;
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
-	align-items: center;
+	align-items: top;
 	color: black;
 	/* margin-bottom:20px ; */
 }
