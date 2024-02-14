@@ -1,12 +1,12 @@
 import "./Day.css";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import Event from "../event/Event";
 import { useLocation } from "react-router-dom";
 import Modal from "react-modal";
-import isValidEvent from "./algorithms";
-import Header from "../header/Header";
+import isValidEvent, {convert24HourToString, get24HourTime} from "./algorithms";
 import { getCurrentMonth, getCurrentYear, getCurrentDay } from "../month/algorithms";
+import {getDay, WeekDay} from "../../../../server/utils/CalculateWeekDay";
+
 const Day = () => {
 	const [events, setEvents] = useState([]);
 	const location = useLocation();
@@ -19,6 +19,7 @@ const Day = () => {
 	const [newEventName, setNewEventName] = useState("");
 	const [newEventStartTime, setNewEventStartTime] = useState("");
 	const [newEventEndTime, setNewEventEndTime] = useState("");
+	const [refreshEvents, setRefreshEvents] = useState(false);
 
 	useEffect(() => {
 		const fetchEvents = async () => {
@@ -39,7 +40,7 @@ const Day = () => {
 			}
 		};
 		fetchEvents();
-	}, []);
+	}, [refreshEvents]);
 
 	const handleCreateEvent = async () => {
 		if (!isValidEvent(newEventName, newEventStartTime, newEventEndTime)) return;
@@ -48,16 +49,20 @@ const Day = () => {
 				`${import.meta.env.VITE_BACKEND_URL}/event/create`,
 				{
 					name: newEventName,
-					start: newEventStartTime,
-					end: newEventEndTime,
+					start: get24HourTime(newEventStartTime),
+					end: get24HourTime(newEventEndTime),
 					day: Number(day),
 					month: Number(month),
 					year: Number(year)
 				},
 				{ withCredentials: true }
 			);
-			setEvents([...events, response.data]);
-			setModalIsOpen(false);
+			if(response.status === 201){
+				setEvents([...events, response.data]);
+				setModalIsOpen(false);
+				setRefreshEvents(!refreshEvents);
+			}
+
 		} catch (error) {
 			console.error(error);
 		}
@@ -65,37 +70,36 @@ const Day = () => {
 
 	return (
 		<div className="day">
-			<Header />
-			<h1>{`${Number(month) + 1}/${day}/${year}`}</h1>
-			<p className="day-weekday">{}</p>
+			<Header/>
+			<div className="day-header">
+				<h1 className="day-weekday">{WeekDay[getDay(Number(day), Number(month), Number(year))]}</h1>
+				<h1>{`${Number(month) + 1}/${day}/${year}`}</h1>
+			</div>
 			<button onClick={() => setModalIsOpen(true)}>Create Event</button>
 			{
 				//put all the hours on the page
-				Array.from({ length: 24 }, (v, i) => {
+				Array.from({length: 24}, (v, i) => {
 					return (
 						<div key={i} className="hour">
 							<p>{i > 11 ? `${i - 12 === 0 ? 12 : i - 12}:00 PM` : `${i === 0 ? 12 : i}:00 AM`}</p>
 							{
 								//put the events on the page
 								events.map((event, index) => {
-									const start = event.start;
-									const end = event.end;
-									const startHour = start;
-									const endHour = end;
-									const startMinute = 0;
-									const endMinute = 0;
-									if (startHour === i) {
+									const start = event.start; //2030
+									const end = event.end; //2130
+									const startHour = Math.floor(start / 100) * 100;
+									if (startHour === i * 100) {
+
 										return (
 											<div key={index} className="event">
 												<h3>{event.name}</h3>
-												<p>{`${startHour > 11 ? `${startHour - 12 === 0 ? 12 : startHour - 12}` : `${startHour === 0 ? 12 : startHour}:${startMinute} PM`}`}</p>
-												<p>{`${endHour > 11 ? `${endHour - 12 === 0 ? 12 : endHour - 12}` : `${endHour === 0 ? 12 : endHour}:${endMinute} PM`}`}</p>
+												<p>{`from ${convert24HourToString(start)} to ${convert24HourToString(end)}`}</p>
 											</div>
 										);
 									}
 								})
 							}
-							<hr />
+							<hr/>
 						</div>
 					);
 				})
@@ -127,26 +131,22 @@ const Day = () => {
 						/>
 					</div>
 					<div className="modal-control">
-						<label htmlFor="new-event-start-time">{`Start Time (in 24 hour time)`}</label>
+						<label htmlFor="new-event-start-time">Start Time</label>
 						<input
 							id="new-event-start-time"
-							type="number"
-							min={0}
-							max={24}
+							type="time"
 							onChange={(e) => {
-								setNewEventStartTime(Number(e.target.value));
+								setNewEventStartTime(e.target.value);
 							}}
 						/>
 					</div>
 					<div className="modal-control">
-						<label htmlFor="new-event-end-time">{`End Time (in 24 hour time)`}</label>
+						<label htmlFor="new-event-end-time">End Time</label>
 						<input
 							id="new-event-end-time"
-							type="number"
-							min={0}
-							max={24}
+							type="time"
 							onChange={(e) => {
-								setNewEventEndTime(Number(e.target.value));
+								setNewEventEndTime(e.target.value);
 							}}
 						/>
 					</div>
