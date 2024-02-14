@@ -15,7 +15,7 @@ const mongoSession = (app: Express) => {
 			resave: false,
 			saveUninitialized: true,
 			cookie: {
-				maxAge: 1000 * 60 * 60 * 2
+				maxAge: 1000 * 60 * 60 * 8
 			}
 		})
 	);

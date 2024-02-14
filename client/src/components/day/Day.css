@@ -1,6 +1,7 @@
 .day {
 	height: 100%;
 	overflow: auto;
+	margin-left: 10px;
 }
 .modal-button {
 	background-color: lightblue;
@@ -27,4 +28,34 @@
 	justify-content: space-between;
 	margin: 10px;
 	width: 60%;
+}
+
+.day-weekday {
+	text-align: center;
+}
+
+.day-header {
+	display: flex;
+	justify-content: space-between;
+	width: 25%;
+	align-items: center;
+}
+.event {
+	background-color: lightblue;
+	color: black;
+	border-radius: 10px;
+	padding-left: 10px;
+	margin-left: 10px;
+	margin-right: 30px;
+	height: fit-content;
+}
+.event > .event-name {
+	color: black;
+	font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+	margin: 0;
+}
+
+.event > .event-duration {
+	margin: 0 0 0 5px;
+	color: black;
 }
