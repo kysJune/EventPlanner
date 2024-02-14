@@ -3,32 +3,6 @@
 	overflow: auto;
 	margin-left: 10px;
 }
-.modal-button {
-	background-color: lightblue;
-	border: none;
-	color: black;
-	font-size: 20px;
-	padding: 10px;
-	cursor: pointer;
-	height: fit-content;
-	width: fit-content;
-}
-.modal-controls {
-	display: flex;
-	flex-direction: column;
-	align-items: left;
-	margin: 10px;
-	padding: 40px;
-	border: 3px solid black;
-	width: 80%;
-	height: 40%;
-}
-.modal-control {
-	display: flex;
-	justify-content: space-between;
-	margin: 10px;
-	width: 60%;
-}
 
 .day-weekday {
 	text-align: center;
@@ -36,10 +10,11 @@
 
 .day-header {
 	display: flex;
-	justify-content: space-between;
+	justify-content: left;
 	width: 25%;
 	align-items: center;
 }
+
 .event {
 	background-color: lightblue;
 	color: black;
@@ -49,6 +24,7 @@
 	margin-right: 30px;
 	height: fit-content;
 }
+
 .event > .event-name {
 	color: black;
 	font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
@@ -58,4 +34,59 @@
 .event > .event-duration {
 	margin: 0 0 0 5px;
 	color: black;
+}
+/*-------------------------------Modal-------------------------------*/
+.Modal {
+	background-color: beige;
+	width: 50%;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	border: 5px solid black;
+	border-radius: 10px;
+}
+
+.modal-controls {
+	display: flex;
+	flex-direction: column;
+	margin: 10px;
+	border: 3px solid black;
+	width: 98%;
+	height: 40%;
+	align-items: flex-start;
+}
+
+.modal-control {
+	display: flex;
+	justify-content: space-between; /* Distributes items evenly along the main axis */
+	align-items: center; /* Aligns items vertically in the center */
+	width: 30%;
+	margin: 5px;
+}
+
+label {
+	margin-right: 10px; /* Adjust as needed */
+}
+
+.modal-button {
+	background-color: lightblue;
+	color: black;
+	font-size: 20px;
+	padding: 10px;
+	cursor: pointer;
+	margin: 4px;
+	height: fit-content;
+	width: fit-content;
+	border: 1px solid transparent;
+}
+
+.Modal h1 {
+	margin-left: 10px;
+}
+
+.Modal button:hover {
+	cursor: pointer;
+	border: 1px solid black;
+	background-color: #9dd8e7;
 }

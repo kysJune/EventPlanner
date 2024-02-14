@@ -110,9 +110,9 @@ const Day = () => {
 			}
 
 			{/* ----------------------------------------MODAL---------------------------------------- */}
-			<Modal isOpen={modalIsOpen} contentLabel="Create an Event Modal">
-				<header>
-					<h1>Creating an event...</h1>
+			<Modal isOpen={modalIsOpen} contentLabel="Create an Event Modal" className="Modal">
+				<header className="modal-header">
+					<h1>Create an event</h1>
 					<button
 						className="modal-button"
 						onClick={() => {
@@ -153,6 +153,16 @@ const Day = () => {
 								setNewEventEndTime(e.target.value);
 							}}
 						/>
+					</div>
+
+					<div className="modal-control">
+						<label htmlFor="new-event-location">Location</label>
+						<input id="new-event-location" />
+					</div>
+
+					<div className="modal-control">
+						<label htmlFor="new-event-description">Description</label>
+						<textarea></textarea>
 					</div>
 
 					<button className="modal-button create-event-button" onClick={handleCreateEvent}>
