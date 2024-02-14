@@ -72,7 +72,7 @@ const Day = () => {
 
 	return (
 		<div className="day">
-			<Header/>
+			<Header />
 			<div className="day-header">
 				<h1 className="day-weekday">{WeekDay[getDay(Number(day), Number(month), Number(year))]}</h1>
 				<h1>{`${Number(month) + 1}/${day}/${year}`}</h1>
