@@ -31,7 +31,6 @@ class Clock extends Component {
 		const meridium = hour >= 12 ? "PM" : "AM";
 		const formatHour = hour % 12 || 12;
 
-		console.log({ meridium });
 		return (
 			<div className="clock">
 				{/* <p>{time.toLocaleTimeString()}</p> */}

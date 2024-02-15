@@ -1,5 +1,5 @@
 import "./Month.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import MiniDay from "./MiniDay.jsx";
 import { Month as MonthEnum } from "../../../../server/utils/CalculateWeekDay";
 import populateMonth, { getCurrentMonth, getCurrentYear } from "./algorithms";
@@ -10,11 +10,15 @@ const Month = () => {
 	const location = useLocation();
 	const [month, setMonth] = useState(location?.state?.month || getCurrentMonth());
 	const [year, setYear] = useState(location?.state?.year || getCurrentYear());
-
-	// query all events for the loggedin user for the given month and year
+	const [weeks, setWeeks] = useState([]);
 
 	//weeks array contains all day objects to display for the given month
-	const weeks = populateMonth(month, year);
+	useEffect(() => {
+		const populate = async () => {
+			setWeeks(await populateMonth(month, year));
+		};
+		populate();
+	}, [month, year]);
 
 	const handlePrevMonthClick = () => {
 		setYear(Number(month) - 1 < 0 ? Number(year) - 1 : year);
@@ -61,6 +65,7 @@ const Month = () => {
 							else if (monthProp === 0 && day.monthStatus === "next") {
 								yearProp = Number(year) + 1;
 							}
+
 							return (
 								<MiniDay
 									key={index}
