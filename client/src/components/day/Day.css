@@ -38,7 +38,7 @@
 /*-------------------------------Modal-------------------------------*/
 .Modal {
 	background-color: beige;
-	width: 50%;
+	width: 20%;
 	position: fixed;
 	top: 50%;
 	left: 50%;
@@ -47,26 +47,28 @@
 	border-radius: 10px;
 }
 
-.modal-controls {
+.modal-header {
 	display: flex;
-	flex-direction: column;
-	margin: 10px;
-	border: 3px solid black;
-	width: 98%;
-	height: 40%;
-	align-items: flex-start;
+	justify-content: center;
+	align-items: center;
+	margin-top: 10px;
+	height: 100%;
 }
 
-.modal-control {
-	display: flex;
-	justify-content: space-between; /* Distributes items evenly along the main axis */
-	align-items: center; /* Aligns items vertically in the center */
+.modal-header button {
+	position: absolute;
+	right: 10px;
+	top: 10px;
+}
+
+.modal-header #new-event-name {
+	height: 40px;
 	width: 30%;
-	margin: 5px;
-}
-
-label {
-	margin-right: 10px; /* Adjust as needed */
+	font-size: 20px;
+	background-color: beige;
+	border: 0;
+	border-radius: 0;
+	border-bottom: 2px black solid;
 }
 
 .modal-button {
@@ -81,8 +83,36 @@ label {
 	border: 1px solid transparent;
 }
 
-.Modal h1 {
-	margin-left: 10px;
+.Modal label {
+	font-size: 18px;
+}
+
+.Modal input,
+textarea {
+	outline: none;
+	border: 1px solid #b2b283;
+	border-radius: 3px;
+	font-size: 16px;
+}
+.Modal textarea {
+	resize: none;
+}
+
+.modal-controls {
+	display: flex;
+	flex-direction: column;
+	margin: 20px 10px;
+	width: 100%;
+	height: 20%;
+	align-items: flex-start;
+}
+
+.modal-control {
+	display: flex;
+	justify-content: space-between; /* Distributes items evenly along the main axis */
+	align-items: center; /* Aligns items vertically in the center */
+	width: 90%;
+	margin: 5px;
 }
 
 .Modal button:hover {
