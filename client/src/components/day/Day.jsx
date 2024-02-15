@@ -110,9 +110,17 @@ const Day = () => {
 			}
 
 			{/* ----------------------------------------MODAL---------------------------------------- */}
-			<Modal isOpen={modalIsOpen} contentLabel="Create an Event Modal">
-				<header>
-					<h1>Creating an event...</h1>
+			<Modal isOpen={modalIsOpen} contentLabel="Create an Event Modal" className="Modal">
+				<header className="modal-header">
+					<input
+						type="text"
+						id="new-event-name"
+						onChange={(e) => {
+							setNewEventName(e.target.value);
+						}}
+						value={newEventName}
+						placeholder="Add title"
+					/>
 					<button
 						className="modal-button"
 						onClick={() => {
@@ -123,17 +131,6 @@ const Day = () => {
 					</button>
 				</header>
 				<div className="modal-controls">
-					<div className="modal-control">
-						<label htmlFor="new-event-name">Event Name</label>
-						<input
-							type="text"
-							id="new-event-name"
-							onChange={(e) => {
-								setNewEventName(e.target.value);
-							}}
-							value={newEventName}
-						/>
-					</div>
 					<div className="modal-control">
 						<label htmlFor="new-event-start-time">Start Time</label>
 						<input
@@ -155,8 +152,18 @@ const Day = () => {
 						/>
 					</div>
 
+					<div className="modal-control">
+						<label htmlFor="new-event-location">Location</label>
+						<input id="new-event-location" />
+					</div>
+
+					<div className="modal-control">
+						<label htmlFor="new-event-description">Description</label>
+						<textarea required></textarea>
+					</div>
+
 					<button className="modal-button create-event-button" onClick={handleCreateEvent}>
-						Create
+						Create Event
 					</button>
 				</div>
 			</Modal>
