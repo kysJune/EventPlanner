@@ -4,8 +4,9 @@
   "description": "Arjun Rashalogni Evan Giampaoli Cleveland Plonsey",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "concurrently \"cd client && npm run dev\"  \"cd server && npm run dev\""
+    "test": "concurrently \"cd client && npm run test\"  \"cd server && npm run test\"",
+    "dev": "concurrently \"cd client && npm run dev\"  \"cd server && npm run dev\"",
+    "format": "concurrently \"cd client && npm run format\"  \"cd server && npm run format\""
   },
   "keywords": [],
   "author": "",
