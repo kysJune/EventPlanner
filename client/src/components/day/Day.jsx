@@ -135,6 +135,7 @@ const Day = () => {
 					<div className="modal-control">
 						<label htmlFor="new-event-start-time">Start Time</label>
 						<input
+							required
 							id="new-event-start-time"
 							type="time"
 							onChange={(e) => {
@@ -145,6 +146,7 @@ const Day = () => {
 					<div className="modal-control">
 						<label htmlFor="new-event-end-time">End Time</label>
 						<input
+							required
 							id="new-event-end-time"
 							type="time"
 							onChange={(e) => {
