@@ -12,6 +12,20 @@ declare module "express-session" {
 	}
 }
 
+export const logout = async (
+	req: Request,
+	res: Response,
+	next: NextFunction
+) => {
+	req.session.destroy((err) => {
+		if (err) {
+			console.error("Error destroying session");
+			return next(err);
+		}
+		res.status(StatusCodes.OK).send();
+	});
+};
+
 export const login = async (
 	req: Request,
 	res: Response,

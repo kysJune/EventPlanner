@@ -25,10 +25,10 @@ export enum WeekDay {
 }
 
 /**
- * 
- * @param day 
- * @param month 
- * @param year 
+ *
+ * @param day
+ * @param month
+ * @param year
  * @returns a number representing the day of the week (0-6)
  */
 export const getDay = (day: number, month: Month, year: number) => {

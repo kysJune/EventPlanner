@@ -23,7 +23,7 @@ function App() {
 					<Route path="/Month" element={<Month />} />
 					{/* <Route path="/Year" element={<Year />} /> */}
 					<Route path="/Day" element={<Day />} />
-					<Route path="/" element={<Home />} />
+					<Route path="/" element={<Login />} />
 				</Routes>
 			</BrowserRouter>
 		</div>

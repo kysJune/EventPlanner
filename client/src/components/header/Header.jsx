@@ -3,6 +3,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { cookies } from "../../App.jsx";
 import { removeCookies } from "./algorithms/algorithms.js";
+import axios from "axios";
 import Clock from "./algorithms/clock.jsx";
 import SearchBar from "./algorithms/searchbar.jsx";
 
@@ -31,11 +32,18 @@ const Header = ({ isLoggedIn }) => {
 	const navMonth = () => {
 		navigate("/month");
 	};
-	const handleLogout = () => {
-		//TODO send http request to logoutController
-		//cookies.remove({...cookies.getAll()});
-		removeCookies();
-		navigate("/");
+	const handleLogout = async () => {
+		
+		try{
+			const result = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/user/logout`, {}, { withCredentials: true });
+		if (result.status === 200) {
+			removeCookies();
+			navigate("/");
+			}
+		} catch (error){
+			console.error(error);
+			return;
+		}
 	};
 
 	return (
