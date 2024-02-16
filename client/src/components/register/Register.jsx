@@ -2,6 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { cookies } from "../../App.jsx";
+import "./Register.css";
 
 export const Register = ({}) => {
 	const [username, setName] = useState("");
@@ -52,28 +53,34 @@ export const Register = ({}) => {
 
 	return (
 		<div className="Register">
-			<input
-				placeholder="Username"
-				type="text"
-				id="username"
-				onChange={handleNameChange}
-				value={username}
-			/>
-			<input
-				placeholder="Password"
-				type="password"
-				id="password"
-				onChange={handlePasswordChange}
-				value={password}
-			/>
-			<input
-				placeholder="Confirm Password"
-				type="password"
-				id="confirm-password"
-				onChange={handleConfirmPasswordChange}
-				value={confirmPassword}
-			/>
-			<button onClick={handleRegister}>Register</button>
+			<div className="register-card">
+				<h1>Register</h1>
+				<input
+					placeholder="Username"
+					type="text"
+					id="username"
+					onChange={handleNameChange}
+					value={username}
+				/>
+				<input
+					placeholder="Password"
+					type="password"
+					id="password"
+					onChange={handlePasswordChange}
+					value={password}
+				/>
+				<input
+					placeholder="Confirm Password"
+					type="password"
+					id="confirm-password"
+					onChange={handleConfirmPasswordChange}
+					value={confirmPassword}
+				/>
+				<p>
+					Already have an account? <a href="/"> Login here</a>
+				</p>
+				<button onClick={handleRegister}>Register</button>
+			</div>
 		</div>
 	);
 };

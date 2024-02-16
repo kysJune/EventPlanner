@@ -2,6 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import { cookies } from "../../App.jsx";
 import { useNavigate } from "react-router-dom";
+import "./Login.css";
 
 export const Login = ({}) => {
 	const [username, setName] = useState("");
@@ -31,21 +32,29 @@ export const Login = ({}) => {
 
 	return (
 		<div className="Login">
-			<input
-				placeholder="Username"
-				type="text"
-				id="username"
-				onChange={handleNameChange}
-				value={username}
-			/>
-			<input
-				placeholder="Password"
-				type="password"
-				id="password"
-				onChange={handlePasswordChange}
-				value={password}
-			/>
-			<button onClick={handleLogin}>Login</button>
+			<div className="login-card">
+				<h1>Login</h1>
+				<label htmlFor="username">Username</label>
+				<input
+					placeholder="Type your username"
+					type="text"
+					id="username"
+					onChange={handleNameChange}
+					value={username}
+				/>
+				<label htmlFor="password">Password</label>
+				<input
+					placeholder="Type your password"
+					type="password"
+					id="password"
+					onChange={handlePasswordChange}
+					value={password}
+				/>
+				<p>
+					Don't have an account? <a href="/register"> Register here</a>
+				</p>
+				<button onClick={handleLogin}>Login</button>
+			</div>
 		</div>
 	);
 };
