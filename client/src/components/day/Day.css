@@ -10,8 +10,8 @@
 
 .day-header {
 	display: flex;
-	justify-content: left;
-	width: 25%;
+	justify-content: space-between;
+	width: 30%;
 	align-items: center;
 }
 
