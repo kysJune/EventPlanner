@@ -33,14 +33,17 @@ const Header = ({ isLoggedIn }) => {
 		navigate("/month");
 	};
 	const handleLogout = async () => {
-		
-		try{
-			const result = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/user/logout`, {}, { withCredentials: true });
-		if (result.status === 200) {
-			removeCookies();
-			navigate("/");
+		try {
+			const result = await axios.post(
+				`${import.meta.env.VITE_BACKEND_URL}/user/logout`,
+				{},
+				{ withCredentials: true }
+			);
+			if (result.status === 200) {
+				removeCookies();
+				navigate("/");
 			}
-		} catch (error){
+		} catch (error) {
 			console.error(error);
 			return;
 		}

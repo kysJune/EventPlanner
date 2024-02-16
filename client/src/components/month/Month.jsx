@@ -5,7 +5,7 @@ import { Month as MonthEnum } from "../../../../server/utils/CalculateWeekDay";
 import populateMonth, { getCurrentMonth, getCurrentYear } from "./algorithms";
 import { useLocation, useNavigate } from "react-router-dom";
 import Header from "../header/Header.jsx";
-import {cookies} from "../../App.jsx";
+import { cookies } from "../../App.jsx";
 
 const Month = () => {
 	const location = useLocation();
@@ -15,7 +15,7 @@ const Month = () => {
 	const navigate = useNavigate();
 	//weeks array contains all day objects to display for the given month
 	useEffect(() => {
-		if(cookies.get("isLoggedIn") === undefined){
+		if (cookies.get("isLoggedIn") === undefined) {
 			navigate("/");
 			return;
 		}

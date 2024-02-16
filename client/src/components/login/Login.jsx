@@ -9,7 +9,7 @@ export const Login = ({}) => {
 	const navigate = useNavigate();
 
 	useEffect(() => {
-		if(cookies.get("isLoggedIn")){
+		if (cookies.get("isLoggedIn")) {
 			navigate("/Month");
 		}
 	}, []);
