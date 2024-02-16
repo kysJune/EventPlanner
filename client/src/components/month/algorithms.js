@@ -39,6 +39,7 @@ const populateMonth = async (month, year) => {
 
 	if (status !== 200 && status !== 204) {
 		console.error("PANIC");
+		prevEvents = []; // TODO: notify user that we couldn't fetch events
 	} else if (status === 204) {
 		prevEvents = [];
 	}
