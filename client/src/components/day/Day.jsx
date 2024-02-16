@@ -7,13 +7,14 @@ import isValidEvent, { convert24HourToString, get24HourTime, isTodaysDate } from
 import { getDay, WeekDay } from "../../../../server/utils/CalculateWeekDay";
 import Weather from "../weather/Weather";
 import Header from "../header/Header.jsx";
+import { getCurrentDay, getCurrentMonth, getCurrentYear } from "../month/algorithms.js";
 
 const Day = () => {
 	const location = useLocation();
 	const [events, setEvents] = useState([]);
-	const [day, setDay] = useState(location?.state?.day || 1);
-	const [month, setMonth] = useState(location?.state?.month || 0);
-	const [year, setYear] = useState(location?.state?.year || 2024);
+	const [day, setDay] = useState(location?.state?.day || getCurrentDay());
+	const [month, setMonth] = useState(location?.state?.month || getCurrentMonth);
+	const [year, setYear] = useState(location?.state?.year || getCurrentYear());
 	const [modalIsOpen, setModalIsOpen] = useState(false);
 	const [newEventName, setNewEventName] = useState("");
 	const [newEventStartTime, setNewEventStartTime] = useState("");
