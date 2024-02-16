@@ -29,7 +29,7 @@ const MiniDay = ({ events, day, month, year, weekDay, monthStatus }) => {
 				{events.map((e, index) => {
 					if (index < 3) return <MiniEvent event={e} key={index} />;
 					else if (index === 4) {
-						return <div>Handle having >= 4 events on the same day</div>;
+						return <div>{"Handle having >= 4 events on the same day"}</div>;
 					}
 				})}
 			</div>
