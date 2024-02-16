@@ -1,61 +1,59 @@
-.register{
-    height: 100%;
-    width: 100%;
-    display: flex;
-    position: relative;
+.register {
+	height: 100%;
+	width: 100%;
+	display: flex;
+	position: relative;
 }
 
-
-.register-card{
-    background-color: beige;
-    color: black;
-    border: 1px solid black;
-    border-radius: 10px;
-    display: flex;
-    flex-direction: column;
-    padding: 20px;
-    width: 40%;
-    height: 80%;
-    margin: 0;
-    position: fixed;
+.register-card {
+	background-color: beige;
+	color: black;
+	border: 1px solid black;
+	border-radius: 10px;
+	display: flex;
+	flex-direction: column;
+	padding: 20px;
+	width: 40%;
+	height: 80%;
+	margin: 0;
+	position: fixed;
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
 }
 
-.register-card input{
-    background-color: transparent;
-    margin: 10px;
-    padding: 10px;
-    font-size: 20px;
-    border: none;
-    border-bottom: 1px solid grey;  
-    color: black;
+.register-card input {
+	background-color: transparent;
+	margin: 10px;
+	padding: 10px;
+	font-size: 20px;
+	border: none;
+	border-bottom: 1px solid grey;
+	color: black;
 }
 
-.register-card input:focus{
-    outline: none;
+.register-card input:focus {
+	outline: none;
 }
 
+.register-card h1,
+.register-card p {
+	text-align: center;
+	margin: 0;
+	color: black;
+}
+.register-card p {
+	margin-top: 20%;
+}
+.register-card button {
+	position: fixed;
+	border-radius: 10px;
+	bottom: 3%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 45%;
+}
 
-.register-card h1, .register-card p{
-    text-align: center;
-    margin: 0;
-    color: black;
-}
-.register-card p{
-    margin-top: 20%;
-}
-.register-card button{
-   
-    position: fixed;
-    border-radius: 10px;
-    bottom: 3%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 45%;
-}
-
-a:hover{
-    text-decoration: underline;
+a:hover {
+	text-decoration: underline;
 }
