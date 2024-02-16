@@ -1,0 +1,16 @@
+{
+  "name": "eventplanner",
+  "version": "1.0.0",
+  "description": "Arjun Rashalogni Evan Giampaoli Cleveland Plonsey",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "concurrently \"cd client && npm run dev\"  \"cd server && npm run dev\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
