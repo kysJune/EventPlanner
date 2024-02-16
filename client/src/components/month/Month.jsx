@@ -3,17 +3,22 @@ import { useEffect, useState } from "react";
 import MiniDay from "./MiniDay.jsx";
 import { Month as MonthEnum } from "../../../../server/utils/CalculateWeekDay";
 import populateMonth, { getCurrentMonth, getCurrentYear } from "./algorithms";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Header from "../header/Header.jsx";
+import {cookies} from "../../App.jsx";
 
 const Month = () => {
 	const location = useLocation();
 	const [month, setMonth] = useState(location?.state?.month || getCurrentMonth());
 	const [year, setYear] = useState(location?.state?.year || getCurrentYear());
 	const [weeks, setWeeks] = useState([]);
-
+	const navigate = useNavigate();
 	//weeks array contains all day objects to display for the given month
 	useEffect(() => {
+		if(cookies.get("isLoggedIn") === undefined){
+			navigate("/");
+			return;
+		}
 		const populate = async () => {
 			setWeeks(await populateMonth(month, year));
 		};

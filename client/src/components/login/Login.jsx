@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { cookies } from "../../App.jsx";
 import { useNavigate } from "react-router-dom";
@@ -8,6 +8,11 @@ export const Login = ({}) => {
 	const [password, setPassword] = useState("");
 	const navigate = useNavigate();
 
+	useEffect(() => {
+		if(cookies.get("isLoggedIn")){
+			navigate("/Month");
+		}
+	}, []);
 	const handleNameChange = (event) => {
 		setName(event.target.value);
 	};
@@ -25,7 +30,7 @@ export const Login = ({}) => {
 		if (response.status === 200) {
 			cookies.set("isLoggedIn", "true");
 			cookies.set("username", username);
-			navigate("/");
+			navigate("/Month");
 		}
 	};
 

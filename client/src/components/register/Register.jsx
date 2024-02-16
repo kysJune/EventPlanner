@@ -43,7 +43,7 @@ export const Register = ({}) => {
 			} else {
 				cookies.set("isLoggedIn", "true");
 				cookies.set("username", username);
-				navigate("/");
+				navigate("/Month");
 			}
 		} catch (error) {
 			console.error(error);
