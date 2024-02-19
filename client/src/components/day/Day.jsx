@@ -8,6 +8,7 @@ import { getDay, WeekDay } from "../../../../server/utils/CalculateWeekDay";
 import Weather from "../weather/Weather";
 import Header from "../header/Header.jsx";
 import { getCurrentDay, getCurrentMonth, getCurrentYear } from "../month/algorithms.js";
+import { StatusCodes } from "http-status-codes";
 
 const Day = () => {
 	const location = useLocation();
@@ -61,9 +62,27 @@ const Day = () => {
 				},
 				{ withCredentials: true }
 			);
+
 			if (response.status === 201) {
 				setEvents([...events, response.data]);
 				setModalIsOpen(false);
+				setRefreshEvents(!refreshEvents);
+			}
+		} catch (error) {
+			console.error(error);
+		}
+	};
+
+	const handleDeleteEvent = async (eventId) => {
+		try {
+			const response = await axios.delete(
+				`${import.meta.env.VITE_BACKEND_URL}/event/${eventId}/delete`,
+				{ withCredentials: true }
+			);
+
+			if (response.status !== StatusCodes.NO_CONTENT) {
+				console.error("PANIC : Failed to delete");
+			} else if (response.status === StatusCodes.NO_CONTENT) {
 				setRefreshEvents(!refreshEvents);
 			}
 		} catch (error) {
@@ -85,27 +104,34 @@ const Day = () => {
 				//put all the hours on the page
 				Array.from({ length: 24 }, (v, i) => {
 					return (
-						<div key={i} className="hour">
-							<p>{i > 11 ? `${i - 12 === 0 ? 12 : i - 12}:00 PM` : `${i === 0 ? 12 : i}:00 AM`}</p>
-							{
-								//put the events on the page
-								events &&
-									events.map((event, index) => {
-										const start = event.start; //2030
-										const end = event.end; //2130
-										const startHour = Math.floor(start / 100) * 100;
-										if (startHour === i * 100) {
-											return (
-												<div key={index} className="event">
-													<h3 className="event-name">{event.name}</h3>
-													<p className="event-duration">{`from ${convert24HourToString(start)} to ${convert24HourToString(end)}`}</p>
-												</div>
-											);
-										}
-									})
-							}
+						<>
 							<hr />
-						</div>
+							<div key={i} className="hour">
+								<p>{i > 11 ? `${i - 12 === 0 ? 12 : i - 12}:00 PM` : `${i === 0 ? 12 : i}:00 AM`}</p>
+								{
+									//put the events on the page
+									events &&
+										events.map((event, index) => {
+											const start = event.start; //2030
+											const end = event.end; //2130
+											const startHour = Math.floor(start / 100) * 100;
+											if (startHour === i * 100) {
+												return (
+													<div key={index} className="event">
+														<div className="event-top">
+															<h3 className="event-name">{event.name}</h3>
+															<button className="delete-event" onClick={() => handleDeleteEvent(event._id)}>
+																X
+															</button>
+														</div>
+														<p className="event-duration">{`from ${convert24HourToString(start)} to ${convert24HourToString(end)}`}</p>
+													</div>
+												);
+											}
+										})
+								}
+							</div>
+						</>
 					);
 				})
 			}

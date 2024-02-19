@@ -10,9 +10,8 @@ header {
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
-	align-items: top;
+	align-items: center;
 	color: black;
-	/* margin-bottom:20px ; */
 }
 
 p {

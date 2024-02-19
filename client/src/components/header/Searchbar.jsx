@@ -1,6 +1,7 @@
 import React, { Component } from "react";
+import "./Header.css";
 
-class SearchBar extends Component {
+class Searchbar extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -22,7 +23,7 @@ class SearchBar extends Component {
 
 	render() {
 		return (
-			<form className="searchbar" onSubmit={this.handleSubmit}>
+			<form className="Searchbar" onSubmit={this.handleSubmit}>
 				<input
 					type="text"
 					value={this.state.searchTerm}
@@ -37,4 +38,4 @@ class SearchBar extends Component {
 	}
 }
 
-export default SearchBar;
+export default Searchbar;

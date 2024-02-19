@@ -15,14 +15,39 @@
 	align-items: center;
 }
 
+.hour {
+	display: flex;
+}
+
 .event {
 	background-color: lightblue;
 	color: black;
 	border-radius: 10px;
 	padding-left: 10px;
+	padding-right: 10px;
 	margin-left: 10px;
-	margin-right: 30px;
 	height: fit-content;
+}
+
+.event-top {
+	margin-top: -10px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.delete-event {
+	height: fit-content;
+	width: fit-content;
+	background-color: transparent;
+	border: none;
+	color: #525252;
+	font-weight: bold;
+}
+
+.delete-event:hover {
+	border: none;
+	color: black;
 }
 
 .event > .event-name {
