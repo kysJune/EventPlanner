@@ -9,6 +9,7 @@ import Weather from "../weather/Weather";
 import Header from "../header/Header.jsx";
 import { getCurrentDay, getCurrentMonth, getCurrentYear } from "../month/algorithms.js";
 import { StatusCodes } from "http-status-codes";
+import {numDaysInMonth} from "../../../../server/utils/CalculateWeekDay.ts"
 
 const Day = () => {
 	const location = useLocation();
@@ -89,14 +90,48 @@ const Day = () => {
 			console.error(error);
 		}
 	};
+	const handlePrevDayClick = () => {
+		if(Number(day)===1){
+			console.log(month, year);
+			setMonth(Number(month) - 1 < 0 ? 11 : Number(month) - 1);
+			if(Number(month)===11){
+				setYear(year-1);
+			}
+			setDay(numDaysInMonth(Number(year), Number(month-1)));
+		}
+		else{
+			setDay(Number(day)-1);
+		}
+	};
+	const handleNextDayClick = () => {
+		if(Number(day)===numDaysInMonth(Number(year), Number(month))){
+			setDay(1);
+			setMonth(Number(month) + 1 > 11 ? 0 : Number(month) + 1);
+			if(Number(month) === 0){
+				setYear(Number(year)+1)
+			}
+		}
+		else{
+			setDay(Number(day)+1);
+		}
+	};
 
 	return (
 		<div className="day">
 			<Header />
-			<div className="day-header">
-				<h1 className="day-weekday">{WeekDay[getDay(Number(day), Number(month), Number(year))]}</h1>
-				<h1>{`${Number(month) + 1}/${day}/${year}`}</h1>
-			</div>
+			<header>
+				<button className="day-control-button" onClick={handlePrevDayClick}>
+					{"<"}
+				</button>
+
+				<div className="day-header">
+					<h1 className="day-weekday">{WeekDay[getDay(Number(day), Number(month), Number(year))]}</h1>
+					<h1>{`${Number(month) + 1}/${day}/${year}`}</h1>
+				</div>
+				<button className="day-control-button" onClick={handleNextDayClick}>
+					{">"}
+				</button>
+			</header>
 			{/* if it's the current day, show the current weather */}
 			{isToday && <Weather />}
 			<button onClick={() => setModalIsOpen(true)}>Create Event</button>
