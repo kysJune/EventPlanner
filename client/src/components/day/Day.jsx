@@ -9,7 +9,7 @@ import Weather from "../weather/Weather";
 import Header from "../header/Header.jsx";
 import { getCurrentDay, getCurrentMonth, getCurrentYear } from "../month/algorithms.js";
 import { StatusCodes } from "http-status-codes";
-import {numDaysInMonth} from "../../../../server/utils/CalculateWeekDay.ts"
+import { numDaysInMonth } from "../../../../server/utils/CalculateWeekDay.ts";
 
 const Day = () => {
 	const location = useLocation();
@@ -91,28 +91,26 @@ const Day = () => {
 		}
 	};
 	const handlePrevDayClick = () => {
-		if(Number(day)===1){
+		if (Number(day) === 1) {
 			console.log(month, year);
 			setMonth(Number(month) - 1 < 0 ? 11 : Number(month) - 1);
-			if(Number(month)===11){
-				setYear(year-1);
+			if (Number(month) === 11) {
+				setYear(year - 1);
 			}
-			setDay(numDaysInMonth(Number(year), Number(month-1)));
-		}
-		else{
-			setDay(Number(day)-1);
+			setDay(numDaysInMonth(Number(year), Number(month - 1)));
+		} else {
+			setDay(Number(day) - 1);
 		}
 	};
 	const handleNextDayClick = () => {
-		if(Number(day)===numDaysInMonth(Number(year), Number(month))){
+		if (Number(day) === numDaysInMonth(Number(year), Number(month))) {
 			setDay(1);
 			setMonth(Number(month) + 1 > 11 ? 0 : Number(month) + 1);
-			if(Number(month) === 0){
-				setYear(Number(year)+1)
+			if (Number(month) === 0) {
+				setYear(Number(year) + 1);
 			}
-		}
-		else{
-			setDay(Number(day)+1);
+		} else {
+			setDay(Number(day) + 1);
 		}
 	};
 
