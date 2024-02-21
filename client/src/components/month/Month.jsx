@@ -42,7 +42,7 @@ const Month = () => {
 				<button className="month-control-button" onClick={handlePrevMonthClick}>
 					{"<"}
 				</button>
-				<h1>{`${MonthEnum[month]}, ${year}`}</h1>
+				<h1 className="month-title">{`${MonthEnum[month]}, ${year}`}</h1>
 				<button className="month-control-button" onClick={handleNextMonthClick}>
 					{">"}
 				</button>

@@ -7,7 +7,7 @@ import axios from "axios";
 import Searchbar from "./Searchbar.jsx";
 import { StatusCodes } from "http-status-codes";
 
-const Header = ({ isLoggedIn }) => {
+const Header = () => {
 	const API_BASE_URL = import.meta.env.VITE_BACKEND_URL;
 
 	const navigate = useNavigate();
@@ -54,24 +54,27 @@ const Header = ({ isLoggedIn }) => {
 					<div className="searchBarContainer">
 						<Searchbar />
 					</div>
-
-					<p className="username">{cookies.get("username").toUpperCase()} </p>
+					<div className="header-right">
+						<p className="username">{cookies.get("username")} </p>
+						<div className="buttons">
+							<button className="button" onClick={navWeather}>
+								Weather
+							</button>
+							<button className="button" onClick={navYear}>
+								Year
+							</button>
+							<button className="button" onClick={navMonth}>
+								Month
+							</button>
+							<button className="button" onClick={navDay}>
+								Day
+							</button>
+							<button className="button" onClick={handleLogout}>
+								Logout
+							</button>
+						</div>
+					</div>
 					{/*TODO change the button to instead show the current weather icon based on the users cookie's location value  */}
-					<button className="button" onClick={navWeather}>
-						Weather
-					</button>
-					<button className="button" onClick={navYear}>
-						Year
-					</button>
-					<button className="button" onClick={navMonth}>
-						Month
-					</button>
-					<button className="button" onClick={navDay}>
-						Day
-					</button>
-					<button className="button" onClick={handleLogout}>
-						Logout
-					</button>
 				</div>
 			) : (
 				<nav className="loggedOutUser">

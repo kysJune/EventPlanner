@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "./Header.css";
+import "@fortawesome/fontawesome-free/css/all.css";
 
 class Searchbar extends Component {
 	constructor(props) {
@@ -30,8 +31,8 @@ class Searchbar extends Component {
 					onChange={this.handleChange}
 					placeholder="Enter a Date or Event"
 				/>
-				<button className="button" onClick="handleSubmit">
-					GO!
+				<button className="search-button" onClick="handleSubmit">
+					<i className="fa fa-search" aria-hidden="true"></i>
 				</button>
 			</form>
 		);
