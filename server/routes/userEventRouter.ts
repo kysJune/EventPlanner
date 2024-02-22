@@ -4,7 +4,8 @@ import {
 	listEvents,
 	read,
 	deleteEvent,
-	update
+	update,
+	searchEventsByName
 } from "../controllers/userEventController";
 import authMiddleware from "../middleware/authMiddleware";
 import { errorHandlerMiddleware } from "../middleware/errorHandler";
@@ -12,13 +13,23 @@ import { errorHandlerMiddleware } from "../middleware/errorHandler";
 const userEventRouter = express.Router();
 
 userEventRouter.post("/create", authMiddleware, create, errorHandlerMiddleware);
+
 userEventRouter.get("/:id/read", authMiddleware, read, errorHandlerMiddleware);
+
+userEventRouter.post(
+	"/search",
+	authMiddleware,
+	searchEventsByName,
+	errorHandlerMiddleware
+);
+
 userEventRouter.post(
 	"/list",
 	authMiddleware,
 	listEvents,
 	errorHandlerMiddleware
 );
+
 userEventRouter.put(
 	"/:id/update",
 	authMiddleware,

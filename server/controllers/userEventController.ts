@@ -111,6 +111,43 @@ export const listEvents = async (
 	});
 };
 
+export const searchEventsByName = async (
+	req: Request,
+	res: Response,
+	next: NextFunction
+) => {
+	const searchTerm: string | undefined = req.body.searchTerm;
+	if (req.session.userid === undefined) {
+		return next(new UnauthorizedError("User not logged in"));
+	}
+
+	const userid: string = req.session.userid;
+	if (!searchTerm) {
+		return next(new BadRequestError("Invalid search term"));
+	}
+
+	const events: UserEventResponse[] | undefined =
+		await DatabaseUserEvent.searchEventsByName(searchTerm, userid);
+
+	let statusCode: StatusCodes;
+	let userEvents: UserEventResponse[];
+	let message: string;
+	if (!events) {
+		userEvents = [];
+		statusCode = StatusCodes.NO_CONTENT;
+		message = "No events found";
+	} else {
+		userEvents = events;
+		statusCode = StatusCodes.OK;
+		message = "Events found";
+	}
+
+	res.status(statusCode).send({
+		userEvents,
+		message
+	});
+};
+
 export const update = async (
 	req: Request,
 	res: Response,

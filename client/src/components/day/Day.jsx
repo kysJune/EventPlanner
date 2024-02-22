@@ -38,7 +38,10 @@ const Day = () => {
 					},
 					{ withCredentials: true }
 				);
-				if (response.data.userEvents === undefined || response.status === 204) return;
+				if (response.data.userEvents === undefined || response.status === 204){
+					setEvents([]);
+					return;
+				}
 				setEvents([...response.data.userEvents]);
 			} catch (error) {
 				console.error(error);
@@ -46,13 +49,13 @@ const Day = () => {
 		};
 		setIsToday(isTodaysDate(Number(day), Number(month), Number(year)));
 		fetchEvents();
-	}, [refreshEvents]);
+	}, [refreshEvents, day, month, year]);
 
 	useEffect(() => {
 		setDay(location?.state?.day || getCurrentDay());
 		setMonth(location?.state?.month || getCurrentMonth());
 		setYear(location?.state?.year || getCurrentYear());
-	}, [location]);
+	}, [location?.state?.day, location?.state?.month, location?.state?.year]);
 
 	const handleCreateEvent = async () => {
 		if (!isValidEvent(newEventName, newEventStartTime, newEventEndTime)) return;
@@ -107,6 +110,7 @@ const Day = () => {
 		} else {
 			setDay(Number(day) - 1);
 		}
+		setRefreshEvents(!refreshEvents);
 	};
 	const handleNextDayClick = () => {
 		if (Number(day) === numDaysInMonth(Number(year), Number(month))) {
@@ -118,6 +122,7 @@ const Day = () => {
 		} else {
 			setDay(Number(day) + 1);
 		}
+		setRefreshEvents(!refreshEvents);
 	};
 
 	return (
@@ -130,7 +135,7 @@ const Day = () => {
 
 				<div className="day-header">
 					<h1 className="day-weekday">{WeekDay[getDay(Number(day), Number(month), Number(year))]}</h1>
-					<h1>{`${Number(month) + 1}/${day}/${year}`}</h1>
+					<h1>{`${Number(month)+1}/${day}/${year}`}</h1>
 				</div>
 				<button className="day-control-button" onClick={handleNextDayClick}>
 					{">"}

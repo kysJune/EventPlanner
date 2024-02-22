@@ -1,0 +1,60 @@
+.results-container{
+    height: 80%;
+    width: 95%;
+   margin-left: 2.5%;
+}
+
+
+.results-container > div:nth-of-type(odd) {
+    background-color: transparent;
+}
+
+.results-container >div:nth-of-type(even) {
+    background-color: darkslategray;
+}
+
+h1{
+    margin-left: 2.5%;
+}
+.SearchEvent{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border: solid grey 1px;
+}
+
+div.SearchEvent:hover{
+    background-color: black;
+}
+
+ul{
+    list-style-type: none;
+    padding: 0;
+}
+
+.date-container h2{
+    font-size: 30px;
+    font-weight:bolder;
+}
+
+.date-container{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    width: 18%;
+    flex-wrap: wrap;
+}
+
+.duration-container{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    width: 18%;
+    flex-wrap: wrap;
+}
+
+.event-title{
+    margin-right: 50%;
+}

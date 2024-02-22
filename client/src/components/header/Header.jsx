@@ -45,9 +45,9 @@ const Header = () => {
 
 	return (
 		<header className="HeaderHeader">
-			<a className="titleContainer" href="/">
-				<h1 className="title">Event Planner</h1>
-			</a>
+			{/* <a className="titleContainer" href="/"> */}
+				<img  className="site-logo" src="/images/logo.png" onClick={() => navigate("/")}/>
+			{/* </a> */}
 
 			{cookies.get("isLoggedIn") ? (
 				<div className="loggedInUser">
