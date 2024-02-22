@@ -1,6 +1,7 @@
 import Weather from "./components/weather/Weather";
 import { Login } from "./components/login/Login";
 import { Register } from "./components/register/Register";
+import SearchResults from "./components/searchResults/SearchResults.jsx";
 import { Route, Routes, BrowserRouter } from "react-router-dom";
 import "./App.css";
 import Cookies from "universal-cookie";
@@ -19,6 +20,7 @@ function App() {
 					<Route path="/register" element={<Register />} />
 					<Route path="/Weather" element={<Weather />} />
 					<Route path="/Month" element={<Month />} />
+					<Route path="/SearchResults" element={<SearchResults />} />
 					{/* <Route path="/Year" element={<Year />} /> */}
 					<Route path="/Day" element={<Day />} />
 					<Route path="/" element={<Login />} />

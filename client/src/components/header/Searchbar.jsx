@@ -93,6 +93,7 @@ const Searchbar = () => {
 			navigate("/Day", { state: { year: Number(year), month: Number(month) - 1, day: Number(day) } });
 		} else {
 			//search by event
+			navigate(`/searchResults?searchTerm=${searchTerm}`);
 		}
 
 		//TODO implement searching of events
