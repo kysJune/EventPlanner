@@ -49,13 +49,13 @@ const Day = () => {
 		};
 		setIsToday(isTodaysDate(Number(day), Number(month), Number(year)));
 		fetchEvents();
-	}, [refreshEvents]);
+	}, [refreshEvents, day, month, year]);
 
 	useEffect(() => {
 		setDay(location?.state?.day || getCurrentDay());
 		setMonth(location?.state?.month || getCurrentMonth());
 		setYear(location?.state?.year || getCurrentYear());
-	}, [location]);
+	}, [location?.state?.day, location?.state?.month, location?.state?.year]);
 
 	const handleCreateEvent = async () => {
 		if (!isValidEvent(newEventName, newEventStartTime, newEventEndTime)) return;
@@ -135,7 +135,7 @@ const Day = () => {
 
 				<div className="day-header">
 					<h1 className="day-weekday">{WeekDay[getDay(Number(day), Number(month), Number(year))]}</h1>
-					<h1>{`${Number(month) + 1}/${day}/${year}`}</h1>
+					<h1>{`${Number(month)+1}/${day}/${year}`}</h1>
 				</div>
 				<button className="day-control-button" onClick={handleNextDayClick}>
 					{">"}

@@ -89,15 +89,12 @@ const Searchbar = () => {
 	const handleSubmit = async () => {
 		if (isSearchByDate) {
 			const { year, month, day } = getDateFromSearch(searchTerm);
-			console.log({ year: Number(year), month: Number(month) - 1, day: Number(day) });
 			navigate("/Day", { state: { year: Number(year), month: Number(month) - 1, day: Number(day) } });
 		} else {
 			//search by event
 			navigate(`/searchResults?searchTerm=${searchTerm}`);
 		}
 
-		//TODO implement searching of events
-		console.log("Search Term:", searchTerm);
 	};
 
 	return (
@@ -111,7 +108,7 @@ const Searchbar = () => {
 					type="text"
 					value={searchTerm}
 					onChange={handleSearchChange}
-					placeholder="Enter a Date or Event"
+					placeholder={`Enter a ${isSearchByDate ? null : "Event"}`}
 				/>
 			) : (
 				<input type="date" value={searchTerm} onChange={handleSearchChange} />
