@@ -55,7 +55,9 @@ const Header = () => {
 						<Searchbar />
 					</div>
 					<div className="header-right">
-						<p className="username">{cookies.get("username")} </p>
+						<p className="username" id="username">
+							{cookies.get("username").toUpperCase()}{" "}
+						</p>
 						<div className="buttons">
 							<button className="button" onClick={navWeather}>
 								Weather
