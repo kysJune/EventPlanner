@@ -30,8 +30,7 @@ const MiniDay = ({ events, day, month, year, weekDay, monthStatus }) => {
 					if (index < 3) return <MiniEvent event={e} key={index} />;
 					else if (index === 3) {
 						return <p className="ellipses-p">...</p>;
-					}
-					else {
+					} else {
 						return null;
 					}
 				})}
