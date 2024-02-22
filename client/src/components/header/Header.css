@@ -13,6 +13,11 @@
 	width: 10%;
 }
 
+.site-logo{
+	height: inherit;
+	width: 40px;
+}
+
 .title {
 	margin: 10px;
 	font-size: 18px;
