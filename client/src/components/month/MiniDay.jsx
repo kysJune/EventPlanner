@@ -27,7 +27,12 @@ const MiniDay = ({ events, day, month, year, weekDay, monthStatus }) => {
 
 			<div className="mini-event-container">
 				{events.map((e, index) => {
-					return <MiniEvent event={e} key={index} />;
+					if (index < 3) return <MiniEvent event={e} key={index} />;
+					else if (index === 3) {
+						return <p className="ellipses-p">...</p>;
+					} else {
+						return null;
+					}
 				})}
 			</div>
 		</div>

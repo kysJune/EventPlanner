@@ -15,7 +15,7 @@ const Day = () => {
 	const location = useLocation();
 	const [events, setEvents] = useState([]);
 	const [day, setDay] = useState(location?.state?.day || getCurrentDay());
-	const [month, setMonth] = useState(location?.state?.month || getCurrentMonth);
+	const [month, setMonth] = useState(location?.state?.month || getCurrentMonth());
 	const [year, setYear] = useState(location?.state?.year || getCurrentYear());
 	const [modalIsOpen, setModalIsOpen] = useState(false);
 	const [newEventName, setNewEventName] = useState("");
@@ -47,6 +47,12 @@ const Day = () => {
 		setIsToday(isTodaysDate(Number(day), Number(month), Number(year)));
 		fetchEvents();
 	}, [refreshEvents]);
+
+	useEffect(() => {
+		setDay(location?.state?.day || getCurrentDay());
+		setMonth(location?.state?.month || getCurrentMonth());
+		setYear(location?.state?.year || getCurrentYear());
+	}, [location]);
 
 	const handleCreateEvent = async () => {
 		if (!isValidEvent(newEventName, newEventStartTime, newEventEndTime)) return;

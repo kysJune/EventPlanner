@@ -36,6 +36,10 @@
 	overflow: hidden;
 }
 
+.MiniDay .ellipses-p {
+	margin: 0 0 20px 20px;
+	font-size: 35px;
+}
 .MiniDay.prev {
 	background-color: gray;
 }

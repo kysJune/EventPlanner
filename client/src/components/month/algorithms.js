@@ -34,7 +34,7 @@ const populateMonth = async (month, year) => {
 		prevEvents = response.data.userEvents;
 		status = response.status;
 	} catch (error) {
-		throw error;
+		console.error(error);
 	}
 
 	if (status !== 200 && status !== 204) {
@@ -71,7 +71,7 @@ const populateMonth = async (month, year) => {
 		curEvents = response.data.userEvents;
 		status = response.status;
 	} catch (error) {
-		throw error;
+		console.error(error);
 	}
 
 	if (status !== 200 && status !== 204) {
@@ -116,7 +116,7 @@ const populateMonth = async (month, year) => {
 		nextEvents = response.data.userEvents;
 		status = response.status;
 	} catch (error) {
-		throw error;
+		console.error( error);
 	}
 
 	if (status !== 200 && status !== 204) {
