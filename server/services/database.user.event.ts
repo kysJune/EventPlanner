@@ -41,7 +41,25 @@ export class DatabaseUserEvent {
 		).sort({ start: 1, end: 1 });
 
 		if (events.length > 0) {
-			console.info("Events found");
+			return events;
+		} else {
+			return undefined;
+		}
+	}
+
+	/**
+	 * 
+	 * @param searchTerm 
+	 * @param id 
+	 * @returns a list of events that match the search term and the user id (in mysql would be: WHERE name LIKE %searchTerm%)
+	 */
+	static async searchEventsByName(searchTerm: string, id: string): Promise<UserEventResponse[] | undefined> {
+		const events: UserEventResponse[] = await UserEventModel.find(
+			//regex matches any string that contains the search term and the i option makes it case insensitive
+			{ name: { $regex: searchTerm, $options: "i" },  userid: new mongoose.Types.ObjectId(id)  }
+		).sort({ start: 1, end: 1 });
+
+		if (events.length > 0) {
 			return events;
 		} else {
 			return undefined;
