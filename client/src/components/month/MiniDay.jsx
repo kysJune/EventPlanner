@@ -16,11 +16,6 @@ const MiniDay = ({ events, day, month, year, weekDay, monthStatus }) => {
 		navigate("/Day", { state: { day, month, year } });
 	};
 
-	useEffect(() => {
-		//if there are more than 3 events, then truncate to three and set ellipsis
-	})
-
-
 	return (
 		<div className={`MiniDay ${monthStatus}`}>
 			<div className="mini-day-header">
@@ -33,8 +28,8 @@ const MiniDay = ({ events, day, month, year, weekDay, monthStatus }) => {
 			<div className="mini-event-container">
 				{events.map((e, index) => {
 					if (index < 3) return <MiniEvent event={e} key={index} />;
-					else if (index === 4) {
-						return <p>...</p>;
+					else if (index === 3) {
+						return <p className="ellipses-p">...</p>;
 					}
 					else {
 						return null;
