@@ -14,7 +14,8 @@
 	background-color: transparent;
 	border: none;
 	color: white;
-	font-size: 30px;
+	font-size: 35px;
+	font-weight: bold;
 }
 
 .month-control-button:hover {
@@ -65,11 +66,11 @@
 .MiniEvent {
 	width: 90%;
 	background: lightblue;
-	border-radius: 10px;
+	border-radius: 5px;
 	margin-left: 4px;
 }
 
 .MiniEvent p {
 	color: black;
-	margin-left: 4px;
+	margin-left: 8px;
 }
