@@ -116,7 +116,7 @@ const populateMonth = async (month, year) => {
 		nextEvents = response.data.userEvents;
 		status = response.status;
 	} catch (error) {
-		console.error( error);
+		console.error(error);
 	}
 
 	if (status !== 200 && status !== 204) {
