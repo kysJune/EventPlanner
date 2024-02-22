@@ -16,9 +16,19 @@ userEventRouter.post("/create", authMiddleware, create, errorHandlerMiddleware);
 
 userEventRouter.get("/:id/read", authMiddleware, read, errorHandlerMiddleware);
 
-userEventRouter.post("/search", authMiddleware, searchEventsByName, errorHandlerMiddleware);
+userEventRouter.post(
+	"/search",
+	authMiddleware,
+	searchEventsByName,
+	errorHandlerMiddleware
+);
 
-userEventRouter.post("/list", authMiddleware, listEvents, errorHandlerMiddleware);
+userEventRouter.post(
+	"/list",
+	authMiddleware,
+	listEvents,
+	errorHandlerMiddleware
+);
 
 userEventRouter.put(
 	"/:id/update",

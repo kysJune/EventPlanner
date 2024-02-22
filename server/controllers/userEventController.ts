@@ -111,12 +111,16 @@ export const listEvents = async (
 	});
 };
 
-export const searchEventsByName = async (req: Request, res: Response, next: NextFunction) => {
+export const searchEventsByName = async (
+	req: Request,
+	res: Response,
+	next: NextFunction
+) => {
 	const searchTerm: string | undefined = req.body.searchTerm;
-	if(req.session.userid === undefined) {
+	if (req.session.userid === undefined) {
 		return next(new UnauthorizedError("User not logged in"));
 	}
-	
+
 	const userid: string = req.session.userid;
 	if (!searchTerm) {
 		return next(new BadRequestError("Invalid search term"));
@@ -142,8 +146,7 @@ export const searchEventsByName = async (req: Request, res: Response, next: Next
 		userEvents,
 		message
 	});
-
-}
+};
 
 export const update = async (
 	req: Request,
