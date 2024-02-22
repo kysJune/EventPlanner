@@ -67,7 +67,7 @@ const SearchEvent = ({ event }) => {
 	return (
 		<div className="SearchEvent" onClick={handleClick}>
 			<h2>{event.name}</h2>
-			<p>{`${event.month}/${event.day}/${event.year}`}</p>
+			<p>{`${Number(event.month) + 1}/${event.day}/${event.year}`}</p>
 		</div>
 	);
 };

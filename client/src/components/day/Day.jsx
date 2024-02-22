@@ -38,7 +38,10 @@ const Day = () => {
 					},
 					{ withCredentials: true }
 				);
-				if (response.data.userEvents === undefined || response.status === 204) return;
+				if (response.data.userEvents === undefined || response.status === 204){
+					setEvents([]);
+					return;
+				}
 				setEvents([...response.data.userEvents]);
 			} catch (error) {
 				console.error(error);
@@ -107,6 +110,7 @@ const Day = () => {
 		} else {
 			setDay(Number(day) - 1);
 		}
+		setRefreshEvents(!refreshEvents);
 	};
 	const handleNextDayClick = () => {
 		if (Number(day) === numDaysInMonth(Number(year), Number(month))) {
@@ -118,6 +122,7 @@ const Day = () => {
 		} else {
 			setDay(Number(day) + 1);
 		}
+		setRefreshEvents(!refreshEvents);
 	};
 
 	return (
