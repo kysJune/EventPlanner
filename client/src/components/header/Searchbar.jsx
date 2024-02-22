@@ -1,6 +1,8 @@
 import React, { Component } from "react";
+import "./Header.css";
+import "@fortawesome/fontawesome-free/css/all.css";
 
-class SearchBar extends Component {
+class Searchbar extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -22,19 +24,19 @@ class SearchBar extends Component {
 
 	render() {
 		return (
-			<form className="searchbar" onSubmit={this.handleSubmit}>
+			<form className="Searchbar" onSubmit={this.handleSubmit}>
 				<input
 					type="text"
 					value={this.state.searchTerm}
 					onChange={this.handleChange}
 					placeholder="Enter a Date or Event"
 				/>
-				<button className="button" onClick="handleSubmit">
-					GO!
+				<button className="search-button" onClick="handleSubmit">
+					<i className="fa fa-search" aria-hidden="true"></i>
 				</button>
 			</form>
 		);
 	}
 }
 
-export default SearchBar;
+export default Searchbar;

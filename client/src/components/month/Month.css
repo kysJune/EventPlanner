@@ -6,11 +6,16 @@
 	overflow: auto;
 }
 
+.month-title {
+	color: white;
+}
+
 .month-control-button {
 	background-color: transparent;
 	border: none;
 	color: white;
-	font-size: 30px;
+	font-size: 35px;
+	font-weight: bold;
 }
 
 .month-control-button:hover {
@@ -32,16 +37,15 @@
 }
 
 .MiniDay.prev {
-	background-color: grey;
+	background-color: gray;
 }
 
 .MiniDay.next {
-	background-color: grey;
-	opacity: 0.5;
+	background-color: gray;
 }
 
 .MiniDay.today {
-	background-color: navy;
+	background-color: #535bf2;
 }
 
 .mini-day-header {
@@ -56,19 +60,17 @@
 }
 
 .mini-button {
-	/* margin-left: 4px;
-	margin-top: 4px; */
 	background-color: transparent;
 }
 
 .MiniEvent {
 	width: 90%;
 	background: lightblue;
-	border-radius: 10px;
+	border-radius: 5px;
 	margin-left: 4px;
 }
 
 .MiniEvent p {
 	color: black;
-	margin-left: 4px;
+	margin-left: 8px;
 }

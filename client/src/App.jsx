@@ -1,9 +1,7 @@
 import Weather from "./components/weather/Weather";
 import { Login } from "./components/login/Login";
-import Home from "./components/home/Home";
 import { Register } from "./components/register/Register";
 import { Route, Routes, BrowserRouter } from "react-router-dom";
-// import Year from "./components/year/Year";
 import "./App.css";
 import Cookies from "universal-cookie";
 

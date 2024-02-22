@@ -4,10 +4,12 @@ import { useNavigate } from "react-router-dom";
 import { cookies } from "../../App.jsx";
 import { removeCookies } from "./algorithms/algorithms.js";
 import axios from "axios";
-import Clock from "./algorithms/clock.jsx";
-import SearchBar from "./algorithms/searchbar.jsx";
+import Searchbar from "./Searchbar.jsx";
+import { StatusCodes } from "http-status-codes";
 
-const Header = ({ isLoggedIn }) => {
+const Header = () => {
+	const API_BASE_URL = import.meta.env.VITE_BACKEND_URL;
+
 	const navigate = useNavigate();
 
 	const handleLogin = () => {
@@ -20,9 +22,6 @@ const Header = ({ isLoggedIn }) => {
 	const navWeather = () => {
 		navigate("/weather");
 	};
-	const navAbout = () => {
-		navigate("/about");
-	};
 	const navYear = () => {
 		navigate("/year");
 	};
@@ -34,51 +33,50 @@ const Header = ({ isLoggedIn }) => {
 	};
 	const handleLogout = async () => {
 		try {
-			const result = await axios.post(
-				`${import.meta.env.VITE_BACKEND_URL}/user/logout`,
-				{},
-				{ withCredentials: true }
-			);
-			if (result.status === 200) {
+			const result = await axios.post(`${API_BASE_URL}/user/logout`, {}, { withCredentials: true });
+			if (result.status === StatusCodes.OK) {
 				removeCookies();
 				navigate("/");
 			}
 		} catch (error) {
 			console.error(error);
-			return;
 		}
 	};
 
 	return (
-		<header className="header">
+		<header className="HeaderHeader">
 			<a className="titleContainer" href="/">
-				<Clock className="clock" />
-				<h1 className="title">Event Planner </h1>
+				<h1 className="title">Event Planner</h1>
 			</a>
 
 			{cookies.get("isLoggedIn") ? (
 				<div className="loggedInUser">
-					<SearchBar />
-					<p className="username"> {cookies.get("username")} </p>
+					<div className="searchBarContainer">
+						<Searchbar />
+					</div>
+					<div className="header-right">
+						<p className="username" id="username">
+							{cookies.get("username").toUpperCase()}{" "}
+						</p>
+						<div className="buttons">
+							<button className="button" onClick={navWeather}>
+								Weather
+							</button>
+							<button className="button" onClick={navYear}>
+								Year
+							</button>
+							<button className="button" onClick={navMonth}>
+								Month
+							</button>
+							<button className="button" onClick={navDay}>
+								Day
+							</button>
+							<button className="button" onClick={handleLogout}>
+								Logout
+							</button>
+						</div>
+					</div>
 					{/*TODO change the button to instead show the current weather icon based on the users cookie's location value  */}
-					<button className="button" onClick={navWeather}>
-						Weather
-					</button>
-					<button className="button" onClick={navYear}>
-						Year
-					</button>
-					<button className="button" onClick={navMonth}>
-						Month
-					</button>
-					<button className="button" onClick={navDay}>
-						Day
-					</button>
-					<button className="button" onClick={navAbout}>
-						About
-					</button>
-					<button className="button" onClick={handleLogout}>
-						Logout
-					</button>
 				</div>
 			) : (
 				<nav className="loggedOutUser">
