@@ -63,7 +63,7 @@ export class DatabaseUserEvent {
 				name: { $regex: searchTerm, $options: "i" },
 				userid: new mongoose.Types.ObjectId(id)
 			}
-		).sort({ start: 1, end: 1 });
+		).sort({ year: 1, month: 1, day:1, start: 1, end: 1 });
 
 		if (events.length > 0) {
 			return events;
