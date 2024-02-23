@@ -22,10 +22,7 @@ const SearchResults = () => {
 		const fetchEvents = async () => {
 			setSearchTerm(queryParameters.get("searchTerm") || "");
 			try {
-				const response = await customAxios.post(
-					`/event/search`,
-					{ searchTerm }
-				);
+				const response = await customAxios.post(`/event/search`, { searchTerm });
 				if (response.status === 204) {
 					setEvents([]);
 					return;

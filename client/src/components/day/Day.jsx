@@ -28,13 +28,11 @@ const Day = () => {
 	useEffect(() => {
 		const fetchEvents = async () => {
 			try {
-				const response = await customAxios.post(`/event/list`,
-					{
-						day: Number(day),
-						month: Number(month),
-						year: Number(year)
-					}
-				);
+				const response = await customAxios.post(`/event/list`, {
+					day: Number(day),
+					month: Number(month),
+					year: Number(year)
+				});
 				if (response.data.userEvents === undefined || response.status === 204) {
 					setEvents([]);
 					return;
@@ -153,7 +151,16 @@ const Day = () => {
 												const end = event.end; //2130
 												const startHour = Math.floor(start / 100) * 100;
 												if (startHour === i * 100) {
-													return <DayEvent setRefreshEvents={setRefreshEvents} refreshEvents={refreshEvents} event={event} start={start} end={end} key={index} />;
+													return (
+														<DayEvent
+															setRefreshEvents={setRefreshEvents}
+															refreshEvents={refreshEvents}
+															event={event}
+															start={start}
+															end={end}
+															key={index}
+														/>
+													);
 												}
 											})
 									}
@@ -232,12 +239,9 @@ const Day = () => {
 const DayEvent = ({ event, start, end, setRefreshEvents, refreshEvents }) => {
 	const [showDescription, setShowDescription] = useState(false);
 
-	
 	const handleDeleteEvent = async (eventId) => {
 		try {
-			const response = await customAxios.delete(
-				`/event/${eventId}/delete`
-			);
+			const response = await customAxios.delete(`/event/${eventId}/delete`);
 
 			if (response.status !== StatusCodes.NO_CONTENT) {
 				console.error("PANIC : Failed to delete");

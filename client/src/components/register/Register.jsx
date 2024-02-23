@@ -30,13 +30,10 @@ export const Register = ({}) => {
 				alert("Passwords do not match");
 				return;
 			}
-			const response = await customAxios.post(
-				`/user/register`,
-				{
-					username,
-					password
-				}
-			);
+			const response = await customAxios.post(`/user/register`, {
+				username,
+				password
+			});
 			if (response.status !== 200) {
 				console.error("register failed");
 				alert(response.data.message);
