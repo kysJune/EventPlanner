@@ -5,72 +5,6 @@ import "./Header.css";
 import "@fortawesome/fontawesome-free/css/all.css";
 import { getDateFromSearch } from "./algorithms/algorithms";
 
-// class Searchbar extends Component {
-// 	constructor(props) {
-// 		super(props);
-// 		this.state = {
-// 			searchTerm: "",
-// 			isSearchByDate: false
-// 		};
-// 		navigate = useNavigate();
-// 	}
-
-// 	handleSearchChange = (event) => {
-// 		this.setState({
-// 			searchTerm: event.target.value
-// 		});
-// 	};
-// 	handleSearchCriteriaChange = (event) => {
-// 		this.setState({
-// 			isSearchByDate: event.target.value === "date",
-// 			searchTerm: ""
-// 		});
-// 	};
-
-// 	handleSubmit = async () => {
-// 		if(this.state.isSearchByDate){
-
-// 			navigate("/Day", {state: {day: this.state.searchTerm}});
-// 		}
-// 		else {
-// 			//search by event
-// 		}
-
-// 		//TODO implement searching of events
-// 		console.log("Search Term:", this.state.searchTerm);
-// 	};
-
-// 	render() {
-// 		return (
-// 			<div className="Searchbar" onSubmit={this.handleSubmit}>
-// 				<select
-// 					name="searchCriteria"
-// 					id="searchCriteria"
-// 					onChange={this.handleSearchCriteriaChange}
-// 					>
-// 					<option value="event">Event</option>
-// 					<option value="date">Date</option>
-// 				</select>
-// 				{
-// 				!this.state.isSearchByDate ?  <input
-// 					type="text"
-// 					value={this.state.searchTerm}
-// 					onChange={this.handleSearchChange}
-// 					placeholder="Enter a Date or Event"
-// 				/>
-// 				: <input
-// 					type="date"
-// 					value={this.state.searchTerm}
-// 					onChange={this.handleSearchChange}
-// 					/>
-// 				}
-// 				<button className="search-button" onClick="handleSubmit">
-// 					<i className="fa fa-search" aria-hidden="true"></i>
-// 				</button>
-// 			</div>
-// 		);
-// 	}
-// }
 
 const Searchbar = () => {
 	const navigate = useNavigate();
@@ -89,7 +23,7 @@ const Searchbar = () => {
 	const handleSubmit = async () => {
 		if (isSearchByDate) {
 			const { year, month, day } = getDateFromSearch(searchTerm);
-			navigate("/Day", { state: { year: Number(year), month: Number(month) - 1, day: Number(day) } });
+			navigate("/Day", { state: { year: Number(year), month: (Number(month)-1), day: Number(day) } });
 		} else {
 			//search by event
 			navigate(`/searchResults?searchTerm=${searchTerm}`);
