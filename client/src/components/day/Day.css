@@ -160,23 +160,22 @@ textarea {
 	background-color: #9dd8e7;
 }
 
-
-.description-button{
+.description-button {
 	background-color: transparent;
 	border: none;
 	font-size: 10px;
 	color: black;
 }
 
-.description-button:hover{
+.description-button:hover {
 	cursor: pointer;
 	color: blue;
 }
 
-.description-button:focus{
+.description-button:focus {
 	outline: none;
 }
 
-.event-description{
+.event-description {
 	color: black;
 }

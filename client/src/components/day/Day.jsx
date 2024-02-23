@@ -171,9 +171,7 @@ const Day = () => {
 												const end = event.end; //2130
 												const startHour = Math.floor(start / 100) * 100;
 												if (startHour === i * 100) {
-													return (
-														<DayEvent event={event} start={start} end={end} key={index}/>
-													);
+													return <DayEvent event={event} start={start} end={end} key={index} />;
 												}
 											})
 									}
@@ -236,7 +234,7 @@ const Day = () => {
 
 					<div className="modal-control">
 						<label htmlFor="new-event-description">Description</label>
-						<textarea required onChange={e => setNewEventDescription(e.target.value)}></textarea>
+						<textarea required onChange={(e) => setNewEventDescription(e.target.value)}></textarea>
 					</div>
 
 					<button className="modal-button create-event-button" onClick={handleCreateEvent}>
@@ -249,9 +247,7 @@ const Day = () => {
 	);
 };
 
-
-
-const DayEvent = ({event, start, end}) => {
+const DayEvent = ({ event, start, end }) => {
 	const [showDescription, setShowDescription] = useState(false);
 
 	return (
@@ -263,10 +259,19 @@ const DayEvent = ({event, start, end}) => {
 				</button>
 			</div>
 			<p className="event-duration">{`from ${convert24HourToString(start)} to ${convert24HourToString(end)}`}</p>
-			{event?.description && <button className="description-button" onClick={() => {setShowDescription(!showDescription)}}>{showDescription? "hide" : "show more"}</button>}
+			{event?.description && (
+				<button
+					className="description-button"
+					onClick={() => {
+						setShowDescription(!showDescription);
+					}}
+				>
+					{showDescription ? "hide" : "show more"}
+				</button>
+			)}
 			{showDescription && <p className="event-description">{event.description}</p>}
 		</div>
-	)
-}
+	);
+};
 
 export default Day;

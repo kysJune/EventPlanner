@@ -7,16 +7,17 @@ export const isValidUserEventRequest = (
 	data: unknown
 ): data is UserEventRequest => {
 	return (
-		typeof data === "object" &&
-		data !== null &&
-		(data as any).userid instanceof mongoose.Types.ObjectId &&
-		typeof (data as any).name === "string" &&
-		typeof (data as any).day === "number" &&
-		typeof (data as any).month === "number" &&
-		typeof (data as any).year === "number" &&
-		typeof (data as any).start === "number" &&
-		typeof (data as any).end === "number" &&
-		typeof (data as any).description === "string" || typeof (data as any).description === "undefined"
+		(typeof data === "object" &&
+			data !== null &&
+			(data as any).userid instanceof mongoose.Types.ObjectId &&
+			typeof (data as any).name === "string" &&
+			typeof (data as any).day === "number" &&
+			typeof (data as any).month === "number" &&
+			typeof (data as any).year === "number" &&
+			typeof (data as any).start === "number" &&
+			typeof (data as any).end === "number" &&
+			typeof (data as any).description === "string") ||
+		typeof (data as any).description === "undefined"
 	);
 };
 
