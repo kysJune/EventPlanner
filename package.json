@@ -16,5 +16,8 @@
   "license": "ISC",
   "dependencies": {
     "concurrently": "^8.2.2"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^7.0.2"
   }
 }
