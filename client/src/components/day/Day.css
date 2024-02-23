@@ -1,7 +1,12 @@
 .day {
 	height: 100%;
+	width: 100%;
 	overflow: auto;
-	margin-left: 10px;
+	box-sizing: border-box;
+}
+
+.day-container{
+	padding: 0 10px 0 10px;
 }
 
 .day-weekday {
@@ -11,8 +16,9 @@
 .day-header {
 	display: flex;
 	justify-content: space-between;
-	width: 30%;
+	width: 25%;
 	align-items: center;
+	color: white;
 }
 
 .hour {
@@ -78,6 +84,14 @@
 	align-items: center;
 	margin-top: 10px;
 	height: 100%;
+}
+
+.day-control-button{
+	background-color: transparent;
+	border: none;
+	color: white;
+	font-size: 35px;
+	font-weight: bold;
 }
 
 .modal-header button {
