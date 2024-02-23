@@ -15,7 +15,8 @@ export const isValidUserEventRequest = (
 		typeof (data as any).month === "number" &&
 		typeof (data as any).year === "number" &&
 		typeof (data as any).start === "number" &&
-		typeof (data as any).end === "number"
+		typeof (data as any).end === "number" &&
+		typeof (data as any).description === "string" || typeof (data as any).description === "undefined"
 	);
 };
 

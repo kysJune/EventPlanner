@@ -8,4 +8,5 @@ export interface EventResponse {
 	year: number;
 	start: number;
 	end: number;
+	description: string;
 }
