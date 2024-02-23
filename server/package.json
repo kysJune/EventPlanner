@@ -8,9 +8,10 @@
 		"test": "jest",
 		"start": "npm run build && node ./dist/app.js",
 		"dev": "nodemon --exec npx ts-node app.ts",
-		"lint": "npx eslint .",
-		"lint:fix": "npx eslint . --fix",
+		"lint:check": "npx eslint .",
+		"lint": "npx eslint . --fix",
 		"format": "npx prettier . --write",
+		"format:check": "npx prettier . --check",
 		"insert:holidays": "ts-node scripts/insertNationalHolidays.ts",
 		"delete:holidays": "ts-node scripts/deleteNationalHolidays.ts"
 	},
