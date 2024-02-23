@@ -1,6 +1,8 @@
 name: Github workflow Formatter
 on:
-  push
+  pull_request:
+    branches:
+      - main
 
 jobs:
   lint-and-format:

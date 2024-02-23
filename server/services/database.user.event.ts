@@ -21,7 +21,8 @@ export class DatabaseUserEvent {
 		const event: UserEventResponse | null = await UserEventModel.findById({
 			_id: id
 		});
-		if (event) {console.info("Event found");
+		if (event) {
+			console.info("Event found");
 			return event;
 		} else {
 			console.info("Event not found");
