@@ -44,8 +44,9 @@ const Weather = () => {
 			<div className="city-input">
 				<label htmlFor="city">City</label>
 				<input type="text" name="city" id="city" value={city} onChange={handleCityChange} />
+				<button onClick={getWeather}>Get Weather</button>
 			</div>
-			<button onClick={getWeather}>Get Weather</button>
+			
 			{showWeather && (
 				<div className="weather-info">
 					<h2>{`Current Weather in ${cityName}`}</h2>

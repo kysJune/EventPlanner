@@ -1,26 +1,40 @@
 .weather {
-	height: 50vh;
-	width: 100%;
+	height: 250px;
+	width: 60%;
+	display: flex;
+	flex-direction: row;
+	align-items:start;
+	padding-left: 20px;
+	padding-top: 20px;
+	background-color: transparent;
+	color: white;
+	border: 1px solid grey;
+	margin: auto;
+	margin-bottom: 15px;
+
+}
+.city-input {
+	height: 80%;
+	width: 80%;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	padding-top: 20px;
-	background-color: darkblue;
-	color: white;
-	border: 3px solid black;
-	box-shadow: inset 0px 0px 5px 5px yellow;
-}
-.city-input {
-	display: flex;
-	width: 80%;
+	width: fit-content;
+	padding: 10px;
 	justify-content: space-evenly;
+	background-color: transparent;
+	color: white;
 }
 
 .weather-info {
 	display: flex;
+	height: 100%;
 	width: 80%;
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	margin-top: 20px;
+}
+.weather-info img {
+	height: 85px;
+	width: 85px;
 }
