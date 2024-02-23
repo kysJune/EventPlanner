@@ -25,7 +25,6 @@ const Day = () => {
 	const [isToday, setIsToday] = useState(false);
 
 	useEffect(() => {
-		//check if the day is today
 
 		const fetchEvents = async () => {
 			try {
@@ -57,6 +56,12 @@ const Day = () => {
 		setYear(location?.state?.year || getCurrentYear());
 	}, [location?.state?.day, location?.state?.month, location?.state?.year]);
 
+	const clearModalFields = () => {
+		setNewEventName("");
+		setNewEventStartTime("");
+		setNewEventEndTime("");
+	}
+
 	const handleCreateEvent = async () => {
 		if (!isValidEvent(newEventName, newEventStartTime, newEventEndTime)) return;
 		try {
@@ -76,6 +81,7 @@ const Day = () => {
 			if (response.status === 201) {
 				setEvents([...events, response.data]);
 				setModalIsOpen(false);
+				clearModalFields();
 				setRefreshEvents(!refreshEvents);
 			}
 		} catch (error) {
@@ -128,13 +134,14 @@ const Day = () => {
 	return (
 		<div className="day">
 			<Header />
+			<div className="day-container">	
 			<header>
 				<button className="day-control-button" onClick={handlePrevDayClick}>
 					{"<"}
 				</button>
 
 				<div className="day-header">
-					<h1 className="day-weekday">{WeekDay[getDay(Number(day), Number(month), Number(year))]}</h1>
+					<h1 className="day-weekday">{WeekDay[getDay(Number(day), Number(month), Number(year))].toUpperCase()}</h1>
 					<h1>{`${Number(month)+1}/${day}/${year}`}</h1>
 				</div>
 				<button className="day-control-button" onClick={handleNextDayClick}>
@@ -179,7 +186,7 @@ const Day = () => {
 					);
 				})
 			}
-
+			</div>
 			{/* ----------------------------------------MODAL---------------------------------------- */}
 			<Modal isOpen={modalIsOpen} contentLabel="Create an Event Modal" className="Modal">
 				<header className="modal-header">
@@ -196,6 +203,7 @@ const Day = () => {
 						className="modal-button"
 						onClick={() => {
 							setModalIsOpen(false);
+							clearModalFields();
 						}}
 					>
 						X
