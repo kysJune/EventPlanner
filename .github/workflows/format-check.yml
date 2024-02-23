@@ -1,6 +1,8 @@
 name: Github workflow Formatter
 on:
-  push
+  pull_request:
+    branches:
+      - main
 
 jobs:
   lint-and-format:
@@ -15,8 +17,11 @@ jobs:
         with:
           node-version: 18
 
-      - name: Install dependencies
-        run: npm install
+      - name: Install client dependencies
+        run: (cd client && npm install)
+
+      - name: Install server dependencies
+        run: (cd server && npm install)
 
       - name: Run linter check
         run: npm run lint:check
