@@ -21,6 +21,7 @@ const Day = () => {
 	const [newEventName, setNewEventName] = useState("");
 	const [newEventStartTime, setNewEventStartTime] = useState("");
 	const [newEventEndTime, setNewEventEndTime] = useState("");
+	const [newEventDescription, setNewEventDescription] = useState("");
 	const [refreshEvents, setRefreshEvents] = useState(false);
 	const [isToday, setIsToday] = useState(false);
 
@@ -59,6 +60,7 @@ const Day = () => {
 		setNewEventName("");
 		setNewEventStartTime("");
 		setNewEventEndTime("");
+		setNewEventDescription("");
 	};
 
 	const handleCreateEvent = async () => {
@@ -72,7 +74,8 @@ const Day = () => {
 					end: get24HourTime(newEventEndTime),
 					day: Number(day),
 					month: Number(month),
-					year: Number(year)
+					year: Number(year),
+					description: newEventDescription
 				},
 				{ withCredentials: true }
 			);
@@ -168,17 +171,7 @@ const Day = () => {
 												const end = event.end; //2130
 												const startHour = Math.floor(start / 100) * 100;
 												if (startHour === i * 100) {
-													return (
-														<div key={index} className="event">
-															<div className="event-top">
-																<h3 className="event-name">{event.name}</h3>
-																<button className="delete-event" onClick={() => handleDeleteEvent(event._id)}>
-																	X
-																</button>
-															</div>
-															<p className="event-duration">{`from ${convert24HourToString(start)} to ${convert24HourToString(end)}`}</p>
-														</div>
-													);
+													return <DayEvent event={event} start={start} end={end} key={index} />;
 												}
 											})
 									}
@@ -241,7 +234,7 @@ const Day = () => {
 
 					<div className="modal-control">
 						<label htmlFor="new-event-description">Description</label>
-						<textarea required></textarea>
+						<textarea required onChange={(e) => setNewEventDescription(e.target.value)}></textarea>
 					</div>
 
 					<button className="modal-button create-event-button" onClick={handleCreateEvent}>
@@ -250,6 +243,33 @@ const Day = () => {
 				</div>
 			</Modal>
 			{/* ----------------------------------------MODAL---------------------------------------- */}
+		</div>
+	);
+};
+
+const DayEvent = ({ event, start, end }) => {
+	const [showDescription, setShowDescription] = useState(false);
+
+	return (
+		<div key={event._id} className="event">
+			<div className="event-top">
+				<h3 className="event-name">{event.name}</h3>
+				<button className="delete-event" onClick={() => handleDeleteEvent(event._id)}>
+					X
+				</button>
+			</div>
+			<p className="event-duration">{`from ${convert24HourToString(start)} to ${convert24HourToString(end)}`}</p>
+			{event?.description && (
+				<button
+					className="description-button"
+					onClick={() => {
+						setShowDescription(!showDescription);
+					}}
+				>
+					{showDescription ? "hide" : "show more"}
+				</button>
+			)}
+			{showDescription && <p className="event-description">{event.description}</p>}
 		</div>
 	);
 };

@@ -30,6 +30,10 @@ const eventSchema = new Schema<UserEventRequest & Document>({
 	end: {
 		type: Number,
 		required: true
+	},
+	description: {
+		type: String,
+		required: false
 	}
 });
 

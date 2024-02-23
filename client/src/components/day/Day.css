@@ -159,3 +159,23 @@ textarea {
 	border: 1px solid black;
 	background-color: #9dd8e7;
 }
+
+.description-button {
+	background-color: transparent;
+	border: none;
+	font-size: 10px;
+	color: black;
+}
+
+.description-button:hover {
+	cursor: pointer;
+	color: blue;
+}
+
+.description-button:focus {
+	outline: none;
+}
+
+.event-description {
+	color: black;
+}
