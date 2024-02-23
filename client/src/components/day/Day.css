@@ -5,7 +5,7 @@
 	box-sizing: border-box;
 }
 
-.day-container{
+.day-container {
 	padding: 0 10px 0 10px;
 }
 
@@ -86,7 +86,7 @@
 	height: 100%;
 }
 
-.day-control-button{
+.day-control-button {
 	background-color: transparent;
 	border: none;
 	color: white;

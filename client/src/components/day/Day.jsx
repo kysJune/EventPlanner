@@ -25,7 +25,6 @@ const Day = () => {
 	const [isToday, setIsToday] = useState(false);
 
 	useEffect(() => {
-
 		const fetchEvents = async () => {
 			try {
 				const response = await axios.post(
@@ -37,7 +36,7 @@ const Day = () => {
 					},
 					{ withCredentials: true }
 				);
-				if (response.data.userEvents === undefined || response.status === 204){
+				if (response.data.userEvents === undefined || response.status === 204) {
 					setEvents([]);
 					return;
 				}
@@ -60,7 +59,7 @@ const Day = () => {
 		setNewEventName("");
 		setNewEventStartTime("");
 		setNewEventEndTime("");
-	}
+	};
 
 	const handleCreateEvent = async () => {
 		if (!isValidEvent(newEventName, newEventStartTime, newEventEndTime)) return;
@@ -134,58 +133,60 @@ const Day = () => {
 	return (
 		<div className="day">
 			<Header />
-			<div className="day-container">	
-			<header>
-				<button className="day-control-button" onClick={handlePrevDayClick}>
-					{"<"}
-				</button>
+			<div className="day-container">
+				<header>
+					<button className="day-control-button" onClick={handlePrevDayClick}>
+						{"<"}
+					</button>
 
-				<div className="day-header">
-					<h1 className="day-weekday">{WeekDay[getDay(Number(day), Number(month), Number(year))].toUpperCase()}</h1>
-					<h1>{`${Number(month)+1}/${day}/${year}`}</h1>
-				</div>
-				<button className="day-control-button" onClick={handleNextDayClick}>
-					{">"}
-				</button>
-			</header>
-			{/* if it's the current day, show the current weather */}
-			{isToday && <Weather />}
-			<button onClick={() => setModalIsOpen(true)}>Create Event</button>
-			{
-				//put all the hours on the page
-				Array.from({ length: 24 }, (v, i) => {
-					return (
-						<>
-							<hr />
-							<div key={i} className="hour">
-								<p>{i > 11 ? `${i - 12 === 0 ? 12 : i - 12}:00 PM` : `${i === 0 ? 12 : i}:00 AM`}</p>
-								{
-									//put the events on the page
-									events &&
-										events.map((event, index) => {
-											const start = event.start; //2030
-											const end = event.end; //2130
-											const startHour = Math.floor(start / 100) * 100;
-											if (startHour === i * 100) {
-												return (
-													<div key={index} className="event">
-														<div className="event-top">
-															<h3 className="event-name">{event.name}</h3>
-															<button className="delete-event" onClick={() => handleDeleteEvent(event._id)}>
-																X
-															</button>
+					<div className="day-header">
+						<h1 className="day-weekday">
+							{WeekDay[getDay(Number(day), Number(month), Number(year))].toUpperCase()}
+						</h1>
+						<h1>{`${Number(month) + 1}/${day}/${year}`}</h1>
+					</div>
+					<button className="day-control-button" onClick={handleNextDayClick}>
+						{">"}
+					</button>
+				</header>
+				{/* if it's the current day, show the current weather */}
+				{isToday && <Weather />}
+				<button onClick={() => setModalIsOpen(true)}>Create Event</button>
+				{
+					//put all the hours on the page
+					Array.from({ length: 24 }, (v, i) => {
+						return (
+							<>
+								<hr />
+								<div key={i} className="hour">
+									<p>{i > 11 ? `${i - 12 === 0 ? 12 : i - 12}:00 PM` : `${i === 0 ? 12 : i}:00 AM`}</p>
+									{
+										//put the events on the page
+										events &&
+											events.map((event, index) => {
+												const start = event.start; //2030
+												const end = event.end; //2130
+												const startHour = Math.floor(start / 100) * 100;
+												if (startHour === i * 100) {
+													return (
+														<div key={index} className="event">
+															<div className="event-top">
+																<h3 className="event-name">{event.name}</h3>
+																<button className="delete-event" onClick={() => handleDeleteEvent(event._id)}>
+																	X
+																</button>
+															</div>
+															<p className="event-duration">{`from ${convert24HourToString(start)} to ${convert24HourToString(end)}`}</p>
 														</div>
-														<p className="event-duration">{`from ${convert24HourToString(start)} to ${convert24HourToString(end)}`}</p>
-													</div>
-												);
-											}
-										})
-								}
-							</div>
-						</>
-					);
-				})
-			}
+													);
+												}
+											})
+									}
+								</div>
+							</>
+						);
+					})
+				}
 			</div>
 			{/* ----------------------------------------MODAL---------------------------------------- */}
 			<Modal isOpen={modalIsOpen} contentLabel="Create an Event Modal" className="Modal">

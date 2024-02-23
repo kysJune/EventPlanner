@@ -14,14 +14,14 @@
 	width: 10%;
 }
 
-#site-logo{
+#site-logo {
 	height: 100%;
 	width: 12%;
 	margin-right: 20px;
 	border: solid 2px transparent;
 }
 
-#site-logo:hover{
+#site-logo:hover {
 	border: solid 2px black;
 }
 
@@ -73,7 +73,6 @@
 	border-radius: 0 5px 5px 0;
 	color: black;
 }
-
 
 .header-right {
 	display: flex;

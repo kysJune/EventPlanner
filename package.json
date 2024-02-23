@@ -6,7 +6,8 @@
   "scripts": {
     "test": "concurrently \"cd client && npm run test\"  \"cd server && npm run test\"",
     "dev": "concurrently \"cd client && npm run dev\"  \"cd server && npm run dev\"",
-    "format": "concurrently \"cd client && npm run format\"  \"cd server && npm run format\""
+    "format": "concurrently \"cd client && npm run format\"  \"cd server && npm run format\"",
+    "lint": "concurrently \"cd client && npm run lint\"  \"cd server && npm run lint\""
   },
   "keywords": [],
   "author": "",

@@ -4,14 +4,14 @@ import axios from "axios";
 import Header from "../header/Header";
 import "./SearchResults.css";
 import { Month } from "../../../../server/utils/CalculateWeekDay";
-import {getDayOfWeek} from "./algorithms";
+import { getDayOfWeek } from "./algorithms";
 
 const SearchResults = () => {
 	const [events, setEvents] = useState([]);
 	const [queryParameters] = useSearchParams();
 	const [searchTerm, setSearchTerm] = useState(queryParameters.get("searchTerm") || "");
 	const navigate = useNavigate();
-    const location = useLocation();
+	const location = useLocation();
 
 	useEffect(() => {
 		if (searchTerm.length === 0) {
@@ -20,7 +20,7 @@ const SearchResults = () => {
 		}
 
 		const fetchEvents = async () => {
-            setSearchTerm(queryParameters.get("searchTerm") || "");
+			setSearchTerm(queryParameters.get("searchTerm") || "");
 			try {
 				const response = await axios.post(
 					`${import.meta.env.VITE_BACKEND_URL}/event/search`,
@@ -48,17 +48,16 @@ const SearchResults = () => {
 		<div className="SearchResults">
 			<Header />
 			<h1>Search Results</h1>
-           
+
 			{events.length === 0 ? (
 				<p>No events found</p>
 			) : (
-                <div className="results-container">
-                        {events.map((event) => (
-                                <SearchEvent event={event} key={event._id} />
-                        ))}
-                </div>
+				<div className="results-container">
+					{events.map((event) => (
+						<SearchEvent event={event} key={event._id} />
+					))}
+				</div>
 			)}
-           
 		</div>
 	);
 };
@@ -72,10 +71,10 @@ const SearchEvent = ({ event }) => {
 	return (
 		<div className="SearchEvent" onClick={handleClick}>
 			<div className="date-container">
-             <h3 className="day-event">{Number(event.day)}</h3>
-             <p className="month-event">{`${Month[Number(event.month)]} ${Number(event.year)} ${getDayOfWeek(event.day, event.month, event.year)}`}</p>
-            </div>
-            <div className="duration-container"></div>
+				<h3 className="day-event">{Number(event.day)}</h3>
+				<p className="month-event">{`${Month[Number(event.month)]} ${Number(event.year)} ${getDayOfWeek(event.day, event.month, event.year)}`}</p>
+			</div>
+			<div className="duration-container"></div>
 			<p className="event-title">{event.name}</p>
 		</div>
 	);

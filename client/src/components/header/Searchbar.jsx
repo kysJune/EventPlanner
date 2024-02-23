@@ -5,7 +5,6 @@ import "./Header.css";
 import "@fortawesome/fontawesome-free/css/all.css";
 import { getDateFromSearch } from "./algorithms/algorithms";
 
-
 const Searchbar = () => {
 	const navigate = useNavigate();
 	const [searchTerm, setSearchTerm] = useState("");
@@ -13,6 +12,12 @@ const Searchbar = () => {
 
 	const handleSearchChange = (event) => {
 		setSearchTerm(event.target.value);
+	};
+
+	const handleKeyPress = (event) => {
+		if (event.key === "Enter") {
+			handleSubmit();
+		}
 	};
 
 	const handleSearchCriteriaChange = (event) => {
@@ -23,12 +28,11 @@ const Searchbar = () => {
 	const handleSubmit = async () => {
 		if (isSearchByDate) {
 			const { year, month, day } = getDateFromSearch(searchTerm);
-			navigate("/Day", { state: { year: Number(year), month: (Number(month)-1), day: Number(day) } });
+			navigate("/Day", { state: { year: Number(year), month: Number(month) - 1, day: Number(day) } });
 		} else {
 			//search by event
 			navigate(`/searchResults?searchTerm=${searchTerm}`);
 		}
-
 	};
 
 	return (
@@ -42,10 +46,16 @@ const Searchbar = () => {
 					type="text"
 					value={searchTerm}
 					onChange={handleSearchChange}
+					onKeyDown={handleKeyPress}
 					placeholder={`Enter a ${isSearchByDate ? null : "Event"}`}
 				/>
 			) : (
-				<input type="date" value={searchTerm} onChange={handleSearchChange} />
+				<input
+					type="date"
+					value={searchTerm}
+					onChange={handleSearchChange}
+					onKeyDown={handleKeyPress}
+				/>
 			)}
 			<button className="search-button" onClick={handleSubmit}>
 				<i className="fa fa-search" aria-hidden="true"></i>

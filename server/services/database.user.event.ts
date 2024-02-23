@@ -55,15 +55,15 @@ export class DatabaseUserEvent {
 	 */
 	static async searchEventsByName(
 		searchTerm: string,
-		id: string
+		userid: string
 	): Promise<UserEventResponse[] | undefined> {
 		const events: UserEventResponse[] = await UserEventModel.find(
 			// regex matches any string that contains the search term and the i option makes it case insensitive
 			{
 				name: { $regex: searchTerm, $options: "i" },
-				userid: new mongoose.Types.ObjectId(id)
+				userid: new mongoose.Types.ObjectId(userid)
 			}
-		).sort({ year: 1, month: 1, day:1, start: 1, end: 1 });
+		).sort({ year: 1, month: 1, day: 1, start: 1, end: 1 });
 
 		if (events.length > 0) {
 			return events;
