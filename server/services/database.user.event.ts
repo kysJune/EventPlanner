@@ -24,7 +24,8 @@ export class DatabaseUserEvent {
 		if (event) {
 			console.info("Event found");
 			return event;
-		} else {console.info("Event not found");
+		} else {
+			console.info("Event not found");
 			return undefined;
 		}
 	}
