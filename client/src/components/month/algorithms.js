@@ -1,5 +1,5 @@
 import { WeekDay, getDay, numDaysInMonth } from "../../../../server/utils/CalculateWeekDay";
-import axios from "axios";
+import customAxios from "../../config/customAxios";
 
 const populateMonth = async (month, year) => {
 	const todayMonth = getCurrentMonth();
@@ -23,13 +23,12 @@ const populateMonth = async (month, year) => {
 	let prevEvents;
 	let status;
 	try {
-		const response = await axios.post(
-			`${import.meta.env.VITE_BACKEND_URL}/event/list`,
+		const response = await customAxios.post(
+			`/event/list`,
 			{
 				month: prevMonth,
 				year: prevYear
-			},
-			{ withCredentials: true }
+			}
 		);
 		prevEvents = response.data.userEvents;
 		status = response.status;
@@ -60,13 +59,12 @@ const populateMonth = async (month, year) => {
 	let curEvents;
 	status = undefined;
 	try {
-		const response = await axios.post(
-			`${import.meta.env.VITE_BACKEND_URL}/event/list`,
+		const response = await customAxios.post(
+			`/event/list`,
 			{
 				month: month,
 				year: year
 			},
-			{ withCredentials: true }
 		);
 		curEvents = response.data.userEvents;
 		status = response.status;
@@ -105,13 +103,12 @@ const populateMonth = async (month, year) => {
 	let nextEvents;
 	status = undefined;
 	try {
-		const response = await axios.post(
-			`${import.meta.env.VITE_BACKEND_URL}/event/list`,
+		const response = await customAxios.post(
+			`/event/list`,
 			{
 				month: nextMonth,
 				year: nextYear
-			},
-			{ withCredentials: true }
+			}
 		);
 		nextEvents = response.data.userEvents;
 		status = response.status;

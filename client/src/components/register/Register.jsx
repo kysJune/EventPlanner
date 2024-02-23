@@ -1,5 +1,5 @@
 import { useState } from "react";
-import axios from "axios";
+import customAxios from "../../config/customAxios.js";
 import { useNavigate } from "react-router-dom";
 import { cookies } from "../../App.jsx";
 import "./Register.css";
@@ -30,13 +30,12 @@ export const Register = ({}) => {
 				alert("Passwords do not match");
 				return;
 			}
-			const response = await axios.post(
-				`${import.meta.env.VITE_BACKEND_URL}/user/register`,
+			const response = await customAxios.post(
+				`/user/register`,
 				{
 					username,
 					password
-				},
-				{ withCredentials: true }
+				}
 			);
 			if (response.status !== 200) {
 				console.error("register failed");

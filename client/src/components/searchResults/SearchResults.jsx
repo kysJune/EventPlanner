@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useSearchParams, useLocation } from "react-router-dom";
-import axios from "axios";
+import customAxios from "../../config/customAxios";
 import Header from "../header/Header";
 import "./SearchResults.css";
 import { Month } from "../../../../server/utils/CalculateWeekDay";
@@ -22,10 +22,9 @@ const SearchResults = () => {
 		const fetchEvents = async () => {
 			setSearchTerm(queryParameters.get("searchTerm") || "");
 			try {
-				const response = await axios.post(
-					`${import.meta.env.VITE_BACKEND_URL}/event/search`,
-					{ searchTerm },
-					{ withCredentials: true }
+				const response = await customAxios.post(
+					`/event/search`,
+					{ searchTerm }
 				);
 				if (response.status === 204) {
 					setEvents([]);
