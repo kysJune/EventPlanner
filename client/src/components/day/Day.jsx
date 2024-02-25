@@ -1,6 +1,5 @@
 import "./Day.css";
 import { useState, useEffect } from "react";
-import axios from "axios";
 import { useLocation } from "react-router-dom";
 import Modal from "react-modal";
 import isValidEvent, { convert24HourToString, get24HourTime, isTodaysDate } from "./algorithms";
@@ -10,6 +9,7 @@ import Header from "../header/Header.jsx";
 import { getCurrentDay, getCurrentMonth, getCurrentYear } from "../month/algorithms.js";
 import { StatusCodes } from "http-status-codes";
 import { numDaysInMonth } from "../../../../server/utils/CalculateWeekDay.ts";
+import customAxios from "../../config/customAxios.js";
 
 const Day = () => {
 	const location = useLocation();
@@ -28,15 +28,11 @@ const Day = () => {
 	useEffect(() => {
 		const fetchEvents = async () => {
 			try {
-				const response = await axios.post(
-					`${import.meta.env.VITE_BACKEND_URL}/event/list`,
-					{
-						day: Number(day),
-						month: Number(month),
-						year: Number(year)
-					},
-					{ withCredentials: true }
-				);
+				const response = await customAxios.post(`/event/list`, {
+					day: Number(day),
+					month: Number(month),
+					year: Number(year)
+				});
 				if (response.data.userEvents === undefined || response.status === 204) {
 					setEvents([]);
 					return;
@@ -66,8 +62,8 @@ const Day = () => {
 	const handleCreateEvent = async () => {
 		if (!isValidEvent(newEventName, newEventStartTime, newEventEndTime)) return;
 		try {
-			const response = await axios.post(
-				`${import.meta.env.VITE_BACKEND_URL}/event/create`,
+			const response = await customAxios.post(
+				`/event/create`,
 				{
 					name: newEventName,
 					start: get24HourTime(newEventStartTime),
@@ -91,22 +87,6 @@ const Day = () => {
 		}
 	};
 
-	const handleDeleteEvent = async (eventId) => {
-		try {
-			const response = await axios.delete(
-				`${import.meta.env.VITE_BACKEND_URL}/event/${eventId}/delete`,
-				{ withCredentials: true }
-			);
-
-			if (response.status !== StatusCodes.NO_CONTENT) {
-				console.error("PANIC : Failed to delete");
-			} else if (response.status === StatusCodes.NO_CONTENT) {
-				setRefreshEvents(!refreshEvents);
-			}
-		} catch (error) {
-			console.error(error);
-		}
-	};
 	const handlePrevDayClick = () => {
 		if (Number(day) === 1) {
 			console.log(month, year);
@@ -171,7 +151,16 @@ const Day = () => {
 												const end = event.end; //2130
 												const startHour = Math.floor(start / 100) * 100;
 												if (startHour === i * 100) {
-													return <DayEvent event={event} start={start} end={end} key={index} />;
+													return (
+														<DayEvent
+															setRefreshEvents={setRefreshEvents}
+															refreshEvents={refreshEvents}
+															event={event}
+															start={start}
+															end={end}
+															key={index}
+														/>
+													);
 												}
 											})
 									}
@@ -247,8 +236,22 @@ const Day = () => {
 	);
 };
 
-const DayEvent = ({ event, start, end }) => {
+const DayEvent = ({ event, start, end, setRefreshEvents, refreshEvents }) => {
 	const [showDescription, setShowDescription] = useState(false);
+
+	const handleDeleteEvent = async (eventId) => {
+		try {
+			const response = await customAxios.delete(`/event/${eventId}/delete`);
+
+			if (response.status !== StatusCodes.NO_CONTENT) {
+				console.error("PANIC : Failed to delete");
+			} else if (response.status === StatusCodes.NO_CONTENT) {
+				setRefreshEvents(!refreshEvents);
+			}
+		} catch (error) {
+			console.error(error);
+		}
+	};
 
 	return (
 		<div key={event._id} className="event">

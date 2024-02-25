@@ -3,7 +3,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { cookies } from "../../App.jsx";
 import { removeCookies } from "./algorithms/algorithms.js";
-import axios from "axios";
+import customAxios from "../../config/customAxios.js";
 import Searchbar from "./Searchbar.jsx";
 import { StatusCodes } from "http-status-codes";
 
@@ -33,7 +33,7 @@ const Header = () => {
 	};
 	const handleLogout = async () => {
 		try {
-			const result = await axios.post(`${API_BASE_URL}/user/logout`, {}, { withCredentials: true });
+			const result = await customAxios.post(`/user/logout`);
 			if (result.status === StatusCodes.OK) {
 				removeCookies();
 				navigate("/");
