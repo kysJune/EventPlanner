@@ -33,7 +33,7 @@ const Header = () => {
 	};
 	const navVenues = () => {
 		navigate("/venues");
-	}
+	};
 	const handleLogout = async () => {
 		try {
 			const result = await customAxios.post(`/user/logout`);
