@@ -131,7 +131,7 @@ const Venues = () => {
 			) : (
 				<div className="results-container">
 					{venues.map((venue, index) => (
-						<Venue venue={venue} key={index} />
+						<Venue venue={venue} city={eventCity} state={eventState} key={index} />
 					))}
 				</div>
 			)}
@@ -139,14 +139,16 @@ const Venues = () => {
 	);
 };
 
-const Venue = ({ venue }) => {
+const Venue = ({ venue, city, state }) => {
 	const [modalIsOpen, setModalIsOpen] = useState(false);
 	const [newEventName, setNewEventName] = useState(venue.name);
 	const [newEventStartTime, setNewEventStartTime] = useState("");
 	const [newEventEndTime, setNewEventEndTime] = useState("");
 	const [newEventDescription, setNewEventDescription] = useState("");
 	const [newEventDate, setNewEventDate] = useState("");
-	const [newEventLocation, setNewEventLocation] = useState(venue.location.address);
+	const [newEventLocation, setNewEventLocation] = useState(
+		`${venue.location.address}, ${city}, ${state}`
+	);
 
 	const handleVenueClick = () => {
 		setModalIsOpen(true);
@@ -155,15 +157,16 @@ const Venue = ({ venue }) => {
 	const handleCreateEvent = async () => {
 		if (!isValidEvent(newEventName, newEventStartTime, newEventEndTime)) return;
 		try {
+			const date = new Date(newEventDate);
 			const response = await customAxios.post(
 				`/event/create`,
 				{
 					name: newEventName,
 					start: get24HourTime(newEventStartTime),
 					end: get24HourTime(newEventEndTime),
-					day: Number(day),
-					month: Number(month),
-					year: Number(year),
+					day: date.getDate() + 1,
+					month: date.getMonth() + 1,
+					year: date.getFullYear(),
 					location: newEventLocation,
 					description: newEventDescription
 				},
@@ -229,7 +232,7 @@ const Venue = ({ venue }) => {
 						<input
 							required
 							id="new-event-date"
-							type="time"
+							type="date"
 							onChange={(e) => {
 								setNewEventDate(e.target.value);
 							}}
