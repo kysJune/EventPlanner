@@ -4,12 +4,15 @@ import { cookies } from "../../App";
 import Header from "../header/Header";
 import Modal from "react-modal";
 import customAxios from "../../config/customAxios";
-import { getDay } from "../../../../server/utils/CalculateWeekDay";
+import isValidEvent, { get24HourTime } from "../day/algorithms.js";
 
 const Venues = () => {
 	const [venues, setVenues] = useState([]);
 	const [userLocation, setUserLocation] = useState(cookies.get("location") || "");
 	const [category, setCategory] = useState("");
+
+	const [eventCity, setEventCity] = useState("");
+	const [eventState, setEventState] = useState("");
 
 	const fetchVenues = async () => {
 		//make a request to the foursquare api to get a list of 10 venues for the location and the
@@ -17,7 +20,7 @@ const Venues = () => {
 		try {
 			const searchParams = new URLSearchParams({
 				query: category.length > 0 ? category : "bar", //TODO: default to something that makes sense
-				near: userLocation,
+				near: `${eventCity}, ${eventState}`,
 				sort: "DISTANCE",
 				fields: "price,name,location"
 			});
@@ -49,13 +52,67 @@ const Venues = () => {
 			<Header />
 			<div className="venue-controls">
 				<label htmlFor="user-location-input">Location</label>
-				<input
-					type="text"
-					id="user-location-input"
-					value={userLocation}
-					placeholder="Type your location"
-					onChange={(e) => setUserLocation(e.target.value)}
-				/>
+				<div className="location-container">
+					<input
+						type="text"
+						id="user-location-input"
+						value={eventCity}
+						placeholder="Enter City"
+						onChange={(e) => setEventCity(e.target.value)}
+					/>
+					<select value={eventState} onChange={(e) => setEventState(e.target.value)}>
+						<option value="AL">Alabama</option>
+						<option value="AK">Alaska</option>
+						<option value="AZ">Arizona</option>
+						<option value="AR">Arkansas</option>
+						<option value="CA">California</option>
+						<option value="CO">Colorado</option>
+						<option value="CT">Connecticut</option>
+						<option value="DE">Delaware</option>
+						<option value="FL">Florida</option>
+						<option value="GA">Georgia</option>
+						<option value="HI">Hawaii</option>
+						<option value="ID">Idaho</option>
+						<option value="IL">Illinois</option>
+						<option value="IN">Indiana</option>
+						<option value="IA">Iowa</option>
+						<option value="KS">Kansas</option>
+						<option value="KY">Kentucky</option>
+						<option value="LA">Louisiana</option>
+						<option value="ME">Maine</option>
+						<option value="MD">Maryland</option>
+						<option value="MA">Massachusetts</option>
+						<option value="MI">Michigan</option>
+						<option value="MN">Minnesota</option>
+						<option value="MS">Mississippi</option>
+						<option value="MO">Missouri</option>
+						<option value="MT">Montana</option>
+						<option value="NE">Nebraska</option>
+						<option value="NV">Nevada</option>
+						<option value="NH">New Hampshire</option>
+						<option value="NJ">New Jersey</option>
+						<option value="NM">New Mexico</option>
+						<option value="NY">New York</option>
+						<option value="NC">North Carolina</option>
+						<option value="ND">North Dakota</option>
+						<option value="OH">Ohio</option>
+						<option value="OK">Oklahoma</option>
+						<option value="OR">Oregon</option>
+						<option value="PA">Pennsylvania</option>
+						<option value="RI">Rhode Island</option>
+						<option value="SC">South Carolina</option>
+						<option value="SD">South Dakota</option>
+						<option value="TN">Tennessee</option>
+						<option value="TX">Texas</option>
+						<option value="UT">Utah</option>
+						<option value="VT">Vermont</option>
+						<option value="VA">Virginia</option>
+						<option value="WA">Washington</option>
+						<option value="WV">West Virginia</option>
+						<option value="WI">Wisconsin</option>
+						<option value="WY">Wyoming</option>
+					</select>
+				</div>
 				<label htmlFor="category-input">What are you looking for?</label>
 				<input
 					type="text"
@@ -89,6 +146,8 @@ const Venue = ({ venue }) => {
 	const [newEventEndTime, setNewEventEndTime] = useState("");
 	const [newEventDescription, setNewEventDescription] = useState("");
 	const [newEventDate, setNewEventDate] = useState("");
+	const [newEventLocation, setNewEventLocation] = useState(venue.location.address);
+
 	const handleVenueClick = () => {
 		setModalIsOpen(true);
 	};
@@ -105,6 +164,7 @@ const Venue = ({ venue }) => {
 					day: Number(day),
 					month: Number(month),
 					year: Number(year),
+					location: newEventLocation,
 					description: newEventDescription
 				},
 				{ withCredentials: true }
@@ -200,7 +260,11 @@ const Venue = ({ venue }) => {
 
 					<div className="modal-control">
 						<label htmlFor="new-event-location">Location</label>
-						<input id="new-event-location" />
+						<input
+							id="new-event-location"
+							value={newEventLocation}
+							onChange={(e) => setNewEventLocation(e.target.value)}
+						/>
 					</div>
 
 					<div className="modal-control">

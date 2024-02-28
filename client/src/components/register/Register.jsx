@@ -35,7 +35,7 @@ export const Register = ({}) => {
 			const response = await customAxios.post(`/user/register`, {
 				username,
 				password,
-				location: city.length > 3 && state.length == 2 ? `${city}, ${state}` : undefined
+				location: city.length > 3 && state.length === 2 ? `${city}, ${state}` : undefined
 			});
 			if (response.status !== 200) {
 				console.error("register failed");

@@ -5,5 +5,6 @@ export interface EventRequest {
 	year: number;
 	start: number;
 	end: number;
+	location?: string;
 	description: string;
 }
