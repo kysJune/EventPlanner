@@ -5,7 +5,6 @@ const isValidEvent = (newEventName, newEventStartTime, newEventEndTime) => {
 	}
 	const startTime = get24HourTime(newEventStartTime);
 	const endTime = get24HourTime(newEventEndTime);
-	console.log(startTime, endTime);
 	if (startTime < 0 || startTime > 2459 || endTime < 0 || endTime > 2459 || startTime > endTime) {
 		alert("Invalid time range");
 		return false;

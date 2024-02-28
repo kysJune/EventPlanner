@@ -110,6 +110,15 @@ const Venue = ({ venue, city, state }) => {
 		setModalIsOpen(true);
 	};
 
+	const clearModalFields = () => {
+		setNewEventName("");
+		setNewEventStartTime("");
+		setNewEventEndTime("");
+		setNewEventDescription("");
+		setNewEventDate("");
+		setNewEventLocation("");
+	};
+
 	const handleCreateEvent = async () => {
 		if (!isValidEvent(newEventName, newEventStartTime, newEventEndTime)) return;
 		try {
@@ -121,7 +130,7 @@ const Venue = ({ venue, city, state }) => {
 					start: get24HourTime(newEventStartTime),
 					end: get24HourTime(newEventEndTime),
 					day: date.getDate() + 1,
-					month: date.getMonth() + 1,
+					month: date.getMonth(),
 					year: date.getFullYear(),
 					location: newEventLocation,
 					description: newEventDescription
@@ -130,10 +139,8 @@ const Venue = ({ venue, city, state }) => {
 			);
 
 			if (response.status === 201) {
-				setEvents([...events, response.data]);
 				setModalIsOpen(false);
 				clearModalFields();
-				setRefreshEvents(!refreshEvents);
 			}
 		} catch (error) {
 			console.error(error);
