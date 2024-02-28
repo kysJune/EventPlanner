@@ -8,6 +8,7 @@ export class DatabaseUser {
 	 * Create a user
 	 */
 	static async create(user: UserRequest): Promise<mongoose.Types.ObjectId> {
+		console.log(user);
 		const result = new UserModel(user);
 		await result.save();
 		return result._id;
