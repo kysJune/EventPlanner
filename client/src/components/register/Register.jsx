@@ -35,7 +35,7 @@ export const Register = ({}) => {
 			const response = await customAxios.post(`/user/register`, {
 				username,
 				password,
-				location: (city.length > 3 && state.length == 2) ? `${city}, ${state}` : undefined
+				location: city.length > 3 && state.length == 2 ? `${city}, ${state}` : undefined
 			});
 			if (response.status !== 200) {
 				console.error("register failed");
@@ -79,14 +79,14 @@ export const Register = ({}) => {
 					placeholder="City"
 					type="text"
 					id="city"
-					onChange={e => setCity(e.target.value)}
+					onChange={(e) => setCity(e.target.value)}
 					value={city}
 				/>
 				<input
 					placeholder="State"
 					type="text"
 					id="state"
-					onChange={e => setState(e.target.value) }
+					onChange={(e) => setState(e.target.value)}
 					value={state}
 				/>
 				<p>
