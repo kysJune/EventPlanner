@@ -5,7 +5,7 @@ import Header from "../header/Header";
 import Modal from "react-modal";
 import customAxios from "../../config/customAxios";
 import isValidEvent, { get24HourTime } from "../day/algorithms.js";
-import {states as statesList} from "./states.js";
+import { states as statesList } from "./states.js";
 
 const Venues = () => {
 	const [venues, setVenues] = useState([]);
@@ -62,11 +62,13 @@ const Venues = () => {
 						onChange={(e) => setEventCity(e.target.value)}
 					/>
 					<select value={eventState} onChange={(e) => setEventState(e.target.value)}>
-						{
-							Object.keys(statesList).map((stateKey, index) => {
-								return <option key={index} value={stateKey}>{statesList[stateKey]}</option>;
-							})
-						}
+						{Object.keys(statesList).map((stateKey, index) => {
+							return (
+								<option key={index} value={stateKey}>
+									{statesList[stateKey]}
+								</option>
+							);
+						})}
 					</select>
 				</div>
 				<label htmlFor="category-input">What are you looking for?</label>

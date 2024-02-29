@@ -22,6 +22,7 @@ const Day = () => {
 	const [newEventStartTime, setNewEventStartTime] = useState("");
 	const [newEventEndTime, setNewEventEndTime] = useState("");
 	const [newEventDescription, setNewEventDescription] = useState("");
+	const [newEventLocation, setNewEventLocation] = useState("");
 	const [refreshEvents, setRefreshEvents] = useState(false);
 	const [isToday, setIsToday] = useState(false);
 
@@ -71,7 +72,8 @@ const Day = () => {
 					day: Number(day),
 					month: Number(month),
 					year: Number(year),
-					description: newEventDescription
+					description: newEventDescription,
+					location: newEventLocation.length == 0 ? undefined : newEventLocation
 				},
 				{ withCredentials: true }
 			);
@@ -218,7 +220,11 @@ const Day = () => {
 
 					<div className="modal-control">
 						<label htmlFor="new-event-location">Location</label>
-						<input id="new-event-location" />
+						<input
+							id="new-event-location"
+							value={newEventLocation}
+							onChange={(e) => setNewEventLocation(e.target.value)}
+						/>
 					</div>
 
 					<div className="modal-control">
