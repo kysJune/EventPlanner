@@ -14,7 +14,13 @@ module.exports = {
   rules: {
     'react-refresh/only-export-components': [
       'warn',
+      
       { allowConstantExport: true },
     ],
+    semi: [1, "always"],
+    quotes: ["error", "double"],
+    "no-console": ["warn", { allow: ["info", "error"] }],
+    indent: ["error", "tab"],
+    "comma-dangle": "off"
   },
 }

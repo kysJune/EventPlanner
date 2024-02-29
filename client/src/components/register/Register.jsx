@@ -43,6 +43,9 @@ export const Register = ({}) => {
 			} else {
 				cookies.set("isLoggedIn", "true");
 				cookies.set("username", username);
+				if (city.length > 0 && state.length > 0) {
+					cookies.set("location", `${city}, ${state}`);
+				}
 				navigate("/Month");
 			}
 		} catch (error) {

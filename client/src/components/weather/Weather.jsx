@@ -1,11 +1,11 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./Weather.css";
 import axios from "axios";
-import Header from "../header/Header";
 import { convertKelvinToFahrenheit, getIcon } from "./Logic";
+import { cookies } from "../../App";
 
 const Weather = () => {
-	const [city, setCity] = useState("");
+	const [city, setCity] = useState(cookies.get("location")?.split(",")[0] || "");
 	const [error, setError] = useState(null);
 	const [temperature, setTemperature] = useState("");
 	const [description, setDescription] = useState("");
@@ -23,7 +23,6 @@ const Weather = () => {
 		//need to replace the space with %20 to represent it in the url.
 		const encodedCity = city.split(" ").join("%20");
 		const url = `https://api.openweathermap.org/data/2.5/weather?q=${encodedCity}&appid=${import.meta.env.VITE_WEATHER_API_KEY}`;
-		console.log(url);
 		try {
 			const response = await axios.get(url);
 			console.log(response.data);
@@ -37,6 +36,13 @@ const Weather = () => {
 			console.log(err);
 		}
 	};
+
+	useEffect(() => {
+		if (city.length === 0) {
+			return;
+		}
+		getWeather();
+	}, []);
 
 	return (
 		<div className="weather">

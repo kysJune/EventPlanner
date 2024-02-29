@@ -11,9 +11,8 @@ const Venues = () => {
 	const [venues, setVenues] = useState([]);
 	const [userLocation, setUserLocation] = useState(cookies.get("location") || "");
 	const [category, setCategory] = useState("");
-
-	const [eventCity, setEventCity] = useState("");
-	const [eventState, setEventState] = useState("");
+	const [eventCity, setEventCity] = useState(cookies.get("location")?.split(",")[0] || "");
+	const [eventState, setEventState] = useState(cookies.get("location")?.split(",")[1].trim() || "");
 
 	const fetchVenues = async () => {
 		//make a request to the foursquare api to get a list of 10 venues for the location and the
