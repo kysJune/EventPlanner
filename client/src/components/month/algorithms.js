@@ -23,7 +23,7 @@ const populateMonth = async (month, year) => {
 	let prevEvents;
 	let status;
 	try {
-		const response = await customAxios.post(`/event/list`, {
+		const response = await customAxios.post("/event/list", {
 			month: prevMonth,
 			year: prevYear
 		});
@@ -56,7 +56,7 @@ const populateMonth = async (month, year) => {
 	let curEvents;
 	status = undefined;
 	try {
-		const response = await customAxios.post(`/event/list`, {
+		const response = await customAxios.post("/event/list", {
 			month: month,
 			year: year
 		});
@@ -97,7 +97,7 @@ const populateMonth = async (month, year) => {
 	let nextEvents;
 	status = undefined;
 	try {
-		const response = await customAxios.post(`/event/list`, {
+		const response = await customAxios.post("/event/list", {
 			month: nextMonth,
 			year: nextYear
 		});

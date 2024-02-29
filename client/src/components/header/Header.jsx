@@ -31,6 +31,9 @@ const Header = () => {
 	const navMonth = () => {
 		navigate("/month");
 	};
+	const navVenues = () => {
+		navigate("/venues");
+	};
 	const handleLogout = async () => {
 		try {
 			const result = await customAxios.post(`/user/logout`);
@@ -59,8 +62,8 @@ const Header = () => {
 							{cookies.get("username").toUpperCase()}{" "}
 						</p>
 						<div className="buttons">
-							<button className="button" onClick={navWeather}>
-								Weather
+							<button className="button" onClick={navVenues}>
+								Venues
 							</button>
 							<button className="button" onClick={navYear}>
 								Year

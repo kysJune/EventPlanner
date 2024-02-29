@@ -31,6 +31,10 @@ const eventSchema = new Schema<UserEventRequest & Document>({
 		type: Number,
 		required: true
 	},
+	location: {
+		type: String,
+		required: false
+	},
 	description: {
 		type: String,
 		required: false

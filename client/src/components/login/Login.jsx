@@ -31,6 +31,7 @@ export const Login = ({}) => {
 		if (response.status === 200) {
 			cookies.set("isLoggedIn", "true");
 			cookies.set("username", username);
+			cookies.set("location", response.data.user.location);
 			navigate("/Month");
 		}
 	};

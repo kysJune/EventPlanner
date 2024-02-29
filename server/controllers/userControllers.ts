@@ -66,7 +66,7 @@ export const register = async (
 	res: Response,
 	next: NextFunction
 ) => {
-	const { username, password } = req.body;
+	const { username, password, location } = req.body;
 	// TODO : future asking for the user's location in the future as part of registration
 
 	// Check if a user already exists with that username
@@ -84,7 +84,8 @@ export const register = async (
 	try {
 		const userId = await DatabaseUser.create({
 			username,
-			password: hashedPassword
+			password: hashedPassword,
+			location
 		});
 
 		req.session.isLoggedIn = true;

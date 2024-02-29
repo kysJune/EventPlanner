@@ -7,6 +7,8 @@ import "./Register.css";
 export const Register = ({}) => {
 	const [username, setName] = useState("");
 	const [password, setPassword] = useState("");
+	const [city, setCity] = useState("");
+	const [state, setState] = useState("");
 	const [confirmPassword, setConfirmPassword] = useState("");
 
 	const navigate = useNavigate();
@@ -32,7 +34,8 @@ export const Register = ({}) => {
 			}
 			const response = await customAxios.post(`/user/register`, {
 				username,
-				password
+				password,
+				location: city.length > 3 && state.length === 2 ? `${city}, ${state}` : undefined
 			});
 			if (response.status !== 200) {
 				console.error("register failed");
@@ -40,6 +43,9 @@ export const Register = ({}) => {
 			} else {
 				cookies.set("isLoggedIn", "true");
 				cookies.set("username", username);
+				if (city.length > 0 && state.length > 0) {
+					cookies.set("location", `${city}, ${state}`);
+				}
 				navigate("/Month");
 			}
 		} catch (error) {
@@ -71,6 +77,20 @@ export const Register = ({}) => {
 					id="confirm-password"
 					onChange={handleConfirmPasswordChange}
 					value={confirmPassword}
+				/>
+				<input
+					placeholder="City"
+					type="text"
+					id="city"
+					onChange={(e) => setCity(e.target.value)}
+					value={city}
+				/>
+				<input
+					placeholder="State"
+					type="text"
+					id="state"
+					onChange={(e) => setState(e.target.value)}
+					value={state}
 				/>
 				<p>
 					Already have an account? <a href="/"> Login here</a>

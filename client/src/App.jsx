@@ -1,6 +1,7 @@
 import Weather from "./components/weather/Weather";
 import { Login } from "./components/login/Login";
 import { Register } from "./components/register/Register";
+import Venues from "./components/venues/Venues";
 import SearchResults from "./components/searchResults/SearchResults.jsx";
 import { Route, Routes, BrowserRouter } from "react-router-dom";
 import "./App.css";
@@ -24,6 +25,7 @@ function App() {
 					{/* <Route path="/Year" element={<Year />} /> */}
 					<Route path="/Day" element={<Day />} />
 					<Route path="/" element={<Login />} />
+					<Route path="/Venues" element={<Venues />} />
 				</Routes>
 			</BrowserRouter>
 		</div>
