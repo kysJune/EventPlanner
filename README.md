@@ -1,6 +1,6 @@
 # EventPlanner
 ## Authors
-Arjun Rashalogni
+Arjun Radhakrishnan
 Evan Giampaoli
 Cleveland Plonsey
 
